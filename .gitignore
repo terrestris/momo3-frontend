@@ -1,3 +1,12 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+node_modules
+
+# Eclipse
 bin
 target
 tmp
@@ -5,3 +14,17 @@ tmp
 .settings
 .project
 .wtpmodules
+
+# Sencha 
+build/
+ext/
+packages/
+classic.json
+sass/example/example.css
+sass/example/bootstrap.json
+sass/example/bootstrap.js
+
+# Coverage
+.instrumented/
+test/.index_coverage.html
+coverage/

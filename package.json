@@ -1,0 +1,33 @@
+{
+  "name": "shogun-client",
+  "type": "code",
+  "version": "1.0.0",
+  "description": "Basic GIS-Client for shogun2",
+  "license": "GPL-3.0",
+  "author": "terrestris GmbH & Co. KG",
+  "scripts": {
+    "js-lint": "eslint -c .eslintrc ./",
+    "test": "mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true test/index.html",
+    "coverage-clean": "rm -rf .instrumented/ && rm -rf ./coverage/ && rm -f ./test/.index_coverage.html",
+    "coverage-sed": "sed -e 's/..\\/app/..\\/.instrumented\\/app/g' ./test/index.html > ./test/.index_coverage.html",
+    "coverage-instrument": "istanbul instrument -o .instrumented/ -x '**/ext/** **/build/** **/node_modules/** **/packages/** **/sass/** **/test/**' ./",
+    "coverage-report": "mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true --hooks ./test/phantom_hooks.js ./test/.index_coverage.html && istanbul report --root ./coverage html",
+    "coverage-run": "npm run coverage-clean && npm run coverage-sed && npm run coverage-instrument && npm run coverage-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terrestris/shogun2-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/terrestris/shogun2-client/issues"
+  },
+  "homepage": "https://github.com/terrestris/shogun2-client#readme",
+  "dependencies": {
+    "eslint": "1.7.3",
+    "expect.js": "0.3.1",
+    "istanbul": "0.4.0",
+    "mocha": "2.3.3",
+    "mocha-phantomjs": "4.0.1",
+    "sinon": "1.17.2"
+  }
+}
