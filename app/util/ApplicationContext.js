@@ -19,7 +19,7 @@ Ext.define('ShogunClient.util.ApplicationContext', {
          * The path configs needed by this class.
          */
         pathConfig: {
-            appContextUrlTpl: '../application/get.action?id={0}'
+            appContextUrlTpl: '../rest/applications/{0}'
         },
 
         /**
