@@ -1,4 +1,4 @@
-Ext.define('ShogunClient.util.URL', {
+Ext.define('momo.util.URL', {
 
     statics: {
 

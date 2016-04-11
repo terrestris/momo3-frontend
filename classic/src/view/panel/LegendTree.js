@@ -1,17 +1,6 @@
-/**
- * LegendTree Panel
- */
-Ext.define('ShogunClient.view.panel.LegendTree', {
-    extend: 'BasiGX.view.panel.LegendTree',
-    xtype: 'shogun-view-panel-legendtree',
-
-    requires: [
-        'ShogunClient.view.component.Map',
-        'GeoExt.data.store.LayersTree',
-
-        'ShogunClient.view.panel.LegendTreeController',
-        'ShogunClient.view.panel.LegendTreeModel'
-    ],
+Ext.define("momo.view.panel.LegendTree",{
+    extend: "BasiGX.view.panel.LegendTree",
+    xtype: "momo-panel-legendtree",
 
     controller: 'panel.legendtree',
 
@@ -27,6 +16,9 @@ Ext.define('ShogunClient.view.panel.LegendTree', {
         title: '{title}'
     },
 
+   /**
+    *
+    */
     initComponent: function() {
         var me = this;
         var ctrl = me.getController();
@@ -37,5 +29,4 @@ Ext.define('ShogunClient.view.panel.LegendTree', {
         // call parent
         me.callParent();
     }
-
 });

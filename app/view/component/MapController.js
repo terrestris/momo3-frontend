@@ -1,4 +1,4 @@
-Ext.define('ShogunClient.view.component.MapController', {
+Ext.define('momo.view.component.MapController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.component.map',
@@ -39,7 +39,7 @@ Ext.define('ShogunClient.view.component.MapController', {
      */
     createOlMap: function() {
         var me = this;
-        var appCtxUtil = ShogunClient.util.ApplicationContext;
+        var appCtxUtil = momo.util.ApplicationContext;
         var mapConfig = appCtxUtil.getMapConfig();
         var mapControls = appCtxUtil.getMapControls();
         var map;
@@ -103,7 +103,7 @@ Ext.define('ShogunClient.view.component.MapController', {
      */
     createOlLayers: function() {
         var me = this;
-        var appCtxUtil = ShogunClient.util.ApplicationContext;
+        var appCtxUtil = momo.util.ApplicationContext;
         var mapLayers = appCtxUtil.getValue('mapLayers');
         var olLayers = [];
 
@@ -234,7 +234,7 @@ Ext.define('ShogunClient.view.component.MapController', {
      *
      */
     getProjectionString: function() {
-        var appCtxUtil = ShogunClient.util.ApplicationContext;
+        var appCtxUtil = momo.util.ApplicationContext;
         var mapConfig = appCtxUtil.getMapConfig();
         var mapConfigProjection = mapConfig.projection;
 

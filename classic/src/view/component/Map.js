@@ -2,7 +2,7 @@
  * Map Component
  *
  */
-Ext.define('ShogunClient.view.component.Map', {
+Ext.define('momo.view.component.Map', {
     extend: 'GeoExt.component.Map',
     xtype: 'shogun-component-map',
 
@@ -10,8 +10,8 @@ Ext.define('ShogunClient.view.component.Map', {
         'BasiGX.util.ConfigParser',
         'BasiGX.util.Layer',
 
-        'ShogunClient.view.component.MapController',
-        'ShogunClient.view.component.MapModel'
+        'momo.view.component.MapController',
+        'momo.view.component.MapModel'
     ],
 
     controller: 'component.map',

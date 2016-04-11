@@ -1,4 +1,4 @@
-Ext.define('ShogunClient.util.ApplicationContext', {
+Ext.define('momo.util.ApplicationContext', {
     extend: 'BasiGX.util.ConfigParser',
 
     statics: {
@@ -29,9 +29,9 @@ Ext.define('ShogunClient.util.ApplicationContext', {
         getApplicationContext: function() {
             var me = this;
 
-            if (ShogunClient.getApplication() &&
-                    ShogunClient.getApplication().getApplicationContext()) {
-                return ShogunClient.getApplication().getApplicationContext();
+            if (momo.getApplication() &&
+                    momo.getApplication().getApplicationContext()) {
+                return momo.getApplication().getApplicationContext();
             } else {
                 Ext.Logger.error(me.appContextNotLoadedErrorMsg);
             }
@@ -43,9 +43,9 @@ Ext.define('ShogunClient.util.ApplicationContext', {
         setApplicationContext: function(appCtx) {
             var me = this;
 
-            if (appCtx && ShogunClient.getApplication() &&
-                    ShogunClient.getApplication().setApplicationContext()) {
-                ShogunClient.getApplication().setApplicationContext(appCtx);
+            if (appCtx && momo.getApplication() &&
+                    momo.getApplication().setApplicationContext()) {
+                momo.getApplication().setApplicationContext(appCtx);
             } else {
                 Ext.Logger.error(me.appContextNotSetErrorMsg);
             }
