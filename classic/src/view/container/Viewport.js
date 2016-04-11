@@ -1,4 +1,4 @@
-Ext.define('ShogunClient.view.container.Viewport', {
+Ext.define('momo.view.container.Viewport', {
     extend: 'Ext.container.Viewport',
 
     initComponent: function() {

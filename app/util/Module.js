@@ -1,4 +1,4 @@
-Ext.define('ShogunClient.util.Module', {
+Ext.define('momo.util.Module', {
 
     statics: {
 
@@ -23,7 +23,7 @@ Ext.define('ShogunClient.util.Module', {
          */
         createViewport: function(viewportName) {
             var me = this;
-            var appCtxUtil = ShogunClient.util.ApplicationContext;
+            var appCtxUtil = momo.util.ApplicationContext;
             var appViewport = appCtxUtil.getValue('viewport');
             var appViewportType = appCtxUtil.getValue('type', appViewport);
             var appViewportPlacements = appCtxUtil.getValue('regions',
@@ -163,7 +163,7 @@ Ext.define('ShogunClient.util.Module', {
          *                              from.
          */
         checkModuleProperties: function(subModule, parentModule) {
-            var appCtxUtil = ShogunClient.util.ApplicationContext;
+            var appCtxUtil = momo.util.ApplicationContext;
             var appViewportPropHints = appCtxUtil.getValue('propertyHints',
                     parentModule);
             var appViewportPropMusts = appCtxUtil.getValue('propertyMusts',

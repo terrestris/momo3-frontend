@@ -4,12 +4,12 @@
  * Sencha Cmd when upgrading.
  */
 Ext.application({
-    name: 'ShogunClient',
+    name: 'momo',
 
-    extend: 'ShogunClient.Application',
+    extend: 'momo.Application',
 
     requires: [
-        'ShogunClient.view.container.Viewport'
+        'momo.view.container.Viewport'
     ]
 
 });

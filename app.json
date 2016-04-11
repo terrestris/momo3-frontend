@@ -2,8 +2,8 @@
     /**
      * The application's namespace.
      */
-    "name": "ShogunClient",
-    
+    "name": "momo",
+
     /**
      * The version of the application.
      */
@@ -41,16 +41,16 @@
      * The Sencha Framework for this application: "ext" or "touch".
      */
     "framework": "ext",
-    
+
     /**
      * The toolkit to use. Select either "classic" or "modern".
      */
-    "toolkit": "classic",    
-    
+    "toolkit": "classic",
+
     /**
      * The name of the theme for this application.
      */
-    
+
     /**
      * The list of required packages (with optional versions; default is "latest").
      *
@@ -89,7 +89,7 @@
          * root namespace, change this to "". Doing so would change the mapping of
          * "ShogunClient.view.Foo" to "sass/src/ShogunClient/view/Foo.scss".
          */
-        "namespace": "ShogunClient",
+        "namespace": "momo",
 
         /**
          * File used to save sass variables edited via Sencha Inspector. This file
@@ -98,7 +98,7 @@
          *      "save": "sass/save.scss"
          *
          */
-         
+
         /**
          * Comma-separated list of files or folders containing extra Sass. These
          * files are automatically included in the Sass compilation. By default this
@@ -320,13 +320,13 @@
             "type": "yui"
         }
     },
-    
+
     /**
      * Settings specific to testing builds.
      */
     "testing": {
     },
-    
+
     /**
      * Settings specific to development builds.
      */
@@ -369,9 +369,9 @@
      */
     "bootstrap": {
         "base": "${app.dir}",
-        
+
         "manifest": "${build.id}.json",
-        
+
         "microloader": "bootstrap.js",
         "css": "bootstrap.css"
     },
@@ -416,7 +416,7 @@
      *      }
      *
      */
-    
+
     "output": {
         "base": "${workspace.build.dir}/${build.environment}/${app.name}",
         "page": "index.html",
@@ -430,8 +430,8 @@
             "shared": "resources"
         }
     },
-    
-    
+
+
     /**
     * Controls for localStorage caching
     *   "cache": {
@@ -447,12 +447,12 @@
     *       "deltas": "deltas"
     *   }
     */
-    
+
     "cache": {
         "enable": false,
         "deltas": "${build.id}/deltas"
     },
-    
+
 
     /**
      * Used to automatically generate cache.manifest (HTML 5 application cache manifest)
@@ -507,9 +507,9 @@
      * generated inside this directory must be kept intact for proper generation of
      * deltas between updates.
      */
-    
+
     "archivePath": "archive/${build.id}",
-    
+
 
 
     /**
@@ -554,13 +554,13 @@
      *     }
      *
      */
-    
+
     "builds": {
         "classic": {
             "toolkit": "classic",
-            
+
             "theme": "theme-triton",
-            
+
             "sass": {
                 // "save": "classic/sass/save.scss"
             }
@@ -568,15 +568,15 @@
 
         /*"modern": {
             "toolkit": "modern",
-            
+
             "theme": "theme-triton",
-            
+
             "sass": {
                 // "save": "modern/sass/save.scss"
             }
         }*/
     },
-    
+
 
     /**
      * Uniquely generated id for this application, used as prefix for localStorage keys.

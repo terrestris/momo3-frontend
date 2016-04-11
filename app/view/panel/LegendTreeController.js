@@ -1,7 +1,7 @@
 /**
  *
  */
-Ext.define('ShogunClient.view.panel.LegendTreeController', {
+Ext.define('momo.view.panel.LegendTreeController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.panel.legendtree',
@@ -14,15 +14,15 @@ Ext.define('ShogunClient.view.panel.LegendTreeController', {
         var view = me.getView();
         var map;
 
-        if (!ShogunClient.view.component.Map ||
-                !ShogunClient.view.component.Map.guess() ||
-                !ShogunClient.view.component.Map.guess().getMap()) {
+        if (!momo.view.component.Map ||
+                !momo.view.component.Map.guess() ||
+                !momo.view.component.Map.guess().getMap()) {
             Ext.Logger.warn('Couldn\'t find the map object. It\'s very ' +
                     'unlikely the LegendTree will work properly.');
             return false;
         }
 
-        map = ShogunClient.view.component.Map.guess().getMap();
+        map = momo.view.component.Map.guess().getMap();
 
         var legendStore = Ext.create('GeoExt.data.store.LayersTree', {
             layerGroup: map.getLayerGroup()

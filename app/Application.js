@@ -3,16 +3,16 @@
  * when it calls Ext.application(). This is the ideal place to handle
  * application launch and initialization details.
  */
-Ext.define('ShogunClient.Application', {
+Ext.define('momo.Application', {
     extend: 'Ext.app.Application',
 
     requires: [
-        'ShogunClient.util.ApplicationContext',
-        'ShogunClient.util.URL',
-        'ShogunClient.util.Module'
+        'momo.util.ApplicationContext',
+        'momo.util.URL',
+        'momo.util.Module'
     ],
 
-    name: 'ShogunClient',
+    name: 'momo',
 
     stores: [],
 
@@ -25,16 +25,16 @@ Ext.define('ShogunClient.Application', {
      */
     init: function() {
         var me = this;
-        var appCtxUtil = ShogunClient.util.ApplicationContext;
-        var moduleUtil = ShogunClient.util.Module;
-        var urlUtil = ShogunClient.util.URL;
+        var appCtxUtil = momo.util.ApplicationContext;
+        var moduleUtil = momo.util.Module;
+        var urlUtil = momo.util.URL;
 
         // get the current application ID
         var appId = urlUtil.getUrlQueryParameter('id');
 
         // load the application context and build the application on success
         appCtxUtil.loadApplicationContext(appId, function() {
-            var viewportName = 'ShogunClient.view.container.Viewport';
+            var viewportName = 'momo.view.container.Viewport';
             // create the viewport
             moduleUtil.createViewport(viewportName);
             // and set it to the application
