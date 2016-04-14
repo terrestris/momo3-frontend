@@ -4,7 +4,7 @@
  */
 Ext.define('momo.view.component.Map', {
     extend: 'GeoExt.component.Map',
-    xtype: 'shogun-component-map',
+    xtype: 'momo-component-map',
 
     requires: [
         'BasiGX.util.ConfigParser',
@@ -20,7 +20,7 @@ Ext.define('momo.view.component.Map', {
 
     inheritableStatics: {
         guess: function(){
-            return Ext.ComponentQuery.query('shogun-component-map')[0];
+            return Ext.ComponentQuery.query('momo-component-map')[0];
         }
     },
 
