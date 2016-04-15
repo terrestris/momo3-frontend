@@ -29,6 +29,10 @@ Ext.define('momo.Application', {
         var moduleUtil = momo.util.Module;
         var urlUtil = momo.util.URL;
 
+        // disable annoying debug messages from WAI-ARIA 1.0 recommendations.
+        Ext.enableAriaButtons = false;
+        Ext.enableAriaPanels = false;
+
         // get the current application ID
         var appId = urlUtil.getUrlQueryParameter('id');
 

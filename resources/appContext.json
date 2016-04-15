@@ -55,7 +55,7 @@
                     },
                     {
                         "title": "Center Region",
-                        "xtype": "shogun-component-map"
+                        "xtype": "momo-component-map"
                     }
                 ]
             },
