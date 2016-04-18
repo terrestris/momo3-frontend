@@ -57,7 +57,8 @@ Ext.define('momo.util.Module', {
             });
 
             // create the viewport
-            Ext.create(viewportName, {
+            Ext.define(viewportName + '.override', {
+                override: viewportName,
                 layout: appViewportType,
                 items: items
             });
