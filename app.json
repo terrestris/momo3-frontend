@@ -169,7 +169,8 @@
          */
         "src": [
             "sass/src",
-            "${toolkit.name}/sass/src"
+            "${toolkit.name}/sass/src",
+            "lib/basigx/sass/src"
         ]
     },
 
