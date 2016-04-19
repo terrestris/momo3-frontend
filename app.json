@@ -22,7 +22,9 @@
      */
     "classpath": [
         "app",
-        "${toolkit.name}/src"
+        "${toolkit.name}/src",
+        "./lib/geoext/src",
+        "./lib/basigx/src"
     ],
 
     /**
@@ -62,7 +64,7 @@
      */
     "requires": [
         "font-awesome",
-        "BasiGX"
+        "ux"
     ],
 
     /**
