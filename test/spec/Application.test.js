@@ -1,9 +1,9 @@
-Ext.Loader.syncRequire(['ShogunClient.Application']);
+Ext.Loader.syncRequire(['momo.Application']);
 
-describe('ShogunClient.Application', function() {
+describe('momo.Application', function() {
     describe('Basics', function() {
         it('is defined', function() {
-            expect(ShogunClient.Application).to.not.be(undefined);
+            expect(momo.Application).to.not.be(undefined);
         });
     });
 });

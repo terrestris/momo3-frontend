@@ -85,11 +85,11 @@
     "sass": {
         /**
          * The root namespace to use when mapping *.scss files to classes in the
-         * sass/src and sass/var directories. For example, "ShogunClient.view.Foo" would
-         * map to "sass/src/view/Foo.scss". If we changed this to "ShogunClient.view" then
+         * sass/src and sass/var directories. For example, "momo.view.Foo" would
+         * map to "sass/src/view/Foo.scss". If we changed this to "momo.view" then
          * it would map to "sass/src/Foo.scss". To style classes outside the app's
          * root namespace, change this to "". Doing so would change the mapping of
-         * "ShogunClient.view.Foo" to "sass/src/ShogunClient/view/Foo.scss".
+         * "momo.view.Foo" to "sass/src/momo/view/Foo.scss".
          */
         "namespace": "momo",
 
