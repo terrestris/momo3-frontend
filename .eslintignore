@@ -6,3 +6,4 @@ packages/
 sass/
 bootstrap.js
 ci/
+lib/

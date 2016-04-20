@@ -14,20 +14,20 @@ This folder contains misc. support code for Sass builds (global functions, etc.)
 ### ./sass/src
 
 This folder contains Sass files defining CSS rules corresponding to classes
-included in the application's JavaScript code build. By default, files in this 
-folder are mapped to the application's root namespace, 'ShogunClient'. This is set in
+included in the application's JavaScript code build. By default, files in this
+folder are mapped to the application's root namespace, 'momo'. This is set in
 `"app.json"`:
 
     "sass": {
-        "namespace": "ShogunClient"
+        "namespace": "momo"
     }
 
 ### ./sass/var
 
 This folder contains Sass files defining Sass variables corresponding to classes
-included in the application's JavaScript code build. By default, files in this 
-folder are mapped to the application's root namespace, 'ShogunClient' in the same way
-as `"ShogunClient/sass/src"`.
+included in the application's JavaScript code build. By default, files in this
+folder are mapped to the application's root namespace, 'momo' in the same way
+as `"momo/sass/src"`.
 
 ## Slicing
 
