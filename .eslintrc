@@ -10,7 +10,7 @@
         "window": false,
         "location": false,
         "BasiGX": true,
-        "ShogunClient": true,
+        "momo": true,
 
         "afterEach": false,
         "beforeEach": false,
