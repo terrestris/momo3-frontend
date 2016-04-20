@@ -3,6 +3,9 @@ Ext.define('momo.view.component.MapModel', {
 
     alias: 'viewmodel.component.map',
 
-    data: {}
-
+    data: {
+        mapStateHistory: [],
+        currentMapStateIndex: null,
+        clickedNav: null
+    }
 });

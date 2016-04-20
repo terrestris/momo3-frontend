@@ -247,6 +247,63 @@ Ext.define('momo.view.component.MapController', {
         } else {
             return Ext.String.format('EPSG:{0}', mapConfigProjection);
         }
-    }
+    },
 
+    setRouting: function(){
+        var mapComponentXType = 'momo-component-map';
+        var hash = BasiGX.util.Application.getRoute(mapComponentXType);
+
+        // If the map moved without hitting a navigationhistorybutton,
+        // the history starts new.
+        if(!this.getViewModel().get('clickedNav')){
+            this.getViewModel().set('currentMapStateIndex', null);
+        }
+        // Store new mapState unless the stepForward button was clicked.
+        if(this.getViewModel().get('clickedNav') !== 'stepForward'){
+            this.storeRoute(hash);
+        }
+        // After storing the route reset the clickedNav value.
+        this.getViewModel().set('clickedNav', null);
+        return hash;
+    },
+
+    storeRoute: function(hash){
+        var hist = this.getViewModel().get('mapStateHistory');
+        hist.push(hash);
+    },
+
+    restoreMapState: function(hash){
+        var center = hash.split('center/')[1].split('|')[0];
+        var zoom = hash.split('zoom/')[1].split('|')[0];
+        this.loadCenter(center);
+        this.loadZoom(zoom);
+    },
+
+    loadCenter: function(centerString){
+        var mapComponent = this.getView().down('momo-component-map');
+        var map = mapComponent.getMap();
+        var center = centerString.split(',');
+        var olView = map.getView();
+        var pan = ol.animation.pan({
+            source: olView.getCenter()
+        });
+
+        center[0] = parseInt(center[0], 10);
+        center[1] = parseInt(center[1], 10);
+
+        map.beforeRender(pan);
+        map.getView().setCenter(center);
+    },
+
+    loadZoom: function(zoomString){
+        var mapComponent = this.getView().down('momo-component-map');
+        var map = mapComponent.getMap();
+        var olView = map.getView();
+        var zoom = ol.animation.zoom({
+            resolution: olView.getResolution()
+        });
+
+        map.beforeRender(zoom);
+        map.getView().setZoom(parseInt(zoomString, 10));
+    }
 });
