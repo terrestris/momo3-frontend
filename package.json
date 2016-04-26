@@ -1,8 +1,8 @@
 {
-  "name": "shogun-client",
+  "name": "momo",
   "type": "code",
   "version": "1.0.0",
-  "description": "Basic GIS-Client for shogun2",
+  "description": "Basic GIS-Client for Momo project",
   "license": "GPL-3.0",
   "author": "terrestris GmbH & Co. KG",
   "scripts": {
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/terrestris/shogun2-client.git"
+    "url": "https://github.com/terrestris/momo3-frontend.git"
   },
   "bugs": {
-    "url": "https://github.com/terrestris/shogun2-client/issues"
+    "url": "https://github.com/terrestris/momo3-frontend/issues"
   },
-  "homepage": "https://github.com/terrestris/shogun2-client#readme",
+  "homepage": "https://github.com/terrestris/momo3-frontend#readme",
   "dependencies": {
     "eslint": "1.7.3",
     "expect.js": "0.3.1",
