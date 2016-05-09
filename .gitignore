@@ -14,6 +14,7 @@ tmp
 .settings
 .project
 .wtpmodules
+.settings/
 
 # Sencha 
 build/
@@ -23,6 +24,9 @@ classic.json
 sass/example/example.css
 sass/example/bootstrap.json
 sass/example/bootstrap.js
+
+# Libs
+lib/
 
 # Coverage
 .instrumented/
