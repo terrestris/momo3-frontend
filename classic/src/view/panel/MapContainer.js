@@ -13,37 +13,36 @@ Ext.define("momo.view.panel.MapContainer",{
 
     viewModel: 'component.map',
 
-    mapComponentConfig: {
-        xtype: 'momo-component-map'
-    },
-
-    overviewMapConfig: {
-        xtype: 'gx_overviewmap',
-        magnification: 10,
-        width: 400,
-        height: 150,
-        padding: 5,
-        cls: 'basigx-overview-map',
-        hidden: true,
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.TileWMS({
-                    url: 'http://ows.terrestris.de/osm/service?',
-                    params: {
-                        LAYERS: 'OSM-WMS',
-                        TRANSPARENT: false,
-                        VERSION: '1.1.1'
-                    }
+    config: {
+        mapComponentConfig: {
+            xtype: 'momo-component-map'
+        },
+        overviewMapConfig: {
+            xtype: 'gx_overviewmap',
+            magnification: 10,
+            width: 400,
+            height: 150,
+            padding: 5,
+            cls: 'basigx-overview-map',
+            hidden: true,
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.TileWMS({
+                        url: 'http://ows.terrestris.de/osm/service?',
+                        params: {
+                            LAYERS: 'OSM-WMS',
+                            TRANSPARENT: false,
+                            VERSION: '1.1.1'
+                        }
+                    })
                 })
-            })
-        ]
+            ]
+        },
+        // we don't need menu container (yet)
+        menuConfig: null,
+        // we already have our own legend panel in west region
+        legendPanelConfig: null
     },
-
-    // we don't need menu container (yet)
-    menuConfig: null,
-
-    // we already have our own legend panel in west region
-    legendPanelConfig: null,
 
     listeners: {
         boxready: function(mapContainer){
