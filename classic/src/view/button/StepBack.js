@@ -55,8 +55,9 @@ Ext.define("momo.view.button.StepBack", {
     *
     */
     handler: function(){
-        var mainModel = this.up('momo-panel-mapcontainer').getViewModel();
-        var mainController = this.up('momo-panel-mapcontainer').getController();
+        var mapContainer = this.up('momo-panel-mapcontainer');
+        var mainModel = mapContainer.down('momo-component-map').getViewModel();
+        var mainController = mapContainer.getController();
         var mapStateHistory = mainModel.get('mapStateHistory');
         var currentMapStateIndex = mainModel.get('currentMapStateIndex');
         var newMapStateIndex;

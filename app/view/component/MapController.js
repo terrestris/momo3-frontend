@@ -251,19 +251,21 @@ Ext.define('momo.view.component.MapController', {
 
     setRouting: function(){
         var mapComponentXType = 'momo-component-map';
+        var viewModel =
+            this.getView().up().down(mapComponentXType).getViewModel();
         var hash = BasiGX.util.Application.getRoute(mapComponentXType);
 
         // If the map moved without hitting a navigationhistorybutton,
         // the history starts new.
-        if(!this.getViewModel().get('clickedNav')){
-            this.getViewModel().set('currentMapStateIndex', null);
+        if(!viewModel.get('clickedNav')){
+            viewModel.set('currentMapStateIndex', null);
         }
         // Store new mapState unless the stepForward button was clicked.
-        if(this.getViewModel().get('clickedNav') !== 'stepForward'){
+        if(viewModel.get('clickedNav') !== 'stepForward'){
             this.storeRoute(hash);
         }
         // After storing the route reset the clickedNav value.
-        this.getViewModel().set('clickedNav', null);
+        viewModel.set('clickedNav', null);
         return hash;
     },
 
