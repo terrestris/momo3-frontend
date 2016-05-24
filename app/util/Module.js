@@ -106,12 +106,6 @@ Ext.define('momo.util.Module', {
          * object root node. As the object `properties` isn't needed
          * afterwards, we will delete it after completion.
          *
-         * Note: At this stage of development, SHOGun2 returns the module
-         *       properties as string-string pairs always. To be fully
-         *       compatible with ExtJS (and JavaScript of course), we try to
-         *       convert the property values to primitive data types
-         *       (Number, String, Boolean).
-         *
          * @param {Object} module The module object to work on.
          * @return {Object} The manipulated module object.
          */
@@ -119,12 +113,7 @@ Ext.define('momo.util.Module', {
 
             if (module.properties) {
                 Ext.iterate(module.properties, function(key, val) {
-                    // try to transform the value to a Boolean
-                    val = val === 'true' ? true :
-                            (val === 'false' ? false : val);
-                    // try to transform the value to a Number
-                    val = !isNaN(val) ? parseFloat(val) : val;
-                    // and set the pair to the root object
+                    // set the pair to the root object
                     module[key] = val;
                 });
                 // remove the properties object as not needed anymore
