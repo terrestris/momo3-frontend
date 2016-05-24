@@ -20,8 +20,7 @@ Ext.define('momo.view.component.Map', {
 
     inheritableStatics: {
         guess: function(){
-            var xtype = 'momo-panel-mapcontainer';
-            return Ext.ComponentQuery.query(xtype)[0].mapPanel;
+            return BasiGX.util.Map.getMapComponent('momo-component-map');
         }
     },
 
@@ -32,6 +31,7 @@ Ext.define('momo.view.component.Map', {
         ctrl.setMap();
 
         me.callParent(arguments);
+
     }
 
 });
