@@ -14,6 +14,7 @@ Ext.define('momo.view.component.MapController', {
             var olMap = me.createOlMap();
             view.setMap(olMap);
         }
+        olMap.on('moveend',me.setRouting, me);
     },
 
     /**
@@ -251,8 +252,7 @@ Ext.define('momo.view.component.MapController', {
 
     setRouting: function(){
         var mapComponentXType = 'momo-component-map';
-        var viewModel =
-            this.getView().up().down(mapComponentXType).getViewModel();
+        var viewModel = this.getView().getViewModel();
         var hash = BasiGX.util.Application.getRoute(mapComponentXType);
 
         // If the map moved without hitting a navigationhistorybutton,
@@ -282,7 +282,7 @@ Ext.define('momo.view.component.MapController', {
     },
 
     loadCenter: function(centerString){
-        var mapComponent = this.getView().down('momo-component-map');
+        var mapComponent = this.getView();
         var map = mapComponent.getMap();
         var center = centerString.split(',');
         var olView = map.getView();
@@ -298,7 +298,7 @@ Ext.define('momo.view.component.MapController', {
     },
 
     loadZoom: function(zoomString){
-        var mapComponent = this.getView().down('momo-component-map');
+        var mapComponent = this.getView();
         var map = mapComponent.getMap();
         var olView = map.getView();
         var zoom = ol.animation.zoom({

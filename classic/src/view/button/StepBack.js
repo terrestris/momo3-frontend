@@ -25,9 +25,7 @@
  *  |___/<___|/__/\___.|  _/<___|\_|_.|_\_\<___|\_. |\___.
  *                     |_|                      <___'
  *
- * ZoomIn Button
- *
- * Button used to zoom in
+ * Button used to zoom/pan to the next map extent
  *
  */
 Ext.define("momo.view.button.StepBack", {
@@ -55,9 +53,10 @@ Ext.define("momo.view.button.StepBack", {
     *
     */
     handler: function(){
-        var mapContainer = this.up('momo-panel-mapcontainer');
-        var mainModel = mapContainer.down('momo-component-map').getViewModel();
-        var mainController = mapContainer.getController();
+        var mapComponent =
+            BasiGX.util.Map.getMapComponent('momo-map-component');
+        var mainModel = mapComponent.getViewModel();
+        var mainController = mapComponent.getController();
         var mapStateHistory = mainModel.get('mapStateHistory');
         var currentMapStateIndex = mainModel.get('currentMapStateIndex');
         var newMapStateIndex;
