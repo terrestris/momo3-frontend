@@ -24,6 +24,8 @@ classic.json
 sass/example/example.css
 sass/example/bootstrap.json
 sass/example/bootstrap.js
+bootstrap.js
+bootstrap.css
 
 # Libs
 lib/
