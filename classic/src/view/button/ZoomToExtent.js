@@ -1,4 +1,4 @@
-/* Copyright (c) 2015 terrestris GmbH & Co. KG
+/* Copyright (c) 2016 terrestris GmbH & Co. KG
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -44,12 +44,11 @@ Ext.define("momo.view.button.ZoomToExtent", {
      *
      */
     bind: {
-        tooltip: '{tooltip}',
         text: '{text}'
     },
 
     /**
-     * The OL3 map this button is bounded to
+     * The OL3 map this button is bound to
      */
     olMap: null,
 
@@ -93,6 +92,19 @@ Ext.define("momo.view.button.ZoomToExtent", {
             olView.setZoom(targetZoom);
         }
     },
+
+    /**
+    *
+    */
+   constructor: function(config) {
+       this.callParent([config]);
+
+       if (this.setTooltip) {
+           var bind = this.config.bind;
+           bind.tooltip = this.getViewModel().get('tooltip');
+           this.setBind(bind);
+       }
+   },
 
     /**
      *
