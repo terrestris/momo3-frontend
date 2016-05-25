@@ -96,15 +96,15 @@ Ext.define("momo.view.button.ZoomToExtent", {
     /**
     *
     */
-   constructor: function(config) {
-       this.callParent([config]);
+    constructor: function(config) {
+        this.callParent([config]);
 
-       if (this.setTooltip) {
-           var bind = this.config.bind;
-           bind.tooltip = this.getViewModel().get('tooltip');
-           this.setBind(bind);
-       }
-   },
+        if (this.setTooltip) {
+            var bind = this.config.bind;
+            bind.tooltip = this.getViewModel().get('tooltip');
+            this.setBind(bind);
+        }
+    },
 
     /**
      *
