@@ -19,7 +19,7 @@
  * Button used to show and hide a panel with meta informations for the map
  * (i.e. current map scale, used EPSG or mouse position)
  *
- * @class momo.view.button.AddWms
+ * @class momo.view.button.ShowMetaPanel
  */
 Ext.define("momo.view.button.ShowMetaPanel", {
     extend: "Ext.Button",
