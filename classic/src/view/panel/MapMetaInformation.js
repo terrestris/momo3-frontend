@@ -55,8 +55,7 @@ Ext.define("momo.view.panel.MapMetaInformation", {
 
     items: [
         {
-            xtype: 'basigx-combo-scale',
-            width: 150
+            xtype: 'momo-combo-scale'
         }, {
             xtype: 'displayfield',
             bind: {
@@ -71,13 +70,13 @@ Ext.define("momo.view.panel.MapMetaInformation", {
                     df.setValue(proj);
                 }
             }
-        },{
+        }, {
             xtype: 'displayfield',
-            width: 250,
+            width: 255,
             bind: {
                 fieldLabel: '{mousePositionLabel}'
             },
-            labelWidth: 150,
+            labelWidth: 160,
             listeners: {
                 afterrender: function(df) {
                     var map = BasiGX.util.Map
