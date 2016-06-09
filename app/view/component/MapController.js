@@ -124,14 +124,9 @@ Ext.define('momo.view.component.MapController', {
         var me = this;
         var mapLayerAppearance = mapLayer.appearance;
 
-        // check for required options
-        if (!mapLayer.type) {
-            Ext.Logger.warn('Could not create the ol.layer. Missing ' +
-                    'property type');
-            return false;
-        }
-
-        var olLayer = new ol.layer[mapLayer.type]({
+        // currently we dont get any type info from the backend
+        // TODO support more than just 'Tile'
+        var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
             opacity: mapLayerAppearance.opacity,
             visible: mapLayerAppearance.visible,
