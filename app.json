@@ -23,8 +23,8 @@
     "classpath": [
         "app",
         "${toolkit.name}/src",
-        "./lib/geoext/src",
-        "./lib/basigx/src"
+        "../lib/geoext3/src",
+        "../lib/BasiGX/src"
     ],
 
     /**
