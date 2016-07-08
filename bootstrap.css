@@ -5,5 +5,5 @@
  * to the most recently built CSS file for the application to allow index.html
  * in the development directory to load properly (i.e., "dev mode").
  */
-@import 'build/development/momo/classic/resources/momo-all.css';
+@import 'build/development/MoMo/classic/resources/MoMo-all.css';
 

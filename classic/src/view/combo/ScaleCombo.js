@@ -18,9 +18,9 @@
  *
  * Lets the user control the maps scale with a combobox
  *
- * @class momo.view.combo.ScaleCombo
+ * @class MoMo.client.view.combo.ScaleCombo
  */
-Ext.define("momo.view.combo.ScaleCombo", {
+Ext.define("MoMo.client.view.combo.ScaleCombo", {
     xtype: "momo-combo-scale",
     extend: 'BasiGX.view.combo.ScaleCombo',
     requires: [

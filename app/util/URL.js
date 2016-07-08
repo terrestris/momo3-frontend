@@ -1,4 +1,4 @@
-Ext.define('momo.util.URL', {
+Ext.define('MoMo.client.util.URL', {
 
     statics: {
 

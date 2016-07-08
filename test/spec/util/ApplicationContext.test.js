@@ -1,9 +1,9 @@
 /*eslint max-len: [0, 80, 4]*/
-Ext.Loader.syncRequire(['momo.util.ApplicationContext']);
+Ext.Loader.syncRequire(['MoMo.client.util.ApplicationContext']);
 
-describe('momo.util.ApplicationContext', function() {
+describe('MoMo.client.util.ApplicationContext', function() {
 
-    var clazz = momo.util.ApplicationContext;
+    var clazz = MoMo.client.util.ApplicationContext;
 
     describe('Basics', function() {
         it('is defined', function() {

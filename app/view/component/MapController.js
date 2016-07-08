@@ -1,4 +1,4 @@
-Ext.define('momo.view.component.MapController', {
+Ext.define('MoMo.client.view.component.MapController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.component.map',
@@ -40,7 +40,7 @@ Ext.define('momo.view.component.MapController', {
      */
     createOlMap: function() {
         var me = this;
-        var appCtxUtil = momo.util.ApplicationContext;
+        var appCtxUtil = MoMo.client.util.ApplicationContext;
         var mapConfig = appCtxUtil.getMapConfig();
         var mapControls = appCtxUtil.getMapControls();
         var map;
@@ -104,7 +104,7 @@ Ext.define('momo.view.component.MapController', {
      */
     createOlLayers: function() {
         var me = this;
-        var appCtxUtil = momo.util.ApplicationContext;
+        var appCtxUtil = MoMo.client.util.ApplicationContext;
         var mapLayers = appCtxUtil.getValue('mapLayers');
         var olLayers = [];
 
@@ -230,7 +230,7 @@ Ext.define('momo.view.component.MapController', {
      *
      */
     getProjectionString: function() {
-        var appCtxUtil = momo.util.ApplicationContext;
+        var appCtxUtil = MoMo.client.util.ApplicationContext;
         var mapConfig = appCtxUtil.getMapConfig();
         var mapConfigProjection = mapConfig.projection;
 

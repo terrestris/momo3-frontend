@@ -30,7 +30,7 @@
  * Button used to zoom/pan to the previous map extent
  *
  */
-Ext.define("momo.view.button.StepForward", {
+Ext.define("MoMo.client.view.button.StepForward", {
     extend: "Ext.button.Button",
     xtype: 'momo-button-stepforward',
 

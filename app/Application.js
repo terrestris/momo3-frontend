@@ -3,13 +3,13 @@
  * when it calls Ext.application(). This is the ideal place to handle
  * application launch and initialization details.
  */
-Ext.define('momo.Application', {
+Ext.define('MoMo.client.Application', {
     extend: 'Ext.app.Application',
 
     requires: [
-        'momo.util.ApplicationContext',
-        'momo.util.URL',
-        'momo.util.Module'
+        'MoMo.client.util.ApplicationContext',
+        'MoMo.client.util.URL',
+        'MoMo.client.util.Module'
     ],
 
     name: 'momo',
@@ -25,9 +25,9 @@ Ext.define('momo.Application', {
      */
     init: function() {
         var me = this;
-        var appCtxUtil = momo.util.ApplicationContext;
-        var moduleUtil = momo.util.Module;
-        var urlUtil = momo.util.URL;
+        var appCtxUtil = MoMo.client.util.ApplicationContext;
+        var moduleUtil = MoMo.client.util.Module;
+        var urlUtil = MoMo.client.util.URL;
 
         // disable annoying debug messages from WAI-ARIA 1.0 recommendations.
         Ext.enableAriaButtons = false;
@@ -38,7 +38,7 @@ Ext.define('momo.Application', {
 
         // load the application context and build the application on success
         appCtxUtil.loadApplicationContext(appId, function() {
-            var viewportName = 'momo.view.container.Viewport';
+            var viewportName = 'MoMo.client.view.container.Viewport';
             // create the viewport
             moduleUtil.createViewport(viewportName);
             // and set it to the application

@@ -1,4 +1,4 @@
-Ext.define('momo.util.Module', {
+Ext.define('MoMo.client.util.Module', {
 
     statics: {
 
@@ -23,7 +23,7 @@ Ext.define('momo.util.Module', {
          */
         createViewport: function(viewportName) {
             var me = this;
-            var appCtxUtil = momo.util.ApplicationContext;
+            var appCtxUtil = MoMo.client.util.ApplicationContext;
             var appViewport = appCtxUtil.getValue('viewport');
             var appViewportType = appCtxUtil.getValue('type', appViewport);
             var appViewportPlacements = appCtxUtil.getValue('regions',
@@ -153,7 +153,7 @@ Ext.define('momo.util.Module', {
          *                              from.
          */
         checkModuleProperties: function(subModule, parentModule) {
-            var appCtxUtil = momo.util.ApplicationContext;
+            var appCtxUtil = MoMo.client.util.ApplicationContext;
             var appViewportPropHints = appCtxUtil.getValue('propertyHints',
                     parentModule);
             var appViewportPropMusts = appCtxUtil.getValue('propertyMusts',
