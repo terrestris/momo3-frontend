@@ -30,10 +30,10 @@ BASIGX_IN_SENCHA_WS_FOLDER="$SENCHA_WS/packages/BasiGX"
 SENCHA_CMD="$INSTALL_DIR/sencha"
 
 # The version of sencha command to downlaod and install
-SENCHA_CMD_VERSION="6.0.2.14"
+SENCHA_CMD_VERSION="6.1.2.15"
 
 # The version of ExtJS to download and configure the sencha workspace with
-SENCHA_EXTJS_VERSION="6.0.0"
+SENCHA_EXTJS_VERSION="6.0.1"
 
 #(if needed), will not fail if they are there already
 mkdir -p $DOWN_DIR
@@ -46,23 +46,23 @@ mkdir -p $INSTALL_DIR
 cd $DOWN_DIR
 
 # DOWNLOAD (if needed)
-# 1) Sencha cmd (v6.0.2.14)
+# 1) Sencha cmd (v6.1.2.15)
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip" ]; then
     wget "http://cdn.sencha.com/cmd/$SENCHA_CMD_VERSION/no-jre/SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
 fi
 
-# 2) Ext JS (v6.0.0.640)
+# 2) Ext JS (v6.0.1)
 if [ ! -f "ext-$SENCHA_EXTJS_VERSION-gpl.zip" ]; then
     wget "http://cdn.sencha.com/ext/gpl/ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
 
 # EXTRACT (if needed)
-# 1) Sencha cmd (v6.0.2.14)
+# 1) Sencha cmd (v6.1.2.15)
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh" ]; then
     unzip -q "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
 fi
 
-# 2) Ext JS (v6.0.0.640)
+# 2) Ext JS (v6.0.1)
 if [ ! -d "ext-$SENCHA_EXTJS_VERSION" ]; then
     unzip -q "ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
@@ -80,7 +80,7 @@ fi
 # Add local BasiGX repository (it will automatically add a GeoExt3 repo as well)
 $SENCHA_CMD package repo add BasiGX http://terrestris.github.io/BasiGX/cmd/pkgs
 
-# Set the ExtJS library as it is not present in the git repository 
+# Set the ExtJS library as it is not present in the git repository
 $SENCHA_CMD app upgrade $DOWN_DIR/ext-$SENCHA_EXTJS_VERSION
 
 # Refresh the app
@@ -90,4 +90,3 @@ $SENCHA_CMD app refresh
 cd $TRAVIS_BUILD_DIR
 
 return 0
-

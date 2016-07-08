@@ -23,11 +23,11 @@
   },
   "homepage": "https://github.com/terrestris/momo3-frontend#readme",
   "dependencies": {
-    "eslint": "1.7.3",
+    "eslint": "3.0.1",
     "expect.js": "0.3.1",
-    "istanbul": "0.4.0",
-    "mocha": "2.3.3",
-    "mocha-phantomjs": "4.0.1",
-    "sinon": "1.17.2"
+    "istanbul": "0.4.4",
+    "mocha": "2.5.3",
+    "mocha-phantomjs": "4.1.0",
+    "sinon": "1.17.4"
   }
 }
