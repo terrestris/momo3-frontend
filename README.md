@@ -1,4 +1,4 @@
-# About `momo3-frontend`
+# About `momo3-frontend` ![](https://travis-ci.org/terrestris/momo3-frontend.svg?branch=master)
 
 The frontend-code for the third phase of MoMo, http://www.bmbf.wasserressourcen-management.de/en/111.php
 
