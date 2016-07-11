@@ -28,7 +28,7 @@
  * Button used to zoom/pan to the next map extent
  *
  */
-Ext.define("momo.view.button.StepBack", {
+Ext.define("MoMo.client.view.button.StepBack", {
     extend: "Ext.button.Button",
     xtype: 'momo-button-stepback',
 

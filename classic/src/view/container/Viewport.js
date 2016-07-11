@@ -1,10 +1,10 @@
-Ext.define('momo.view.container.Viewport', {
+Ext.define('MoMo.client.view.container.Viewport', {
     extend: 'Ext.container.Viewport',
 
     requires: [
         'BasiGX.*',
         'GeoExt.*',
-        'momo.*'
+        'MoMo.client.*'
     ],
 
     initComponent: function() {

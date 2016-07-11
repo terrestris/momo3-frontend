@@ -1,4 +1,4 @@
-Ext.define('momo.util.ApplicationContext', {
+Ext.define('MoMo.client.util.ApplicationContext', {
     extend: 'BasiGX.util.ConfigParser',
 
     statics: {
@@ -29,9 +29,9 @@ Ext.define('momo.util.ApplicationContext', {
         getApplicationContext: function() {
             var me = this;
 
-            if (momo.getApplication() &&
-                    momo.getApplication().getApplicationContext()) {
-                return momo.getApplication().getApplicationContext();
+            if (MoMo.client.getApplication() &&
+                    MoMo.client.getApplication().getApplicationContext()) {
+                return MoMo.client.getApplication().getApplicationContext();
             } else {
                 Ext.Logger.error(me.appContextNotLoadedErrorMsg);
             }
@@ -43,9 +43,9 @@ Ext.define('momo.util.ApplicationContext', {
         setApplicationContext: function(appCtx) {
             var me = this;
 
-            if (appCtx && momo.getApplication() &&
-                    momo.getApplication().setApplicationContext()) {
-                momo.getApplication().setApplicationContext(appCtx);
+            if (appCtx && MoMo.client.getApplication() &&
+                    MoMo.client.getApplication().setApplicationContext()) {
+                MoMo.client.getApplication().setApplicationContext(appCtx);
             } else {
                 Ext.Logger.error(me.appContextNotSetErrorMsg);
             }

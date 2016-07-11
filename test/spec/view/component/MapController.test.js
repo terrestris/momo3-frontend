@@ -1,11 +1,11 @@
 /*eslint max-len: [0, 80, 4]*/
-Ext.Loader.syncRequire(['momo.view.component.MapController']);
+Ext.Loader.syncRequire(['MoMo.client.view.component.MapController']);
 
-describe('momo.view.component.MapController', function() {
+describe('MoMo.client.view.component.MapController', function() {
     var mapController;
 
     beforeEach(function() {
-        mapController = Ext.create('momo.view.component.MapController');
+        mapController = Ext.create('MoMo.client.view.component.MapController');
     });
 
     afterEach(function() {
@@ -14,10 +14,10 @@ describe('momo.view.component.MapController', function() {
 
     describe('Basics', function() {
         it('is defined', function() {
-            expect(momo.view.component.MapController).to.not.be(undefined);
+            expect(MoMo.client.view.component.MapController).to.not.be(undefined);
         });
         it('can be instantiated', function() {
-            expect(mapController).to.be.a(momo.view.component.MapController);
+            expect(mapController).to.be.a(MoMo.client.view.component.MapController);
         });
     });
 

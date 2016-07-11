@@ -18,14 +18,14 @@
  *
  * Button used to zoom to Extent
  *
- * @class momo.view.button.ZoomToExtent
+ * @class MoMo.client.view.button.ZoomToExtent
  */
-Ext.define("momo.view.button.ZoomToExtent", {
+Ext.define("MoMo.client.view.button.ZoomToExtent", {
     extend: "Ext.Button",
     xtype: 'momo-button-zoomtoextent',
 
     requires: [
-        'momo.util.ApplicationContext',
+        'MoMo.client.util.ApplicationContext',
         'BasiGX.util.Map',
         'Ext.app.ViewModel'
     ],
@@ -111,7 +111,7 @@ Ext.define("momo.view.button.ZoomToExtent", {
      */
     setConfigValues: function(){
 
-        var appCtxUtil = momo.util.ApplicationContext;
+        var appCtxUtil = MoMo.client.util.ApplicationContext;
         var mapConfig = appCtxUtil.getMapConfig();
 
         if(mapConfig){

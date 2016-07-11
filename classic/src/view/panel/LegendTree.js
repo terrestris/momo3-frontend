@@ -1,4 +1,4 @@
-Ext.define("momo.view.panel.LegendTree",{
+Ext.define("MoMo.client.view.panel.LegendTree",{
     extend: "BasiGX.view.panel.LegendTree",
     xtype: "momo-panel-legendtree",
 

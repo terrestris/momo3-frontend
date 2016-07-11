@@ -17,9 +17,9 @@
  * Panel containing meta informations for the map as current scale, EPSG
  * or mouse position
  *
- * @class momo.view.panel.MapMetaInformation
+ * @class MoMo.client.view.panel.MapMetaInformation
  */
-Ext.define("momo.view.panel.MapMetaInformation", {
+Ext.define("MoMo.client.view.panel.MapMetaInformation", {
     extend: "Ext.panel.Panel",
     xtype: 'momo-panel-metainfos',
 

@@ -2,7 +2,7 @@
  * Map Component
  *
  */
-Ext.define('momo.view.component.Map', {
+Ext.define('MoMo.client.view.component.Map', {
     extend: 'GeoExt.component.Map',
     xtype: 'momo-component-map',
 
@@ -10,8 +10,8 @@ Ext.define('momo.view.component.Map', {
         'BasiGX.util.ConfigParser',
         'BasiGX.util.Layer',
 
-        'momo.view.component.MapController',
-        'momo.view.component.MapModel'
+        'MoMo.client.view.component.MapController',
+        'MoMo.client.view.component.MapModel'
     ],
 
     controller: 'component.map',

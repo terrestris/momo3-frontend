@@ -4,12 +4,12 @@
  * Sencha Cmd when upgrading.
  */
 Ext.application({
-    name: 'momo',
+    name: 'MoMo.client',
 
-    extend: 'momo.Application',
+    extend: 'MoMo.client.Application',
 
     requires: [
-        'momo.view.container.Viewport'
+        'MoMo.client.view.container.Viewport'
     ]
 
 });
