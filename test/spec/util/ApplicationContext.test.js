@@ -19,14 +19,12 @@ describe('MoMo.client.util.ApplicationContext', function() {
 
     describe('Static methods', function() {
         describe('#loadApplicationContext', function() {
+            clazz.pathConfig.appContextUrlTpl = "../" + clazz.pathConfig.appContextUrlTpl;
             it('is defined', function() {
                 expect(clazz.loadApplicationContext).to.not.be(undefined);
             });
             it('is a function', function() {
                 expect(clazz.loadApplicationContext).to.be.a('function');
-            });
-            it('returns undefined if no callback function is given', function() {
-                expect(clazz.loadApplicationContext(42)).to.be(undefined);
             });
         });
         describe('#getValue', function() {

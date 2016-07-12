@@ -10,7 +10,7 @@
         "window": false,
         "location": false,
         "BasiGX": true,
-        "momo": true,
+        "MoMo": true,
 
         "afterEach": false,
         "beforeEach": false,
