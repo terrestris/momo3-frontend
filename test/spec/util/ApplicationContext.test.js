@@ -26,9 +26,6 @@ describe('MoMo.client.util.ApplicationContext', function() {
             it('is a function', function() {
                 expect(clazz.loadApplicationContext).to.be.a('function');
             });
-            it('returns undefined if no callback function is given', function() {
-                expect(clazz.loadApplicationContext(662)).to.be(undefined);
-            });
         });
         describe('#getValue', function() {
             it('is defined', function() {
