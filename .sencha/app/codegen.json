@@ -32,19 +32,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -53,7 +53,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/production.properties": {
@@ -62,19 +62,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -83,7 +83,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/native.properties": {
@@ -92,19 +92,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -113,7 +113,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/sencha.cfg": {
@@ -122,19 +122,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -143,7 +143,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/build.properties": {
@@ -152,19 +152,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -173,7 +173,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/testing.properties": {
@@ -182,19 +182,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -203,7 +203,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     ".sencha/app/development.properties": {
@@ -212,19 +212,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -233,7 +233,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     },
     "sass/config.rb": {
@@ -242,19 +242,19 @@
       "parameters": {
         "appControllers": "",
         "appModels": "",
-        "appName": "ShogunClient",
+        "appName": "MoMo",
         "appStores": "",
         "appViews": "",
         "classic": false,
         "controllerFileName": "Main",
         "controllerName": "Main",
-        "controllerNamespace": "ShogunClient.controller",
+        "controllerNamespace": "MoMo.controller",
         "frameworkKey": "ext",
         "frameworkName": "ext",
         "frameworkPath": "ext",
-        "modelNamespace": "ShogunClient.model",
+        "modelNamespace": "MoMo.model",
         "modern": false,
-        "name": "ShogunClient",
+        "name": "MoMo",
         "packagesRelPath": "ext/packages/,/home/rieger/workspace/momo3-backend/src/main/webapp/client/ext/classic",
         "senchadir": ".sencha",
         "themeName": "default",
@@ -263,7 +263,7 @@
         "universal": true,
         "viewFileName": "Main",
         "viewName": "Main",
-        "viewNamespace": "ShogunClient.view"
+        "viewNamespace": "MoMo.view"
       }
     }
   }
