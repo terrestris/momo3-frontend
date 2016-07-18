@@ -7,9 +7,18 @@ Ext.define('MoMo.client.view.container.Viewport', {
         'MoMo.client.*'
     ],
 
+    controller: 'momo-mainviewport',
+
+    viewModel: {
+        type: 'momo-mainviewport'
+    },
+
+    listeners: {
+        beforerender: 'getUserBySession'
+    },
+
     initComponent: function() {
         var me = this;
-
         me.callParent(arguments);
     }
 });
