@@ -12,12 +12,13 @@ Ext.define('MoMo.client.Application', {
         'MoMo.client.util.Module'
     ],
 
-    name: 'momo',
+    name: 'MoMo.client',
 
     stores: [],
 
     config: {
-        applicationContext: null
+        applicationContext: null,
+        user: null
     },
 
     /**
