@@ -59,11 +59,7 @@ Ext.define('MoMo.client.container.ViewportController', {
                         method: "POST",
                         headers: BasiGX.util.CSRF.getHeader(),
                         scope: me,
-                        success: function() {
-                            location.href = BasiGX.util.Url
-                                .getWebProjectBaseUrl() + "login/";
-                        },
-                        failure: function() {
+                        callback: function() {
                             location.href = BasiGX.util.Url
                                 .getWebProjectBaseUrl() + "login/";
                         }
