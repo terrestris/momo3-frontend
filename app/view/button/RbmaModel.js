@@ -4,8 +4,8 @@ Ext.define('MoMo.client.view.button.RbmaModel', {
     alias: 'viewmodel.button.rbma',
 
     data: {
-        text: '',
-        tooltip: ''
+        text: 'Open RBMA',
+        tooltip: 'River Basin Management Atlas'
     }
 
 });
