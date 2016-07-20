@@ -16,6 +16,10 @@ Ext.define("MoMo.client.view.panel.RbmaTree",{
         title: '{title}'
     },
 
+    listeners: {
+        itemcontextmenu: 'onItemContextMenuClick'
+    },
+
    /**
     *
     */
