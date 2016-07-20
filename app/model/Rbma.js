@@ -1,20 +1,20 @@
 Ext.define('MoMo.client.model.Rbma', {
 
-    extend: 'Ext.data.Model',
+    extend: 'Ext.data.TreeModel',
 
-//    proxy: {
-//        type: 'rest',
-//        // TODO create the backend service
-//        url: BasiGX.util.Url.getWebProjectBaseUrl() + 'rest/getRbma',
-//        headers: BasiGX.util.CSRF.getHeader()
-//    },
+    proxy: {
+        type: 'rest',
+        url: BasiGX.util.Url.getWebProjectBaseUrl() + 'rest/rbma',
+        headers: BasiGX.util.CSRF.getHeader()
+    },
 
     fields: [{
         name: 'id',
         type: 'auto',
+        persist: false,
         allowNull: true
     }, {
-        name: 'name',
+        name: 'text',
         type: 'string'
     }]
 });
