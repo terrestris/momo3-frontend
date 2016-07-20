@@ -19,12 +19,13 @@
  *
  * @class MoMo.client.view.window.RBMAWindow
  */
-Ext.define("MoMo.client.window.RBMAWindow", {
+Ext.define("MoMo.client.window.RbmaWindow", {
     extend: "Ext.window.Window",
     xtype: 'momo-window-rbma',
 
     requires: [
-        'BasiGX.view.combo.ScaleCombo'
+        'MoMo.client.view.panel.RbmaTree',
+        'MoMo.client.view.panel.RbmaPdfPreview'
     ],
 
     controller: 'window.rbma',
