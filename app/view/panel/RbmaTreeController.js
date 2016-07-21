@@ -6,16 +6,29 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
     /**
      * Set store for the RBMA document tree
      */
-    setRbmaStore: function() {
+    setRbmaStoreAndRootNode: function() {
         var me = this,
-            view = me.getView(),
+            treeView = me.getView(),
             rbmaStore;
 
         rbmaStore = Ext.create('MoMo.client.store.Rbma', {
-            autoLoad: true
+            autoLoad: false
         });
 
-        view.store = rbmaStore;
+        treeView.setStore(rbmaStore);
+
+        // get the root node manually and set it
+        // (as we did not yet mananged to
+        // load the root node from the backend via rest-proxy)
+        // TODO: make it better (so that store.load() would always work)
+        Ext.Ajax.request({
+            url: rbmaStore.getModel().getProxy().getUrl() + '/root',
+            success: function(response, opts) {
+                var obj = Ext.decode(response.responseText);
+                treeView.setRootNode(obj);
+            }
+        });
+
     },
 
     /**

@@ -6,11 +6,6 @@ Ext.define('MoMo.client.store.Rbma', {
 
     model: 'MoMo.client.model.Rbma',
 
-    root: {
-        expanded: false,
-        text: "RBMA document root"
-    },
-
     listeners: {
         beforesync: function(options){
             if (options.create) {

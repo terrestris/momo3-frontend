@@ -55,8 +55,8 @@ Ext.define("MoMo.client.view.panel.RbmaTree",{
         var me = this;
         var ctrl = me.getController();
 
-        // set the store
-        ctrl.setRbmaStore();
+        // set the store and load the root node
+        ctrl.setRbmaStoreAndRootNode();
 
         // call parent
         me.callParent();
