@@ -15,19 +15,21 @@ Ext.define("MoMo.client.view.panel.RbmaPdfPreview",{
     items: [{
         xtype: 'component',
         bind: {
-            html : '<iframe src="' + '{pdfFile}' + '" width="100%" height="100%"></iframe>'
+            html : '<iframe src="' + '{pdfFile}' +
+                '" width="100%" height="100%"></iframe>'
         }
-     }],
+    }],
 
-     bbar: [
-         '->',
-      {
-         xtype: 'button',
-         bind: {
-             text: '{downloadBtnText}'
-         },
-         handler: 'onDownloadBtnClick'
-     }],
+    bbar: [
+        '->',
+        {
+            xtype: 'button',
+            bind: {
+                text: '{downloadBtnText}'
+            },
+            handler: 'onDownloadBtnClick'
+        }
+    ],
 
    /**
     *

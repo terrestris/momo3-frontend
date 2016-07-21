@@ -26,7 +26,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
      * @param {Number} index The item's index
      * @param {Ext.event.Event} The raw event object
      */
-    onItemContextMenuClick: function(view, rec, item, index, e, eOpts){
+    onItemContextMenuClick: function(view, rec, item, index, e){
 
         var me = this;
 
@@ -66,7 +66,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                     vm.get('folderNameText'),
                     vm.get('folderNamePromptText'),
                     function(btn, text, cfg){
-                        if(btn == 'ok'){
+                        if(btn === 'ok'){
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
@@ -88,7 +88,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                         vm.get('leafNameText'),
                         vm.get('leafNamePromptText'),
                     function(btn, text, cfg){
-                        if(btn == 'ok') {
+                        if(btn === 'ok') {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
@@ -110,7 +110,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                     vm.get('folderNameText'),
                     vm.get('folderNewNamePromptText'),
                     function(btn, text, cfg){
-                        if(btn == 'ok'){
+                        if(btn === 'ok'){
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
@@ -131,7 +131,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                     buttons: Ext.Msg.OKCANCEL,
                     ich: Ext.Msg.WARNING,
                     fn: function(btn){
-                        if(btn == 'ok') {
+                        if(btn === 'ok') {
                             record.erase();
                         }
                     }
@@ -174,7 +174,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                     vm.get('leafNameText'),
                     vm.get('leafNewNamePromptText'),
                     function(btn, text, cfg){
-                        if(btn == 'ok') {
+                        if(btn === 'ok') {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
@@ -195,7 +195,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                     buttons: Ext.Msg.OKCANCEL,
                     ich: Ext.Msg.WARNING,
                     fn: function(btn){
-                        if(btn == 'ok') {
+                        if(btn === 'ok') {
                             record.erase();
                         }
                     }

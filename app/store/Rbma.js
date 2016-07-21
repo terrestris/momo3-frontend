@@ -12,7 +12,7 @@ Ext.define('MoMo.client.store.Rbma', {
     },
 
     listeners: {
-        beforesync: function(options, eOpts){
+        beforesync: function(options){
             if (options.create) {
                 var nodeToInsert = options.create[0];
                 nodeToInsert.set('id', null);
@@ -24,7 +24,8 @@ Ext.define('MoMo.client.store.Rbma', {
 
                 var newRec = operation.getRecords()[0];
 
-                var respRec = Ext.JSON.decode(operation.getResponse().responseText);
+                var respRec =
+                    Ext.JSON.decode(operation.getResponse().responseText);
                 newRec.set('id', respRec.id);
             }
         }

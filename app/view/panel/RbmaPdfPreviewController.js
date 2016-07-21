@@ -7,7 +7,7 @@ Ext.define('MoMo.client.view.panel.RbmaPrfPreviewController', {
      *
      */
     onDownloadBtnClick: function() {
-        var me = this;
+        //var me = this;
         //var view = me.getView();
 
         Ext.Msg.alert('Start download...');

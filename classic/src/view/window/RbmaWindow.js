@@ -45,7 +45,7 @@ Ext.define("MoMo.client.window.RbmaWindow", {
     height: '90%',
 
     layout: {
-         type: 'border'
+        type: 'border'
     },
 
     defaults: {

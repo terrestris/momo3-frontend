@@ -18,12 +18,12 @@ Ext.define('MoMo.client.view.panel.RbmaTreeModel', {
         folderNewNamePromptText: 'Enter new folder name',
         deleteFolderText: 'Delete folder',
         warningTitle: 'Warning',
-        deleteFolderWarnMsgText: 'All contained documents will be also deleted. ' +
-            'Are you sure?',
+        deleteFolderWarnMsgText: 'All contained documents will be also ' +
+            'deleted. Are you sure?',
         renameLeafText: 'Rename document',
         leafNewNamePromptText: 'Enter new document name',
         deleteLeafText: 'Delete document',
-        deleteLeafWarnMsgText: 'This document will be removed from the tree. ' +
+        deleteLeafWarnMsgText: 'This document will be removed from tree. ' +
             'Are you sure?'
     }
 
