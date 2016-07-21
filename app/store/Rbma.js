@@ -6,11 +6,27 @@ Ext.define('MoMo.client.store.Rbma', {
 
     model: 'MoMo.client.model.Rbma',
 
-//    parentIdProperty: 'parentFolder',
-
     root: {
         expanded: false,
-        text: "Document root",
-        id: 678
+        text: "RBMA document root"
+    },
+
+    listeners: {
+        beforesync: function(options, eOpts){
+            if (options.create) {
+                var nodeToInsert = options.create[0];
+                nodeToInsert.set('id', null);
+            }
+        },
+        write: function(store, operation){
+
+            if (operation.getRequest().getAction() === "create"){
+
+                var newRec = operation.getRecords()[0];
+
+                var respRec = Ext.JSON.decode(operation.getResponse().responseText);
+                newRec.set('id', respRec.id);
+            }
+        }
     }
 });
