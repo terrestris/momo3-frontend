@@ -11,10 +11,14 @@ Ext.define('MoMo.client.model.Rbma', {
     fields: [{
         name: 'id',
         type: 'auto',
-        persist: false,
         allowNull: true
     }, {
         name: 'text',
         type: 'string'
+    }, {
+        name: 'index',
+        type: 'int',
+        defaultValue: -1,
+        persist: true
     }]
 });
