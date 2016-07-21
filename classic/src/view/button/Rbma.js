@@ -38,8 +38,5 @@ Ext.define('MoMo.client.view.button.Rbma', {
     constructor: function(cfg) {
         var me = this;
         me.callParent([cfg]);
-
-        var viewModel = me.getViewModel();
-        viewModel.set('text', 'Open RBMA');
     }
 });

@@ -10,6 +10,7 @@ Ext.define('MoMo.client.view.button.RbmaController', {
     *
     */
     onClick: function() {
-        Ext.toast('Open the RBMA');
+        var win = Ext.create('MoMo.client.window.RbmaWindow', {});
+        win.show();
     }
 });
