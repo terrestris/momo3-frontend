@@ -15,7 +15,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
             autoLoad: false
         });
 
-        treeView.setStore(rbmaStore);
+        treeView.store = rbmaStore;
 
         // get the root node manually and set it
         // (as we did not yet mananged to
@@ -24,8 +24,8 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
         Ext.Ajax.request({
             url: rbmaStore.getModel().getProxy().getUrl() + '/root',
             success: function(response, opts) {
-                var obj = Ext.decode(response.responseText);
-                treeView.setRootNode(obj);
+                var rootNode = Ext.decode(response.responseText);
+                treeView.setRootNode(rootNode);
             }
         });
 
