@@ -1,19 +1,17 @@
-/**
- *
- */
 Ext.define('MoMo.client.view.panel.RbmaTreeController', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.panel.rbmatree',
 
     /**
-     *
+     * Set store for the RBMA document tree
      */
     setRbmaStore: function() {
-        var me = this;
-        var view = me.getView();
+        var me = this,
+            view = me.getView(),
+            rbmaStore;
 
-        var rbmaStore = Ext.create('MoMo.client.store.Rbma', {
+        rbmaStore = Ext.create('MoMo.client.store.Rbma', {
             autoLoad: true
         });
 
@@ -21,13 +19,16 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
     },
 
     /**
-     *
+     * Shows a context menu on mouse right click in RBMA document tree
+     * @param {Ext.view.View} View Document tree view
+     * @param {Ext.data.Model} rec The record that belongs to the item
+     * @param {HTMLElement} item
+     * @param {Number} index The item's index
+     * @param {Ext.event.Event} The raw event object
      */
     onItemContextMenuClick: function(view, rec, item, index, e, eOpts){
 
         var me = this;
-
-        peter = me;
 
         // forbid the standard browser context menu
         e.preventDefault();
@@ -45,10 +46,13 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
     },
 
     /**
-     *
+     * Creates a folder context menu for the current record
+     * @param {Ext.data.Model} record Clicked record
+     * @return folderContextMenu
      */
-    createFolderContextMenu: function(record) {
+    createFolderContextMenu: function(record){
         var me = this,
+            vm = me.getViewModel(),
             folderContextMenu;
 
         if (!record || (record && record.get('leaf'))) {
@@ -56,69 +60,79 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
         }
 
         var addFolder = Ext.create('Ext.menu.Item', {
-            text: 'Add new folder',
+            text: vm.get('addNewFolderText'),
             handler: function(){
-                Ext.Msg.prompt('Folder name', 'Enter folder name', function(btn, text, cfg){
-                    if(btn == 'ok') {
-                        if (Ext.isEmpty(text)) {
-                            Ext.Msg.show(Ext.apply({}, cfg));
+                Ext.Msg.prompt(
+                    vm.get('folderNameText'),
+                    vm.get('folderNamePromptText'),
+                    function(btn, text, cfg){
+                        if(btn == 'ok'){
+                            if (Ext.isEmpty(text)) {
+                                Ext.Msg.show(Ext.apply({}, cfg));
+                            }
+                            record.appendChild({
+                                text: text,
+                                leaf: false
+                            });
+                            me.getView().getStore().sync();
                         }
-                        record.appendChild({
-                            text: text,
-                            leaf: false
-                        });
-                        me.getView().getStore().sync();
                     }
-                });
+                );
             }
         });
 
         var addLeaf = Ext.create('Ext.menu.Item', {
-            text: 'Add new document',
+            text: vm.get('addNewLeafText'),
             handler: function(){
-                Ext.Msg.prompt('Document name', 'Enter document name', function(btn, text, cfg){
-                    if(btn == 'ok') {
-                        if (Ext.isEmpty(text)) {
-                            Ext.Msg.show(Ext.apply({}, cfg));
+                Ext.Msg.prompt(
+                        vm.get('leafNameText'),
+                        vm.get('leafNamePromptText'),
+                    function(btn, text, cfg){
+                        if(btn == 'ok') {
+                            if (Ext.isEmpty(text)) {
+                                Ext.Msg.show(Ext.apply({}, cfg));
+                            }
+                            record.appendChild({
+                                text: text,
+                                leaf: true
+                            });
+                            me.getView().getStore().sync();
                         }
-                        record.appendChild({
-                            text: text,
-                            leaf: true
-                            //pdfFile: './resources/testPdf.pdf'
-                        });
-                        me.getView().getStore().sync();
                     }
-                });
+                );
             }
         });
 
         var renameFolder = Ext.create('Ext.menu.Item', {
-            text: 'Rename folder',
+            text: vm.get('renameFolderText'),
             handler: function(){
-                Ext.Msg.prompt('Folder name', 'Enter new folder name', function(btn, text, cfg){
-                    if(btn == 'ok') {
-                        if (Ext.isEmpty(text)) {
-                            Ext.Msg.show(Ext.apply({}, cfg));
+                Ext.Msg.prompt(
+                    vm.get('folderNameText'),
+                    vm.get('folderNewNamePromptText'),
+                    function(btn, text, cfg){
+                        if(btn == 'ok'){
+                            if (Ext.isEmpty(text)) {
+                                Ext.Msg.show(Ext.apply({}, cfg));
+                            }
+                            record.set('text', text);
+                            me.getView().getStore().sync();
                         }
-                        record.set('text', text);
-                        me.getView().getStore().sync();
                     }
-                });
+                );
             }
         });
 
         var deleteFolder = Ext.create('Ext.menu.Item', {
-            text: 'Delete folder',
+            text: vm.get('deleteFolderText'),
             handler: function(){
                 Ext.Msg.show({
-                    title: 'Warning',
-                    message: 'All contained documents will be also deleted. Are you sure?',
+                    title: vm.get('warningTitle'),
+                    message: vm.get('deleteFolderWarnMsgText'),
                     buttons: Ext.Msg.OKCANCEL,
                     ich: Ext.Msg.WARNING,
                     fn: function(btn){
                         if(btn == 'ok') {
                             record.erase();
-                            me.getView().getStore().sync();
                         }
                     }
                 });
@@ -140,62 +154,49 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
     },
 
     /**
-     *
+     * Creates a leaf context menu for the current record
+     * @param {Ext.data.Model} record Clicked record
+     * @return leafContextMenu
      */
     createLeafContextMenu: function(record) {
         var me = this,
+            vm = me.getViewModel(),
             leafContextMenu;
 
         if (!record || (record && !record.get('leaf'))) {
             return false;
         }
 
-        var addLeaf = Ext.create('Ext.menu.Item', {
-            text: 'Add new document',
-            handler: function(){
-                Ext.Msg.prompt('Document name', 'Enter document name', function(btn, text, cfg){
-                    if(btn == 'ok') {
-                        if (Ext.isEmpty(text)) {
-                            Ext.Msg.show(Ext.apply({}, cfg));
-                        }
-                        record.appendChild({
-                            text: text,
-                            leaf: true,
-                            pdfFile: './resources/testPdf.pdf'
-                        });
-                        me.getView().getStore().sync();
-                    }
-                });
-            }
-        });
-
         var renameLeaf = Ext.create('Ext.menu.Item', {
-            text: 'Rename document',
+            text: vm.get('renameLeafText'),
             handler: function(){
-                Ext.Msg.prompt('Document name', 'Enter new document name', function(btn, text, cfg){
-                    if(btn == 'ok') {
-                        if (Ext.isEmpty(text)) {
-                            Ext.Msg.show(Ext.apply({}, cfg));
+                Ext.Msg.prompt(
+                    vm.get('leafNameText'),
+                    vm.get('leafNewNamePromptText'),
+                    function(btn, text, cfg){
+                        if(btn == 'ok') {
+                            if (Ext.isEmpty(text)) {
+                                Ext.Msg.show(Ext.apply({}, cfg));
+                            }
+                            record.set('text', text);
+                            me.getView().getStore().sync();
                         }
-                        record.set('text', text);
-                        me.getView().getStore().sync();
                     }
-                });
+                );
             }
         });
 
         var deleteLeaf = Ext.create('Ext.menu.Item', {
-            text: 'Delete document',
+            text: vm.get('deleteLeafText'),
             handler: function(){
                 Ext.Msg.show({
-                    title: 'Warning',
-                    message: 'This document will be removed from the tree. Are you sure?',
+                    title: vm.get('warningTitle'),
+                    message: vm.get('deleteLeafWarnMsgText'),
                     buttons: Ext.Msg.OKCANCEL,
                     ich: Ext.Msg.WARNING,
                     fn: function(btn){
                         if(btn == 'ok') {
                             record.erase();
-                            me.getView().getStore().sync();
                         }
                     }
                 });
@@ -206,13 +207,19 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
             plain: true,
             type: 'leaf-context-menu',
             items: [
-                addLeaf,
                 renameLeaf,
                 deleteLeaf
             ]
         });
 
         return leafContextMenu;
-    }
+    },
 
+    /**
+     * Synchronize the tree store after each drop event
+     */
+    onDragDrop: function () {
+        var me = this;
+        me.getView().getStore().sync();
+    }
 });

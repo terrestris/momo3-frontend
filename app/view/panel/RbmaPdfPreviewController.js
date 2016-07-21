@@ -1,6 +1,3 @@
-/**
- *
- */
 Ext.define('MoMo.client.view.panel.RbmaPrfPreviewController', {
     extend: 'Ext.app.ViewController',
 
