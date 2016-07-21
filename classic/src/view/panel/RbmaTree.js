@@ -12,12 +12,20 @@ Ext.define("MoMo.client.view.panel.RbmaTree",{
 
     collapsed: false,
 
+    viewConfig: {
+        plugins: {
+            ptype: 'treeviewdragdrop',
+            dragText: 'Drag and drop to reorganize'
+        }
+    },
+
     bind: {
         title: '{title}'
     },
 
     listeners: {
-        itemcontextmenu: 'onItemContextMenuClick'
+        itemcontextmenu: 'onItemContextMenuClick',
+        drop: 'onDragDrop'
     },
 
    /**
