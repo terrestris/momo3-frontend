@@ -84,8 +84,9 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
                             record.appendChild({
+                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeFolder',
                                 text: text,
-                                leaf: false
+                                leaf: false,
                             });
                             me.getView().getStore().sync();
                         }
@@ -106,6 +107,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
                             record.appendChild({
+                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeLeaf',
                                 text: text,
                                 leaf: true
                             });

@@ -25,6 +25,9 @@ Ext.define('MoMo.client.model.Rbma', {
         type: 'auto',
         allowNull: true
     }, {
+        name: '@class',
+        type: 'string'
+    }, {
         name: 'text',
         type: 'string'
     }, {
