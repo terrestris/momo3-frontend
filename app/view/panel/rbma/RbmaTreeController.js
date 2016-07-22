@@ -1,7 +1,7 @@
-Ext.define('MoMo.client.view.panel.RbmaTreeController', {
+Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.panel.rbmatree',
+    alias: 'controller.panel.rbma.rbmatree',
 
     /**
      * Set store for the RBMA document tree
@@ -23,7 +23,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
         // TODO: make it better (so that store.load() would always work)
         Ext.Ajax.request({
             url: rbmaStore.getModel().getProxy().getUrl() + '/root',
-            success: function(response, opts) {
+            success: function(response) {
                 var rootNode = Ext.decode(response.responseText);
                 treeView.setRootNode(rootNode);
             }
@@ -83,10 +83,12 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
+                            var cls =
+                                'de.terrestris.momo.model.tree.RbmaTreeFolder';
                             record.appendChild({
-                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeFolder',
+                                '@class': cls,
                                 text: text,
-                                leaf: false,
+                                leaf: false
                             });
                             me.getView().getStore().sync();
                         }
@@ -106,8 +108,10 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
+                            var cls =
+                                'de.terrestris.momo.model.tree.RbmaTreeLeaf';
                             record.appendChild({
-                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeLeaf',
+                                '@class': cls,
                                 text: text,
                                 leaf: true
                             });
@@ -115,6 +119,18 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                         }
                     }
                 );
+            }
+        });
+
+        var addOrReplaceDocument = Ext.create('Ext.menu.Item', {
+            text: vm.get('addDocumentText'),
+            handler: function(rec) {
+                var uploadForm =
+                    Ext.create('MoMo.client.view.window.rbma.RbmaPdfUpload', {
+                        rec: rec
+                    }
+                );
+                uploadForm.show();
             }
         });
 
@@ -160,6 +176,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
             items: [
                 addFolder,
                 addLeaf,
+                addOrReplaceDocument,
                 renameFolder,
                 deleteFolder
             ]
