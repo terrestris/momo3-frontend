@@ -14,6 +14,7 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeModel', {
         addNewLeafText: 'Add new document',
         leafNameText: 'Document name',
         leafNamePromptText: 'Enter document name',
+        addDocumentText: 'Attach/replace PDF document',
         renameFolderText: 'Rename folder',
         folderNewNamePromptText: 'Enter new folder name',
         deleteFolderText: 'Delete folder',

@@ -19,7 +19,7 @@
  *
  * @class MoMo.client.view.window.RBMAWindow
  */
-Ext.define("MoMo.client.window.RbmaWindow", {
+Ext.define("MoMo.client.window.rbma.RbmaWindow", {
     extend: "Ext.window.Window",
     xtype: 'momo-window-rbma',
 
@@ -28,9 +28,9 @@ Ext.define("MoMo.client.window.RbmaWindow", {
         'MoMo.client.view.panel.rbma.RbmaPdfPreview'
     ],
 
-    controller: 'window.rbma',
+    controller: 'window.rbma.rbma',
 
-    viewModel: 'window.rbma',
+    viewModel: 'window.rbma.rbma',
 
     bind: {
         title: '{title}'

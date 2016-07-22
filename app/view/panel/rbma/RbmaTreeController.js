@@ -118,6 +118,18 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
             }
         });
 
+        var addOrReplaceDocument = Ext.create('Ext.menu.Item', {
+            text: vm.get('addDocumentText'),
+            handler: function(rec) {
+                var uploadForm =
+                    Ext.create('MoMo.client.view.window.rbma.RbmaPdfUpload', {
+                        rec: rec
+                    }
+                );
+                uploadForm.show();
+            }
+        });
+
         var renameFolder = Ext.create('Ext.menu.Item', {
             text: vm.get('renameFolderText'),
             handler: function(){
@@ -160,6 +172,7 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
             items: [
                 addFolder,
                 addLeaf,
+                addOrReplaceDocument,
                 renameFolder,
                 deleteFolder
             ]

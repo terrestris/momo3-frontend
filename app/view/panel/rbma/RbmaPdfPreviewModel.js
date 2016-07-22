@@ -1,7 +1,7 @@
 /**
  *
  */
-Ext.define('MoMo.client.view.panel.rbma.RbmaPrfPreviewModel', {
+Ext.define('MoMo.client.view.panel.rbma.RbmaPdfPreviewModel', {
     extend: 'Ext.app.ViewModel',
 
     alias: 'viewmodel.panel.rbma.rbmapdfpreview',
