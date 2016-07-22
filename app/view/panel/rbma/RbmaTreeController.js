@@ -23,7 +23,7 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
         // TODO: make it better (so that store.load() would always work)
         Ext.Ajax.request({
             url: rbmaStore.getModel().getProxy().getUrl() + '/root',
-            success: function(response, opts) {
+            success: function(response) {
                 var rootNode = Ext.decode(response.responseText);
                 treeView.setRootNode(rootNode);
             }
@@ -83,8 +83,10 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
+                            var cls =
+                                'de.terrestris.momo.model.tree.RbmaTreeFolder';
                             record.appendChild({
-                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeFolder',
+                                '@class': cls,
                                 text: text,
                                 leaf: false
                             });
@@ -106,8 +108,10 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                             if (Ext.isEmpty(text)) {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
+                            var cls =
+                                'de.terrestris.momo.model.tree.RbmaTreeLeaf';
                             record.appendChild({
-                                '@class': 'de.terrestris.momo.model.tree.RbmaTreeLeaf',
+                                '@class': cls,
                                 text: text,
                                 leaf: true
                             });

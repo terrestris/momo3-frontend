@@ -71,7 +71,7 @@ Ext.define("MoMo.client.view.window.rbma.RbmaPdfUpload",{
    /**
     *
     */
-    initComponent: function(cfg) {
+    initComponent: function() {
         var me = this;
 
         // call parent
