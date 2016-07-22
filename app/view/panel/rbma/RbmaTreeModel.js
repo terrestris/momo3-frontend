@@ -1,10 +1,10 @@
 /**
  *
  */
-Ext.define('MoMo.client.view.panel.RbmaTreeModel', {
+Ext.define('MoMo.client.view.panel.rbma.RbmaTreeModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.panel.rbmatree',
+    alias: 'viewmodel.panel.rbma.rbmatree',
 
     data: {
         title: 'Document tree',

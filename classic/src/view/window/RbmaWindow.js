@@ -24,8 +24,8 @@ Ext.define("MoMo.client.window.RbmaWindow", {
     xtype: 'momo-window-rbma',
 
     requires: [
-        'MoMo.client.view.panel.RbmaTree',
-        'MoMo.client.view.panel.RbmaPdfPreview'
+        'MoMo.client.view.panel.rbma.RbmaTree',
+        'MoMo.client.view.panel.rbma.RbmaPdfPreview'
     ],
 
     controller: 'window.rbma',

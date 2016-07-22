@@ -1,7 +1,7 @@
-Ext.define('MoMo.client.view.panel.RbmaTreeController', {
+Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.panel.rbmatree',
+    alias: 'controller.panel.rbma.rbmatree',
 
     /**
      * Set store for the RBMA document tree
@@ -86,7 +86,7 @@ Ext.define('MoMo.client.view.panel.RbmaTreeController', {
                             record.appendChild({
                                 '@class': 'de.terrestris.momo.model.tree.RbmaTreeFolder',
                                 text: text,
-                                leaf: false,
+                                leaf: false
                             });
                             me.getView().getStore().sync();
                         }
