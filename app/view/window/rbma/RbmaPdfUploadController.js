@@ -7,11 +7,12 @@ Ext.define('MoMo.client.view.window.rbma.RbmaPdfUploadController', {
      *
      */
     onUploadBtnClick: function() {
+
         var me = this,
             form = me.getView().down('form').getForm(),
-            baseUrl = BasiGX.util.Url.getWebProjectBaseUrl(),
-            // TODO replace it with the backend interface url
-            targetUrl = baseUrl + "ADJUST ME";
+            nodeRecord = me.getView().rec,
+            nodeId = nodeRecord.get('id'),
+            targetUrl = nodeRecord.getProxy().getUrl() + '/' + nodeId + '/doc';
 
         if(form.isValid() && targetUrl){
             form.submit({
@@ -19,7 +20,8 @@ Ext.define('MoMo.client.view.window.rbma.RbmaPdfUploadController', {
                 waitMsg: 'Upload in progress...',
                 success: function(fp, response) {
                     if (response.result && response.result.success === true) {
-                        // TODO implement logic to handle uploaded pdf files
+                        BasiGX.info("Document upload was successful.");
+                        me.getView().close();
                     } else {
                         BasiGX.error("Upload failed. Please try again.");
                     }

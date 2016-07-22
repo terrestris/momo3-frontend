@@ -7,7 +7,7 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaPdfPreviewModel', {
     alias: 'viewmodel.panel.rbma.rbmapdfpreview',
 
     data: {
-        pdfFile: './resources/testPdf.pdf',
+        pdfFile: '',
         downloadBtnText: 'Download document as PDF'
     }
 

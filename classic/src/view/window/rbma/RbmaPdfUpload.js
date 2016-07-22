@@ -33,6 +33,10 @@ Ext.define("MoMo.client.view.window.rbma.RbmaPdfUpload",{
 
     layout: 'auto',
 
+    modal: true,
+
+    rec: null,
+
     bind: {
         title: '{title}'
     },
@@ -48,7 +52,7 @@ Ext.define("MoMo.client.view.window.rbma.RbmaPdfUpload",{
         },
         items: [{
             xtype: 'fileuploadfield',
-            name: 'pdfupload',
+            name: 'file',
             width: 300,
             labelWidth: 30,
             msgTarget: 'side',
@@ -57,6 +61,10 @@ Ext.define("MoMo.client.view.window.rbma.RbmaPdfUpload",{
             bind: {
                 emptyText: '{choosePdfPlaceholderText}'
             }
+        }, {
+            xtype: 'hiddenfield',
+            name: '_csrf',
+            value: BasiGX.util.CSRF.getValue()
         }],
         buttons: [{
             bind: {

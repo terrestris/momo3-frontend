@@ -34,6 +34,7 @@ Ext.define("MoMo.client.view.panel.rbma.RbmaPdfPreview",{
 
     items: [{
         xtype: 'component',
+        hidden: true,
         bind: {
             html : '<iframe src="' + '{pdfFile}' +
                 '" width="100%" height="100%"></iframe>'
