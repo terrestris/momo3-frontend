@@ -44,6 +44,7 @@ Ext.define("MoMo.client.view.panel.rbma.RbmaTree",{
     },
 
     listeners: {
+        itemclick: 'onItemClick',
         itemcontextmenu: 'onItemContextMenuClick',
         drop: 'onDragDrop'
     },
