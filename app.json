@@ -12,7 +12,7 @@
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).
      */
-    "indexHtmlPath": "index.html",
+    "indexHtmlPath": "index-template.html",
 
     /**
      * Comma-separated string with the paths of directories or files to search. Any classes
@@ -229,7 +229,7 @@
         "js": [
             // Remove this entry to individually load sources from the framework.
             {
-                "path": "${framework.dir}/build/ext-all-rtl-debug.js"
+                "path": "${framework.dir}/build/ext-all.js"
             }
         ]
     },
@@ -309,8 +309,7 @@
     "production": {
         "output": {
             "appCache": {
-                "enable": true,
-                "path": "cache.appcache"
+                "enable": false
             }
         },
         "loader": {
@@ -421,10 +420,10 @@
      */
 
     "output": {
-        "base": "${workspace.build.dir}/${build.environment}/${app.name}",
-        "page": "index.html",
-        "manifest": "${build.id}.json",
+        "base": "${workspace.build.dir}/${build.environment}",
+        "page": "../../index.html",
         "js": "${build.id}/app.js",
+        "manifest": "../../${build.id}.json",
         "appCache": {
             "enable": false
         },
@@ -485,13 +484,6 @@
      * property of the "output" object. Folders specified in this list will be deeply copied.
      */
     "resources": [
-        {
-            "path": "resources",
-            "output": "shared"
-        },
-        {
-            "path": "${toolkit.name}/resources"
-        },
         {
             "path": "${build.id}/resources"
         }

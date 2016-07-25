@@ -4,7 +4,8 @@ Ext.define('MoMo.client.view.container.Viewport', {
     requires: [
         'BasiGX.*',
         'GeoExt.*',
-        'MoMo.client.*'
+        'MoMo.*',
+        'Ext.layout.container.Absolute'
     ],
 
     controller: 'momo-mainviewport',
