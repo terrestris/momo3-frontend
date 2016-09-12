@@ -45,10 +45,5 @@ Ext.define("MoMo.client.view.button.ShowMeasureToolsPanel", {
 
     listeners: {
         toggle: 'onToggle'
-    },
-
-    initComponent: function () {
-        var me = this;
-        me.callParent();
     }
 });
