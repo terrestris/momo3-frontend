@@ -108,6 +108,7 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelController', {
         var me = this;
         if (!me.btnPanel) {
             me.btnPanel = me.createMeasurementButtonsPanel();
+            // TODO find a better selector
             var cont = Ext.ComponentQuery
                 .query('container[name="Map Container"]')[0];
             cont.add(me.btnPanel);
