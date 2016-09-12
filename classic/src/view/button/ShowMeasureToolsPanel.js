@@ -14,21 +14,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * LoginLogoutModel
+ * ShowMeasureToolsPanel Button
  *
- * The view model for the login/logout button
+ * Button used to show and hide a panel with measure tools for the map
+ * (i.e. Distance and area measurements)
  *
- * @class MoMo.client.view.button.LoginLogoutModel
+ * @class ShowMeasureToolsPanel
  */
-Ext.define('MoMo.client.view.button.LoginLogoutModel', {
-    extend: 'Ext.app.ViewModel',
+Ext.define("MoMo.client.view.button.ShowMeasureToolsPanel", {
+    extend: "Ext.button.Button",
+    xtype: 'momo-button-showmeasuretoolspanel',
 
-    alias: 'viewmodel.button.loginlogout',
+    requires: [
+        'Ext.app.ViewModel',
+        'BasiGX.util.Animate'
+    ],
 
-    data: {
-        text: '',
-        tooltip: '',
-        isLoginButton: ''
+    controller: 'button.showmeasuretoolspanel',
+
+    viewModel: 'button.showmeasuretoolspanel',
+
+    bind: {
+        tooltip: '{tooltip}',
+        text: '{text}'
+    },
+
+    glyph: 'xf125@FontAwesome',
+
+    enableToggle: true,
+
+    listeners: {
+        toggle: 'onToggle'
     }
-
 });

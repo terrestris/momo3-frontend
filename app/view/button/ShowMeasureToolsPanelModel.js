@@ -14,21 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * LoginLogoutModel
+ * ShowMeasureToolsPanelModel
  *
- * The view model for the login/logout button
+ * The view model for the measurement tools
  *
- * @class MoMo.client.view.button.LoginLogoutModel
+ * @class ShowMeasureToolsPanelModel
  */
-Ext.define('MoMo.client.view.button.LoginLogoutModel', {
+Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.button.loginlogout',
+    alias: 'viewmodel.button.showmeasuretoolspanel',
 
     data: {
-        text: '',
-        tooltip: '',
-        isLoginButton: ''
+        tooltip: 'Messwerkzeuge',
+        text: null
     }
-
 });
