@@ -64,7 +64,7 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelController', {
             name: 'measurement-buttons-panel',
             layout: {
                 type: 'hbox',
-                pack: 'right'
+                pack: 'end'
             },
             width: 100,
             bodyStyle: {
@@ -133,7 +133,7 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelController', {
 
         var top =
             btn.getClientRegion().top - hHeight - hSplitter.getHeight() + "px";
-        var right = btn.getWidth() + "px";
+        var right = btn.getWidth()*2 + "px";
 
         return {
             top: top,
