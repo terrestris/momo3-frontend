@@ -27,6 +27,21 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelModel', {
 
     data: {
         tooltip: 'Zeichnen',
-        text: null
+        text: null,
+        defPointStyle: {
+            radius: 7,
+            fillColor: '#5fa2dd',
+            strokeColor: '#ececec',
+            strokeWidth: 2
+        },
+        defLineStringStyle: {
+            strokeColor: '#ececec',
+            strokeWidth: 2
+        },
+        defPolygonStyle: {
+            fillColor: '#5fa2dd',
+            strokeColor: '#ececec',
+            strokeWidth: 2
+        }
     }
 });

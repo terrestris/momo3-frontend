@@ -74,6 +74,8 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
 
         var parentBtn = me.getView().getEl();
 
+        var viewModel = me.getView().getViewModel();
+
         var position = me.computePosition(parentBtn);
 
         var postitPictureUrl = Ext.Loader.getPath('MoMo.client') +
@@ -91,29 +93,29 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
                 postitPictureUrl: postitPictureUrl,
                 redlinePointStyle: new ol.style.Style({
                     image: new ol.style.Circle({
-                        radius: 7,
+                        radius: viewModel.get('defPointStyle.radius'),
                         fill: new ol.style.Fill({
-                            color: '#5fa2dd'
+                            color: viewModel.get('defPointStyle.fillColor')
                         }),
                         stroke: new ol.style.Stroke({
-                            color: '#ececec',
-                            width: 2
+                            color: viewModel.get('defPointStyle.strokeColor'),
+                            width: viewModel.get('defPointStyle.strokeWidth')
                         })
                     })
                 }),
                 redlineLineStringStyle: new ol.style.Style({
                     stroke: new ol.style.Stroke({
-                        color: '#ececec',
-                        width: 2
+                        color: viewModel.get('defLineStringStyle.strokeColor'),
+                        width: viewModel.get('defLineStringStyle.strokeWidth')
                     })
                 }),
                 redlinePolygonStyle: new ol.style.Style({
                     stroke: new ol.style.Stroke({
-                        color: '#ececec',
-                        width: 2
+                        color: viewModel.get('defPolygonStyle.strokeColor'),
+                        width: viewModel.get('defPolygonStyle.strokeWidth')
                     }),
                     fill: new ol.style.Fill({
-                        color: '#5fa2dd'
+                        color: viewModel.get('defPolygonStyle.fillColor')
                     })
                 })
             }
