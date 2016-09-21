@@ -128,6 +128,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         // TODO support more than just 'Tile'
         var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
+            hoverable: mapLayer.hoverable || false,
             opacity: mapLayerAppearance.opacity,
             visible: mapLayerAppearance.visible,
             minResolution: mapLayerAppearance.minResolution,
@@ -302,5 +303,63 @@ Ext.define('MoMo.client.view.component.MapController', {
 
         map.beforeRender(zoom);
         map.getView().setZoom(parseInt(zoomString, 10));
+    },
+
+    /**
+    *
+    */
+    onHoverFeatureClicked: function(olFeats){
+
+        var me = this;
+        var map = me.getView().getMap();
+        var win = Ext.ComponentQuery.query('window[name=hsi-window]')[0];
+
+        if(win){
+            win.destroy();
+        }
+        var tabs = [];
+        Ext.each(olFeats, function(olFeat){
+            var layer = olFeat.get('layer');
+            var tab = {
+                title: layer.get('name'),
+                xtype: 'propertygrid',
+                width: 400,
+                source: olFeat.getProperties(),
+                closable: true,
+                listeners: {
+                    close: function(card){
+                        var selectInteraction = me.getView()
+                            .getPlugin('momo-client-hover')
+                            .getHoverVectorLayerInteraction();
+                        selectInteraction.getFeatures()
+                            .remove(card.olFeature);
+                    },
+                    scope: me.getView()
+                }
+            };
+            tabs.push(tab);
+        });
+
+        Ext.create('Ext.window.Window',{
+            title: 'Feature Info',
+            name: 'hsi-window',
+            items:[{
+                xtype: 'tabpanel',
+                items: tabs
+            }],
+            listeners: {
+                close: function(){
+                    var selectInteraction = me.getView()
+                        .getPlugin('momo-client-hover')
+                        .getHoverVectorLayerInteraction();
+                    selectInteraction.getFeatures().clear();
+                },
+                scope: me.getView()
+            }
+        }).show();
+
+        map.getOverlays().forEach(function(o) {
+            map.removeOverlay(o);
+        });
     }
 });
