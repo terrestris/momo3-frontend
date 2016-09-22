@@ -42,6 +42,8 @@ Ext.define("MoMo.client.view.button.ShowRedliningToolsPanel", {
 
     enableToggle: true,
 
+    toggleGroup: 'momo-common-tools',
+
     listeners: {
         toggle: 'onToggle'
     }

@@ -45,6 +45,8 @@ Ext.define("MoMo.client.view.button.ShowWorkstateToolsPanel", {
 
     enableToggle: true,
 
+    toggleGroup: 'momo-common-tools',
+
     listeners: {
         toggle: 'onToggle'
     }
