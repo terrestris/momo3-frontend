@@ -12,7 +12,9 @@ Ext.define('MoMo.client.view.component.Map', {
         'BasiGX.util.Map',
 
         'MoMo.client.view.component.MapController',
-        'MoMo.client.view.component.MapModel'
+        'MoMo.client.view.component.MapModel',
+
+        'MoMo.client.plugin.Hover'
     ],
 
     controller: 'component.map',
@@ -23,6 +25,14 @@ Ext.define('MoMo.client.view.component.Map', {
         guess: function(){
             return BasiGX.util.Map.getMapComponent('momo-component-map');
         }
+    },
+
+    plugins: [{
+        ptype: 'momo-client-hover'
+    }],
+
+    listeners: {
+        hoverfeaturesclick: 'onHoverFeatureClicked'
     },
 
     initComponent: function() {
