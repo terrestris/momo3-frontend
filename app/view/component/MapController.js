@@ -128,6 +128,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         // TODO support more than just 'Tile'
         var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
+            routingId: mapLayer.id,
             hoverable: mapLayer.hoverable || false,
             opacity: mapLayerAppearance.opacity,
             visible: mapLayerAppearance.visible,
@@ -270,11 +271,27 @@ Ext.define('MoMo.client.view.component.MapController', {
         hist.push(hash);
     },
 
-    restoreMapState: function(hash){
+    /**
+     * Restores map state from navigation history or given permalink hash.
+     * @param {String} hash Hash containing values for center, zoom or/and map
+     * layers.
+     * @param {Boolean} restoreLayers If the state of visible layers should
+     * be restored as well. If not, only center and zoom will be restored
+     * (this case is useful for navigation history buttons)
+     */
+    restoreMapState: function(hash, restoreLayers){
         var center = hash.split('center/')[1].split('|')[0];
         var zoom = hash.split('zoom/')[1].split('|')[0];
-        this.loadCenter(center);
-        this.loadZoom(zoom);
+        var layers = hash.split('layers/')[1].split('|')[0];
+        if (center) {
+            this.loadCenter(center);
+        }
+        if (zoom) {
+            this.loadZoom(zoom);
+        }
+        if (restoreLayers && layers) {
+            this.loadLayer(layers);
+        }
     },
 
     loadCenter: function(centerString){
@@ -303,6 +320,24 @@ Ext.define('MoMo.client.view.component.MapController', {
 
         map.beforeRender(zoom);
         map.getView().setZoom(parseInt(zoomString, 10));
+    },
+
+    loadLayer: function(layersString){
+        var mapComponent = this.getView();
+        var map = mapComponent.getMap();
+        var mapLayers = BasiGX.util.Layer.getAllLayers(map.getLayerGroup());
+        var layers = layersString.split(',');
+
+        Ext.each(layers, function(layer){
+            layer = parseInt(layer, 10);
+            mapLayers.forEach(function(mapLayer){
+                if(mapLayer.get('routingId') &&
+                        !mapLayer.get('isSliderLayer') &&
+                        layer === mapLayer.get('routingId')){
+                    mapLayer.set('visible', true);
+                }
+            });
+        });
     },
 
     /**

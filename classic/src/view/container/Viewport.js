@@ -15,7 +15,8 @@ Ext.define('MoMo.client.view.container.Viewport', {
     },
 
     listeners: {
-        beforerender: 'getUserBySession'
+        beforerender: 'getUserBySession',
+        afterrender: 'reactOnPermalink'
     },
 
     initComponent: function() {

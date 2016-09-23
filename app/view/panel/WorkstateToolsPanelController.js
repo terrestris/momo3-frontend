@@ -14,37 +14,32 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ShowRedliningToolsPanel Button
+ * WorkstateToolsPanelController
  *
- * Button used to show and hide a panel with redlining tools for the map
+ * The controller for the workstate tools. Contains logic to administrate
+ * the state of work on the map (visible layer, map extent, zoom level etc.)
+ * and to create a permalink
  *
- * @class MoMo.client.view.button.ShowRedliningToolsPanel
+ * @class MoMo.client.view.panel.WorkstateToolsPanelController
  */
-Ext.define("MoMo.client.view.button.ShowRedliningToolsPanel", {
-    extend: "Ext.button.Button",
-    xtype: 'momo-button-showredliningtoolspanel',
+Ext.define('MoMo.client.view.panel.WorkstateToolsPanelController', {
+
+    extend: 'Ext.app.ViewController',
 
     requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Animate'
     ],
 
-    controller: 'button.showredliningtoolspanel',
+    alias: 'controller.panel.workstatetoolspanel',
 
-    viewModel: 'button.showredliningtoolspanel',
 
-    bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
-    },
-
-    glyph: 'xf040@FontAwesome',
-
-    enableToggle: true,
-
-    toggleGroup: 'momo-common-tools',
-
-    listeners: {
-        toggle: 'onToggle'
+    /**
+     * Fires if load/save workstate button was toggled.
+     * @param {Ext.button.Button} btn
+     * @param {Boolean} pressed toggle state
+     */
+    onLoadSaveWorkstateBtnToggle: function(btn, pressed) {
+        if(pressed) {
+            Ext.toast('Arbeitstände laden/speichern');
+        }
     }
 });

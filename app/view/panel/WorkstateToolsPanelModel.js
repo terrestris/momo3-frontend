@@ -14,37 +14,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ShowRedliningToolsPanel Button
+ * WorkstateToolsPanelModel
  *
- * Button used to show and hide a panel with redlining tools for the map
+ * The view model for the workstate tools (button texts)
  *
- * @class MoMo.client.view.button.ShowRedliningToolsPanel
+ * @class MoMo.client.view.panel.WorkstateToolsPanelModel
  */
-Ext.define("MoMo.client.view.button.ShowRedliningToolsPanel", {
-    extend: "Ext.button.Button",
-    xtype: 'momo-button-showredliningtoolspanel',
+Ext.define('MoMo.client.view.panel.WorkstateToolsPanelModel', {
+    extend: 'Ext.app.ViewModel',
 
-    requires: [
-        'Ext.app.ViewModel',
-        'BasiGX.util.Animate'
-    ],
+    alias: 'viewmodel.panel.workstatetoolspanel',
 
-    controller: 'button.showredliningtoolspanel',
-
-    viewModel: 'button.showredliningtoolspanel',
-
-    bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
-    },
-
-    glyph: 'xf040@FontAwesome',
-
-    enableToggle: true,
-
-    toggleGroup: 'momo-common-tools',
-
-    listeners: {
-        toggle: 'onToggle'
+    data: {
+        loadSaveWorkstateBtnText: 'Arbeitstände laden/speichern',
+        permalinkBtnText: 'Permalink erzeugen'
     }
 });

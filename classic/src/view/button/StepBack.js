@@ -74,7 +74,10 @@ Ext.define("MoMo.client.view.button.StepBack", {
 
         mainModel.set('currentMapStateIndex', newMapStateIndex);
         mainModel.set('clickedNav', 'stepBack');
-        mainController.restoreMapState(mapStateHistory[newMapStateIndex]);
+        mainController.restoreMapState(
+            mapStateHistory[newMapStateIndex],
+            false
+        );
     }
 
 });

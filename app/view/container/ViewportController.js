@@ -13,6 +13,19 @@ Ext.define('MoMo.client.container.ViewportController', {
     ],
 
     /**
+     * If application was opened with permalink hash, the map and layer will be
+     * adjusted.
+     */
+    reactOnPermalink: function(){
+        var mapComponent = BasiGX.util.Map.getMapComponent();
+        var ctrl = mapComponent.getController();
+        var hash = window.location.hash;
+        if (window.location.hash) {
+            ctrl.restoreMapState(hash, true);
+        }
+    },
+
+    /**
      * retrieves user information from the backend and sets the information
      * on the applications main viewmodel
      */

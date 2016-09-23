@@ -43,6 +43,8 @@ Ext.define("MoMo.client.view.button.ShowMeasureToolsPanel", {
 
     enableToggle: true,
 
+    toggleGroup: 'momo-common-tools',
+
     listeners: {
         toggle: 'onToggle'
     }
