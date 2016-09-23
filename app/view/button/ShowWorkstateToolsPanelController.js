@@ -57,45 +57,21 @@ Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
 
         var parentBtn = me.getView().getEl();
 
+        var viewModel = me.getView().getViewModel();
+
         var position = me.computePosition(parentBtn);
 
-        var btnPanel = Ext.create('Ext.panel.Panel', {
-            name: 'workstate-buttons-panel',
-            layout: {
-                type: 'hbox',
-                pack: 'end'
-            },
-            width: 100,
-            bodyStyle: {
-                background: 'transparent'
-            },
-            style: {
-                'top': position.top,
-                'right': position.right
-            },
-            defaults: {
+        var btnPanel =
+            Ext.create("MoMo.client.view.panel.WorkstateToolsPanel", {
                 style: {
-                    margin: '0 5px 0 5px'
+                    'top': position.top,
+                    'right': position.right
                 },
-                xtype: 'basigx-button-measure',
-                toggleGroup: 'measure',
-                showMeasureInfoOnClickedPoints: true,
-                listeners: {
-                    afterrender: function(btn){
-                        btn.setBind({
-                            text: '{text}'
-                        });
-                    }
+                bodyStyle: {
+                    background: 'transparent'
                 }
-            },
-            items: [{
-                measureType: 'line',
-                glyph: 'xf201@FontAwesome'
-            }, {
-                measureType: 'polygon',
-                glyph: 'xf1fe@FontAwesome'
-            }]
-        });
+            }
+        );
 
         return btnPanel;
     },
@@ -141,7 +117,7 @@ Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
     },
 
     /**
-     * Hides a measurement tools panel on call button toggle.
+     * Hides a workstate tools panel on call button toggle.
      */
     hideWorkstateToolsPanel: function() {
         var me = this;
