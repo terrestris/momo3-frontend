@@ -78,8 +78,8 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
 
         var position = me.computePosition(parentBtn);
 
-        var postitPictureUrl = Ext.Loader.getPath('MoMo.client') +
-            '/../../../resources/img/blue-post-it.png';
+        var postitPictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
+            'client/resources/img/blue-post-it.png';
 
         var btnPanel =
             Ext.create("MoMo.client.view.panel.RedliningToolsPanel", {
