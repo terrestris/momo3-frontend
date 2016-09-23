@@ -57,8 +57,6 @@ Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
 
         var parentBtn = me.getView().getEl();
 
-        var viewModel = me.getView().getViewModel();
-
         var position = me.computePosition(parentBtn);
 
         var btnPanel =
