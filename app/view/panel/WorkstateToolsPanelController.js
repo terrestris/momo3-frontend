@@ -33,55 +33,13 @@ Ext.define('MoMo.client.view.panel.WorkstateToolsPanelController', {
 
 
     /**
-     * Fires if "draw line" button was toggled. Creates a #drawLineInteraction
-     * if not already exist.
+     * Fires if load/save workstate button was toggled.
      * @param {Ext.button.Button} btn
      * @param {Boolean} pressed toggle state
      */
     onLoadSaveWorkstateBtnToggle: function(btn, pressed) {
-        var me = this,
-            view = me.getView();
-        if (!me.drawLineInteraction) {
-            me.drawLineInteraction = new ol.interaction.Draw({
-                features: view.redlineFeatures,
-                type: 'LineString'
-            });
-            view.map.addInteraction(me.drawLineInteraction);
-        }
-        if (pressed) {
-            me.drawLineInteraction.setActive(true);
-        } else {
-            me.drawLineInteraction.setActive(false);
-        }
-    },
-
-    /**
-     * Creates an instance of {@link MoMo.client.window.RedliningStylerWindow}
-     * class with predefined styles for point, linestring and polygon.
-     * @param {Ext.button.Button} btn
-     * @param {Boolean} pressed toggle state
-     */
-    onPermalinkBtnToggle: function(btn, pressed) {
-        var me = this,
-            view = me.getView();
-        if (!me.stylerWindow) {
-            me.stylerWindow =
-                Ext.create('MoMo.client.window.RedliningStylerWindow', {
-                    redliningVectorLayer: view.redliningVectorLayer,
-                    redlinePointStyle: view.getRedlinePointStyle(),
-                    redlineLineStringStyle: view.getRedlineLineStringStyle(),
-                    redlinePolygonStyle: view.getRedlinePolygonStyle()
-                }
-            );
-            me.stylerWindow.on("hide", function() {
-                btn.toggle();
-                btn.blur();
-            });
-        }
-        if (pressed) {
-            me.stylerWindow.show();
-        } else {
-            me.stylerWindow.hide();
+        if(pressed) {
+            Ext.toast('Arbeitstände laden/speichern');
         }
     }
 });

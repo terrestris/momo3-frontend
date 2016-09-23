@@ -62,26 +62,10 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
     }, {
         xtype: 'basigx-button-permalink',
         bind: {
-            tooltip: '{permalinkBtnText}'
+            tooltip: '{permalinkBtnText}',
+            text: null
         },
         name: 'permalinkBtn',
-        glyph: 'xf01c@FontAwesome' //fa fa-link
-//        listeners: {
-//            toggle: 'onPermalinkBtnToggle'
-//        }
-    }],
-
-    /**
-     * Initializes this component
-     */
-    initComponent: function() {
-        var me = this;
-        var displayInLayerSwitcherKey = BasiGX.util.Layer.
-            KEY_DISPLAY_IN_LAYERSWITCHER;
-
-        //set map
-        me.map = BasiGX.util.Map.getMapComponent().getMap();
-
-        me.callParent(arguments);
-    }
+        glyph: 'xf0c1@FontAwesome' //fa fa-link
+    }]
 });
