@@ -17,6 +17,10 @@ Ext.define('MoMo.client.view.button.Rbma', {
 
     viewModel: 'button.rbma',
 
+    ui: 'momo-header-tools',
+
+    scale: 'small',
+
     /**
      *
      */

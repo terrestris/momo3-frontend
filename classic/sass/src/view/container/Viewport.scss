@@ -2,3 +2,7 @@
     left: auto !important;
     right: 0 !important;
 }
+
+.x-splitter-focus:after {
+    border: none;
+}

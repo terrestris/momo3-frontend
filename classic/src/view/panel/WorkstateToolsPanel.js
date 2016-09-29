@@ -45,6 +45,8 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
     defaults: {
         xtype: 'button',
         toggleGroup: 'workstate',
+        ui: 'momo-tools',
+        scale: 'small',
         style: {
             margin: '0 5px 5px 5px'
         }

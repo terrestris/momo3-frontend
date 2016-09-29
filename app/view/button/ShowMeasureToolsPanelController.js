@@ -80,6 +80,8 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelController', {
                 },
                 xtype: 'basigx-button-measure',
                 toggleGroup: 'measure',
+                ui: 'momo-tools',
+                scale: 'small',
                 showMeasureInfoOnClickedPoints: true,
                 listeners: {
                     afterrender: function(btn){

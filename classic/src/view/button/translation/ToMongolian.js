@@ -17,6 +17,10 @@ Ext.define('MoMo.client.view.button.translation.ToMongolian', {
 
     viewModel: 'button.translation',
 
+    ui: 'momo-header-tools',
+
+    scale: 'small',
+
     /**
      *
      */
