@@ -1,0 +1,21 @@
+@import 'MoMo.scss';
+
+$base-color: $main-2nd-color;
+
+div.trashDropZone{
+    text-align: center;
+    background-color:$main-3rd-color;
+    color: $main-light-color;
+}
+
+div.dragDropOver {
+    text-align: center;
+    background-color:$main-2nd-color;
+    color: $main-light-color;
+}
+
+div.dragDropOverBad {
+    text-align: center;
+    background-color:$main-red;
+    color: $main-light-color;
+}
