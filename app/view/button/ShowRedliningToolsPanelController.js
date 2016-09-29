@@ -34,7 +34,7 @@
  * @class MoMo.client.view.button.ShowRedliningToolsPanelController
  */
 Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'MoMo.client.view.button.ShowToolsPanelCommonController',
 
     requires: [
     ],
@@ -52,141 +52,57 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
     onToggle: function(btn, pressed){
         var me = this;
         if (pressed){
-            me.showRedliningToolsPanel();
+            var conf = me.createConfigObject();
+            me.showToolsPanel("MoMo.client.view.panel.RedliningToolsPanel", conf);
         } else {
-            me.hideRedliningToolsPanel();
-            me.deactivateRedliningTools();
+            me.hideToolsPanel();
+            me.deactivateTools();
         }
     },
 
     /**
-     * Creates a panel containing buttons for redlining tools.
-     * The position of the panel will be computed dynamically (s. method
-     * #computePosition below).
-     * The `redlinePointStyle`, `redlineLineStringStyle` and
-     * `redlinePolygonStyle` must be declared here by instanciating of the panel
-     * as these will be uses as default values in the styler class (compare
-     * {@link MoMo.client.view.window.RedliningStylerWindow})
+     * Returns config object with style properties to be applied
+     * lately to the redlining tools panel
      */
-    createRedliningButtonsPanel: function() {
+    createConfigObject: function(){
 
         var me = this;
-
-        var parentBtn = me.getView().getEl();
 
         var viewModel = me.getView().getViewModel();
 
-        var position = me.computePosition(parentBtn);
-
         var postitPictureUrl = BasiGX.util.Url.getWebProjectBaseUrl() +
-            'client/resources/img/blue-post-it.png';
+        'client/resources/img/blue-post-it.png';
 
-        var btnPanel =
-            Ext.create("MoMo.client.view.panel.RedliningToolsPanel", {
-                style: {
-                    'top': position.top,
-                    'right': position.right
-                },
-                bodyStyle: {
-                    background: 'transparent'
-                },
-                postitPictureUrl: postitPictureUrl,
-                redlinePointStyle: new ol.style.Style({
-                    image: new ol.style.Circle({
-                        radius: viewModel.get('defPointStyle.radius'),
-                        fill: new ol.style.Fill({
-                            color: viewModel.get('defPointStyle.fillColor')
-                        }),
-                        stroke: new ol.style.Stroke({
-                            color: viewModel.get('defPointStyle.strokeColor'),
-                            width: viewModel.get('defPointStyle.strokeWidth')
-                        })
-                    })
-                }),
-                redlineLineStringStyle: new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: viewModel.get('defLineStringStyle.strokeColor'),
-                        width: viewModel.get('defLineStringStyle.strokeWidth')
-                    })
-                }),
-                redlinePolygonStyle: new ol.style.Style({
-                    stroke: new ol.style.Stroke({
-                        color: viewModel.get('defPolygonStyle.strokeColor'),
-                        width: viewModel.get('defPolygonStyle.strokeWidth')
-                    }),
+        var conf = {
+            postitPictureUrl: postitPictureUrl,
+            redlinePointStyle: new ol.style.Style({
+                image: new ol.style.Circle({
+                    radius: viewModel.get('defPointStyle.radius'),
                     fill: new ol.style.Fill({
-                        color: viewModel.get('defPolygonStyle.fillColor')
+                        color: viewModel.get('defPointStyle.fillColor')
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: viewModel.get('defPointStyle.strokeColor'),
+                        width: viewModel.get('defPointStyle.strokeWidth')
                     })
                 })
-            }
-        );
-
-        return btnPanel;
-    },
-
-    /**
-     * Shows a redlining tools panel on call button toggle.
-     */
-    showRedliningToolsPanel: function() {
-        var me = this;
-        if (!me.btnPanel) {
-            me.btnPanel = me.createRedliningButtonsPanel();
-            // map container
-            var cont = Ext.ComponentQuery
-                .query('viewport > container[region=center]')[0];
-            cont.add(me.btnPanel);
-        } else {
-            me.btnPanel.show();
-        }
-    },
-
-    /**
-     * Computes position of the redlining tools panel depending on the
-     * dimensions and position of the parent button and the height of the
-     * application header if given.
-     */
-    computePosition: function(btn){
-        var header = Ext.ComponentQuery.query('panel[region=north]')[0],
-            hHeight = 0;
-
-        if (header) {
-            var hSplitter = header.splitter;
-            hHeight = header.getHeight();
-        }
-
-        var top =
-            btn.getClientRegion().top - hHeight - hSplitter.getHeight() + "px";
-        var right = btn.getWidth()*2 + "px";
-
-        return {
-            top: top,
-            right: right
+            }),
+            redlineLineStringStyle: new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: viewModel.get('defLineStringStyle.strokeColor'),
+                    width: viewModel.get('defLineStringStyle.strokeWidth')
+                })
+            }),
+            redlinePolygonStyle: new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: viewModel.get('defPolygonStyle.strokeColor'),
+                    width: viewModel.get('defPolygonStyle.strokeWidth')
+                }),
+                fill: new ol.style.Fill({
+                    color: viewModel.get('defPolygonStyle.fillColor')
+                })
+            })
         };
-    },
-
-    /**
-     * Hides a redlining tools panel on call button toggle.
-     */
-    hideRedliningToolsPanel: function() {
-        var me = this;
-        if (me.btnPanel) {
-            me.btnPanel.hide();
-        }
-    },
-
-    /**
-     * Deactivates possibly activated redlining tools if parent button was
-     * untoggled and redlining tools panel was hidden.
-     */
-    deactivateRedliningTools: function (){
-        var me = this;
-        if (me.btnPanel) {
-            var redlineBtns = me.btnPanel.query('button');
-            Ext.each(redlineBtns, function(btn){
-                if (btn.pressed) {
-                    btn.toggle();
-                }
-            });
-        }
+        return conf;
     }
 });

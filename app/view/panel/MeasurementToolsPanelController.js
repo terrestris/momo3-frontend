@@ -14,36 +14,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * ShowWorkstateToolsPanelController
+ * MeasurementToolsPanelController
  *
- * This controller will be used to manage the workstate tools
+ * The controller for the measurement tools. At the moment the BasiGX class
+ * ´basigx-button-measure´ with its own logic will be used so we don't need
+ * to implement here our own code (yet). Change it if the measurement tools
+ * should be adjusted or don't work as expected.
  *
- * @class ShowWorkstateToolsPanelController
+ *
+ * @class MoMo.client.view.panel.MeasurementToolsPanelController
  */
-Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
-    extend: 'MoMo.client.view.button.ShowToolsPanelCommonController',
+Ext.define('MoMo.client.view.panel.MeasurementToolsPanelController', {
+
+    extend: 'Ext.app.ViewController',
 
     requires: [
     ],
 
-    alias: 'controller.button.showworkstatetoolspanel',
-
-    /**
-     * Placeholder for the workstate tools panel
-     */
-    btnPanel: null,
-
-    /**
-    *
-    */
-    onToggle: function(btn, pressed){
-        var me = this;
-        if (pressed){
-            me.showToolsPanel("MoMo.client.view.panel.WorkstateToolsPanel");
-        } else {
-            me.hideToolsPanel();
-            me.deactivateTools();
-        }
-    }
+    alias: 'controller.panel.measurementoolspanel'
 
 });

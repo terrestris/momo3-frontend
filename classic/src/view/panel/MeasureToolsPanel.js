@@ -14,22 +14,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Panel containing the workstate tools for the temporary drawing in the
+ * Panel containing the measure tools for the temporary drawing in the
  * client.
  *
- * @class MoMo.client.view.panel.WorkstateToolsPanel
+ * @class MoMo.client.view.panel.MeasureToolsPanel
  */
-Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
+Ext.define("MoMo.client.view.panel.MeasureToolsPanel", {
     extend: "Ext.panel.Panel",
-    xtype: 'momo-panel-workstate',
+    xtype: 'momo-panel-measurement',
 
     requires: [
         'Ext.button.Button'
     ],
 
-    viewModel: 'panel.workstatetoolspanel',
+    viewModel: 'panel.measurementoolspanel',
 
-    controller: 'panel.workstatetoolspanel',
+//    controller: 'panel.measurementoolspanel',
 
     layout: {
         type: 'hbox',
@@ -43,31 +43,37 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
     },
 
     defaults: {
-        xtype: 'button',
-        toggleGroup: 'workstate',
+        style: {
+            margin: '0 5px 0 5px'
+        },
+        xtype: 'basigx-button-measure',
+        toggleGroup: 'measure',
         ui: 'momo-tools',
         scale: 'small',
-        style: {
-            margin: '0 5px 5px 5px'
-        }
+        showMeasureInfoOnClickedPoints: true
     },
 
     items: [{
-        bind: {
-            tooltip: '{loadSaveWorkstateBtnText}'
-        },
-        name: 'loadSaveWorkstateBtn',
-        glyph: 'xf07c@FontAwesome', //fa fa-folder-open
+        measureType: 'line',
+        glyph: 'xf201@FontAwesome',
         listeners: {
-            toggle: 'onLoadSaveWorkstateBtnToggle'
+            afterrender: function(btn){
+                btn.setBind({
+                    text: '{text}',
+                    tooltip: '{lineTooltip}'
+                });
+            }
         }
     }, {
-        xtype: 'basigx-button-permalink',
-        bind: {
-            tooltip: '{permalinkBtnText}',
-            text: null
-        },
-        name: 'permalinkBtn',
-        glyph: 'xf0c1@FontAwesome' //fa fa-link
+        measureType: 'polygon',
+        glyph: 'xf1fe@FontAwesome',
+        listeners: {
+            afterrender: function(btn){
+                btn.setBind({
+                    text: '{text}',
+                    tooltip: '{areaTooltip}'
+                });
+            }
+        }
     }]
 });

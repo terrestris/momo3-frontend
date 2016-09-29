@@ -33,6 +33,10 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
 
     width: 200,
 
+    bodyStyle: {
+        background: 'transparent'
+    },
+
     config: {
         postitPictureUrl: null,
         redlinePointStyle: null,
