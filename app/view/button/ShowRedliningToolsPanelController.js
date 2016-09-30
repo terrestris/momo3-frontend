@@ -53,7 +53,10 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelController', {
         var me = this;
         if (pressed){
             var conf = me.createConfigObject();
-            me.showToolsPanel("MoMo.client.view.panel.RedliningToolsPanel", conf);
+            me.showToolsPanel(
+                "MoMo.client.view.panel.RedliningToolsPanel",
+                conf
+            );
         } else {
             me.hideToolsPanel();
             me.deactivateTools();
