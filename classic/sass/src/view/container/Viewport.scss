@@ -3,6 +3,14 @@
     right: 0 !important;
 }
 
+.momo-viewport-header-body{
+    background-color: $main-light-color;
+}
+
 .x-splitter-focus:after {
     border: none;
+}
+
+.x-grid .x-grid-item.x-grid-item-selected {
+    background-color: lighten($main-light-color, 25%);
 }
