@@ -7,7 +7,7 @@
     background-color: $main-light-color;
 }
 
-.x-splitter-focus:after {
+.x-splitter-focus:after, .x-grid-item-focused .x-grid-cell-inner:before {
     border: none;
 }
 
