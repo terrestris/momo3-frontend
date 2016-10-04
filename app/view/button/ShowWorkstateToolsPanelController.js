@@ -21,7 +21,7 @@
  * @class ShowWorkstateToolsPanelController
  */
 Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
-    extend: 'Ext.app.ViewController',
+    extend: 'MoMo.client.view.button.ShowToolsPanelCommonController',
 
     requires: [
     ],
@@ -39,104 +39,11 @@ Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelController', {
     onToggle: function(btn, pressed){
         var me = this;
         if (pressed){
-            me.showWorkstateToolsPanel();
+            me.showToolsPanel("MoMo.client.view.panel.WorkstateToolsPanel");
         } else {
-            me.hideWorkstateToolsPanel();
-            //me.deactivateWorkstateTools();
-        }
-    },
-
-    /**
-     * Creates a panel containing two buttons for workstate administration and
-     * permalink creation. The position of the panel will be computed
-     * dynamically (s. method #computePosition below).
-     */
-    createWorkstateButtonsPanel: function() {
-
-        var me = this;
-
-        var parentBtn = me.getView().getEl();
-
-        var position = me.computePosition(parentBtn);
-
-        var btnPanel =
-            Ext.create("MoMo.client.view.panel.WorkstateToolsPanel", {
-                style: {
-                    'top': position.top,
-                    'right': position.right
-                },
-                bodyStyle: {
-                    background: 'transparent'
-                }
-            }
-        );
-
-        return btnPanel;
-    },
-
-    /**
-     * Shows a workstate tools panel on call button toggle.
-     */
-    showWorkstateToolsPanel: function() {
-        var me = this;
-        if (!me.btnPanel) {
-            me.btnPanel = me.createWorkstateButtonsPanel();
-            // map container
-            var cont = Ext.ComponentQuery
-                .query('viewport > container[region=center]')[0];
-            cont.add(me.btnPanel);
-        } else {
-            me.btnPanel.show();
-        }
-    },
-
-    /**
-     * Computes position of the measurement tools panel depending on the
-     * dimensions and position of the parent button and the height of the
-     * application header if given.
-     */
-    computePosition: function(btn){
-        var header = Ext.ComponentQuery.query('panel[region=north]')[0],
-            hHeight = 0;
-
-        if (header) {
-            var hSplitter = header.splitter;
-            hHeight = header.getHeight();
-        }
-
-        var top =
-            btn.getClientRegion().top - hHeight - hSplitter.getHeight() + "px";
-        var right = btn.getWidth()*2 + "px";
-
-        return {
-            top: top,
-            right: right
-        };
-    },
-
-    /**
-     * Hides a workstate tools panel on call button toggle.
-     */
-    hideWorkstateToolsPanel: function() {
-        var me = this;
-        if (me.btnPanel) {
-            me.btnPanel.hide();
-        }
-    },
-
-    /**
-     * Deactivates possibly activated workstate tools if parent button was
-     * untoggled and workstate tools panel was hidden.
-     */
-    deactivateWorkstateTools: function (){
-        var me = this;
-        if (me.btnPanel) {
-            var workstateBtns = me.btnPanel.query('button');
-            Ext.each(workstateBtns, function(btn){
-                if (btn.pressed) {
-                    btn.toggle();
-                }
-            });
+            me.hideToolsPanel();
+            me.deactivateTools();
         }
     }
+
 });

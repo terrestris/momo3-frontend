@@ -1,0 +1,20 @@
+/**
+ * The ui config for 'momo-tools' (all common momo tools on the right side);
+ */
+@include extjs-button-small-ui(
+    $ui: 'momo-tools',
+    $background-color: $main-2nd-color,
+    $border-color:darken($main-2nd-color, 5%),
+    $border-radius:5px
+);
+
+/**
+ * The ui config for 'momo-header-tools' (login/logout, RBMA, translation btns);
+ */
+@include extjs-button-small-ui(
+    $ui: 'momo-header-tools',
+    $background-color: $main-2nd-color,
+    $border-color:darken($main-2nd-color, 5%),
+    $border-radius:5px
+);
+

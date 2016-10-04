@@ -19,7 +19,7 @@ tmp
 # Sencha 
 build/
 ext/
-packages/
+packages/remote/
 classic.json
 sass/example/example.css
 sass/example/bootstrap.json

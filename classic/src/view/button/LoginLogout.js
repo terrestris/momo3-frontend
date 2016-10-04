@@ -17,6 +17,10 @@ Ext.define('MoMo.client.view.button.LoginLogout', {
 
     viewModel: 'button.loginlogout',
 
+    ui: 'momo-header-tools',
+
+    scale: 'small',
+
     /**
      *
      */

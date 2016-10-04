@@ -38,13 +38,15 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
 
     width: 100,
 
-    config: {
-
+    bodyStyle: {
+        background: 'transparent'
     },
 
     defaults: {
         xtype: 'button',
         toggleGroup: 'workstate',
+        ui: 'momo-tools',
+        scale: 'small',
         style: {
             margin: '0 5px 5px 5px'
         }

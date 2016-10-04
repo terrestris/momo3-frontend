@@ -33,6 +33,10 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
 
     width: 200,
 
+    bodyStyle: {
+        background: 'transparent'
+    },
+
     config: {
         postitPictureUrl: null,
         redlinePointStyle: null,
@@ -76,6 +80,8 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         defaults: {
             xtype: 'button',
             toggleGroup: 'draw',
+            ui: 'momo-tools',
+            scale: 'small',
             style: {
                 margin: '0 5px 5px 5px'
             }
@@ -126,6 +132,8 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         defaults: {
             xtype: 'button',
             toggleGroup: 'draw',
+            ui: 'momo-tools',
+            scale: 'small',
             style: {
                 margin: '0 5px 5px 5px'
             }
@@ -176,6 +184,8 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         items: [{
             xtype: 'button',
             toggleGroup: 'draw',
+            ui: 'momo-tools',
+            scale: 'small',
             style: {
                 margin: '0 5px 5px 5px'
             },
