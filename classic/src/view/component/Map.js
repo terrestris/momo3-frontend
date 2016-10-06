@@ -7,7 +7,6 @@ Ext.define('MoMo.client.view.component.Map', {
     xtype: 'momo-component-map',
 
     requires: [
-        'BasiGX.util.ConfigParser',
         'BasiGX.util.Layer',
         'BasiGX.util.Map',
 
