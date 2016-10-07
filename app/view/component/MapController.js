@@ -155,7 +155,8 @@ Ext.define('MoMo.client.view.component.MapController', {
             params: {
                 'LAYERS': mapLayerSource.layerNames,
                 'VERSION': mapLayerSource.version,
-                'TILED': true
+                'TILED': true,
+                'TRANSPARENT': mapLayerSource.transparent || true
             },
             crossOrigin: mapLayerSource.crossOrigin || null,
             gutter: mapLayerSource.gutter || 0,
