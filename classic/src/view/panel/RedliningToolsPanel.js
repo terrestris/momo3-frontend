@@ -31,7 +31,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
 
     controller: 'panel.redliningtoolspanel',
 
-    width: 200,
+    width: 250,
 
     bodyStyle: {
         background: 'transparent'
@@ -91,7 +91,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPointsBtnText}'
             },
             name: 'drawPointsBtn',
-            glyph: 'xf1db@FontAwesome', //fa fa-circle-thin
+            glyph: 'xf100@Flaticon',
             listeners: {
                 toggle: 'onDrawPointsBtnToggle'
             }
@@ -100,7 +100,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawLinesBtnText}'
             },
             name: 'drawLinesBtn',
-            glyph: 'xf0c9@FontAwesome', //fa fa-bars
+            glyph: 'xf104@Flaticon',
             listeners: {
                 toggle: 'onDrawLinesBtnToggle'
             }
@@ -109,18 +109,27 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPolygonsBtnText}'
             },
             name: 'drawPolygonsBtn',
-            glyph: 'xf096@FontAwesome', //fa fa-square-o
+            glyph: 'xf106@Flaticon',
             listeners: {
                 toggle: 'onDrawPolygonsBtnToggle'
             }
         }, {
             bind: {
-                tooltip: '{drawPostItBtnText}'
+                tooltip: '{drawCirclesBtnText}'
             },
-            name: 'postitBtn',
-            glyph: 'xf24a@FontAwesome', //fa fa-sticky-note-o
+            name: 'drawCirclesBtn',
+            glyph: 'xf103@Flaticon',
             listeners: {
-                toggle: 'onPostitBtnToggle'
+                toggle: 'onDrawCirclesBtnToggle'
+            }
+        }, {
+            bind: {
+                tooltip: '{drawRectanglesBtnText}'
+            },
+            name: 'drawRectanglesBtn',
+            glyph: 'xf10a@Flaticon',
+            listeners: {
+                toggle: 'onDrawRectanlgesBtnToggle'
             }
         }]
     }, {
@@ -140,10 +149,28 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         },
         items: [{
             bind: {
+                tooltip: '{drawTextBtnText}'
+            },
+            name: 'textBtn',
+            glyph: 'xf10b@Flaticon',
+            listeners: {
+                toggle: 'onTextBtnToggle'
+            }
+        }, {
+            bind: {
+                tooltip: '{drawPostItBtnText}'
+            },
+            name: 'postitBtn',
+            glyph: 'xf108@Flaticon',
+            listeners: {
+                toggle: 'onPostitBtnToggle'
+            }
+        }, {
+            bind: {
                 tooltip: '{copyObjectBtnText}'
             },
             name: 'copyObjectBtn',
-            glyph: 'xf24d@FontAwesome', //fa fa-clone
+            glyph: 'xf10e@Flaticon',
             listeners: {
                 toggle: 'onCopyBtnToggle'
             }
@@ -151,7 +178,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             bind: {
                 tooltip: '{moveObjectBtnText}'
             },
-            glyph: 'xf047@FontAwesome', //fa fa-arrows
+            glyph: 'xf107@Flaticon',
             name: 'moveObjectBtn',
             listeners: {
                 toggle: 'onMoveBtnToggle'
@@ -165,7 +192,23 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             listeners: {
                 toggle: 'onModifyBtnToggle'
             }
-        }, {
+        }]
+    }, {
+        xtype: 'container',
+        layout: {
+            type: 'hbox',
+            pack: 'end'
+        },
+        defaults: {
+            xtype: 'button',
+            toggleGroup: 'draw',
+            ui: 'momo-tools',
+            scale: 'small',
+            style: {
+                margin: '0 5px 5px 5px'
+            }
+        },
+        items: [{
             bind: {
                 tooltip: '{deleteObjectBtnText}'
             },
@@ -174,21 +217,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             listeners: {
                 toggle: 'onDeleteBtnToggle'
             }
-        }]
-    }, {
-        xtype: 'container',
-        layout: {
-            type: 'hbox',
-            pack: 'end'
-        },
-        items: [{
-            xtype: 'button',
-            toggleGroup: 'draw',
-            ui: 'momo-tools',
-            scale: 'small',
-            style: {
-                margin: '0 5px 5px 5px'
-            },
+        }, {
             bind: {
                 tooltip: '{openStyleBtnText}'
             },
@@ -256,6 +285,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
     getState: function() {
         var me = this;
         var features = [];
+
         me.redlineFeatures.forEach(function(feature) {
             features.push(feature.clone());
         });
