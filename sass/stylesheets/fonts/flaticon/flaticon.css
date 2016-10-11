@@ -31,18 +31,28 @@
     margin-left: 20px;
 }
 
+class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}
+
 .flaticon-circle:before { content: "\f100"; }
 .flaticon-circle-1:before { content: "\f101"; }
 .flaticon-circle-2:before { content: "\f102"; }
 .flaticon-circle-outline:before { content: "\f103"; }
 .flaticon-divide-mathematical-sign:before { content: "\f104"; }
 .flaticon-drawing:before { content: "\f105"; }
-.flaticon-hexagon:before { content: "\f106"; }
-.flaticon-multimedia:before { content: "\f107"; }
-.flaticon-post-it:before { content: "\f108"; }
-.flaticon-ruler:before { content: "\f109"; }
-.flaticon-shape:before { content: "\f10a"; }
-.flaticon-shapes:before { content: "\f10b"; }
-.flaticon-square:before { content: "\f10c"; }
-.flaticon-tools:before { content: "\f10d"; }
-.flaticon-two:before { content: "\f10e"; }
+.flaticon-edit-picture:before { content: "\f106"; }
+.flaticon-hexagon:before { content: "\f107"; }
+.flaticon-multimedia:before { content: "\f108"; }
+.flaticon-photo:before { content: "\f109"; }
+.flaticon-post-it:before { content: "\f10a"; }
+.flaticon-ruler:before { content: "\f10b"; }
+.flaticon-shape:before { content: "\f10c"; }
+.flaticon-shapes:before { content: "\f10d"; }
+.flaticon-tool:before { content: "\f10e"; }
+.flaticon-tools:before { content: "\f10f"; }
+.flaticon-two:before { content: "\f110"; }

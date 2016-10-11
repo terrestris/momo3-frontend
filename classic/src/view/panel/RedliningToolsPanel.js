@@ -109,7 +109,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPolygonsBtnText}'
             },
             name: 'drawPolygonsBtn',
-            glyph: 'xf106@Flaticon',
+            glyph: 'xf107@Flaticon',
             listeners: {
                 toggle: 'onDrawPolygonsBtnToggle'
             }
@@ -127,7 +127,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawRectanglesBtnText}'
             },
             name: 'drawRectanglesBtn',
-            glyph: 'xf10a@Flaticon',
+            glyph: 'xf109@Flaticon',
             listeners: {
                 toggle: 'onDrawRectanlgesBtnToggle'
             }
@@ -152,7 +152,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawTextBtnText}'
             },
             name: 'textBtn',
-            glyph: 'xf10b@Flaticon',
+            glyph: 'xf10d@Flaticon',
             listeners: {
                 toggle: 'onTextBtnToggle'
             }
@@ -161,7 +161,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPostItBtnText}'
             },
             name: 'postitBtn',
-            glyph: 'xf108@Flaticon',
+            glyph: 'xf10a@Flaticon',
             listeners: {
                 toggle: 'onPostitBtnToggle'
             }
@@ -170,7 +170,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{copyObjectBtnText}'
             },
             name: 'copyObjectBtn',
-            glyph: 'xf10e@Flaticon',
+            glyph: 'xf110@Flaticon',
             listeners: {
                 toggle: 'onCopyBtnToggle'
             }
@@ -178,7 +178,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             bind: {
                 tooltip: '{moveObjectBtnText}'
             },
-            glyph: 'xf107@Flaticon',
+            glyph: 'xf108@Flaticon',
             name: 'moveObjectBtn',
             listeners: {
                 toggle: 'onMoveBtnToggle'
