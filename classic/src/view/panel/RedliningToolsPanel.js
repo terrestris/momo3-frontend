@@ -233,11 +233,9 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
      * @event redliningchanged
      * An event that fires everytime a feature is added, deleted, moved or
      * modified.
-     * @param {BasiGX.view.container.Redlining} container
+     * @param {MoMo.client.view.panel.RedliningToolsPanel} container
      *     The Redlining container.
      * @param {Object} state The current redlining state.
-     * @param {Boolean} stateChangeActive While setState is runnning this will
-     *     be true otherwise false.
      */
 
     /**
@@ -254,7 +252,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         if (!me.redliningVectorLayer) {
             me.redlineFeatures = new ol.Collection();
             me.redlineFeatures.on(
-                'propertychange',
+                'add',
                 me.fireRedliningChanged,
                 me
             );
@@ -272,76 +270,29 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
     /**
      *
      */
-    fireRedliningChanged: function(){
+    fireRedliningChanged: function(evt){
         var me = this;
-        me.fireEvent('redliningchanged', me, me.getState(),
-                me.stateChangeActive);
+        var feat = evt.element;
+        me.fireEvent('redliningchanged', me, me.adjustFeatureStyle(feat));
     },
 
     /**
-     * Returns the current state of the redlining, containing all features
-     * and the configured styles
+     * Sets currently defined style to the new added features.
+     * @param {ol.Feature} feature drawn feature
      */
-    getState: function() {
-        var me = this;
-        var features = [];
-
-        me.redlineFeatures.forEach(function(feature) {
-            features.push(feature.clone());
-        });
-
-        var state = {
-            features: features,
-            pointStyle: me.getRedlinePointStyle(),
-            lineStyle: me.getRedlineLineStringStyle(),
-            polygonStyle: me.getRedlinePolygonStyle(),
-            styleFunction: me.getRedlineStyleFunction()
-        };
-
-        return state;
-    },
-
-    /**
-     * Sets the state of the redlining, containing drawn features
-     * and the configured styles
-     */
-    setState: function(state) {
+    adjustFeatureStyle: function(feature) {
         var me = this;
 
-        me.stateChangeActive = true;
+        if (feature) {
+            var geometry = feature.getGeometry();
 
-        var styler = Ext.ComponentQuery.query(
-            'basigx-container-redlinestyler')[0];
-
-        if (state.features) {
-            me.redliningVectorLayer.getSource().clear();
-            me.redliningVectorLayer.getSource().addFeatures(state.features);
+            if (geometry instanceof ol.geom.Point) {
+                feature.setStyle(me.getRedlinePointStyle());
+            } else if (geometry instanceof ol.geom.LineString) {
+                feature.setStyle(me.getRedlineLineStringStyle());
+            } else {
+                feature.setStyle(me.getRedlinePolygonStyle());
+            }
         }
-
-        if (state.pointStyle) {
-            me.setRedlinePointStyle(state.pointStyle);
-        }
-
-        if (state.lineStyle) {
-            me.setRedlineLineStringStyle(state.lineStyle);
-        }
-
-        if (state.polygonStyle) {
-            me.setRedlinePolygonStyle(state.polygonStyle);
-        }
-
-        if (styler) {
-            styler.setState(state);
-        }
-
-        if (state.styleFunction) {
-            me.setRedlineStyleFunction(state.styleFunction);
-        }
-
-        // reapply the styleFn on the layer so that ol3 starts redrawing
-        // with new styles
-        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
-
-        me.stateChangeActive = false;
     }
 });

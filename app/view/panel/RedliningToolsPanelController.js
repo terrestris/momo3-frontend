@@ -196,7 +196,7 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
      */
     onDrawCirclesBtnToggle: function(btn, pressed) {
         var me = this,
-        view = me.getView();
+            view = me.getView();
         if (!me.drawCircleInteraction) {
             var geomFunc = function(coordinates, geometry) {
                 var start = coordinates[0];
@@ -207,7 +207,7 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
                 var radius = me.computeCircleRadius(start, end);
                 geometry.setRadius(radius);
                 return geometry;
-              };
+            };
             me.drawCircleInteraction = new ol.interaction.Draw({
                 features: view.redlineFeatures,
                 type: 'LineString',
@@ -233,11 +233,11 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
      */
     onDrawRectanlgesBtnToggle: function(btn, pressed) {
         var me = this,
-        view = me.getView();
+            view = me.getView();
         if (!me.drawRectangleInteraction) {
             var geomFunc = function(coordinates, geometry) {
                 if (!geometry) {
-                  geometry = new ol.geom.Polygon(null);
+                    geometry = new ol.geom.Polygon(null);
                 }
                 var start = coordinates[0];
                 var end = coordinates[1];
@@ -245,7 +245,7 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
                   [start, [start[0], end[1]], end, [end[0], start[1]], start]
                 ]);
                 return geometry;
-              };
+            };
             me.drawRectangleInteraction = new ol.interaction.Draw({
                 features: view.redlineFeatures,
                 type: 'LineString',
@@ -644,8 +644,6 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
      * @param {ol.Feature} feat point feature bounded to the postit
      */
     setTextOnFeature: function(text, feat) {
-        var me = this,
-        view = me.getView();
         feat.setStyle(new ol.style.Style({
             text: new ol.style.Text({
                 text: text,
@@ -726,10 +724,9 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
      * transform the drawn circle to the approximate regular polygon with
      * given circle geometry.
      */
-    translateCircleToPolygon: function(evt){
+    translateCircleToPolygon: function(){
         var me = this,
-            view = me.getView(),
-            feat = evt.element;
+            view = me.getView();
 
         Ext.each(view.redlineFeatures.getArray(), function(f){
             if (f.getGeometry().getType() === "Circle") {
