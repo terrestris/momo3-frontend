@@ -130,6 +130,7 @@ Ext.define('MoMo.client.view.component.MapController', {
             name: mapLayer.name || 'UNNAMED LAYER',
             routingId: mapLayer.id,
             hoverable: mapLayer.hoverable || false,
+            chartable: mapLayer.chartable || false,
             opacity: mapLayerAppearance.opacity,
             visible: mapLayerAppearance.visible,
             minResolution: mapLayerAppearance.minResolution,
@@ -349,39 +350,54 @@ Ext.define('MoMo.client.view.component.MapController', {
         var me = this;
         var map = me.getView().getMap();
         var win = Ext.ComponentQuery.query('window[name=hsi-window]')[0];
+        var showChartWin = false;
+        var xtype;
 
         if(win){
             win.destroy();
         }
-        var tabs = [];
+        var items = [];
         Ext.each(olFeats, function(olFeat){
             var layer = olFeat.get('layer');
-            var tab = {
-                title: layer.get('name'),
-                xtype: 'propertygrid',
-                width: 400,
-                source: olFeat.getProperties(),
-                closable: true,
-                listeners: {
-                    close: function(card){
-                        var selectInteraction = me.getView()
-                            .getPlugin('momo-client-hover')
-                            .getHoverVectorLayerInteraction();
-                        selectInteraction.getFeatures()
-                            .remove(card.olFeature);
-                    },
-                    scope: me.getView()
-                }
-            };
-            tabs.push(tab);
+            if (layer.get('chartable')) {
+                showChartWin = true;
+            }
         });
+        if (!showChartWin) {
+            Ext.each(olFeats, function(olFeat){
+                var layer = olFeat.get('layer');
+                var tab = {
+                        title: layer.get('name'),
+                        xtype: 'propertygrid',
+                        width: 400,
+                        source: olFeat.getProperties(),
+                        closable: true,
+                        listeners: {
+                            close: function(card){
+                                var selectInteraction = me.getView()
+                                .getPlugin('momo-client-hover')
+                                .getHoverVectorLayerInteraction();
+                                selectInteraction.getFeatures()
+                                .remove(card.olFeature);
+                            },
+                            scope: me.getView()
+                        }
+                };
+                items.push(tab);
+            });
+            xtype = 'tabpanel;'
+        } else {
+            me.requestChartingData(olFeats[0]);
+            xtype = 'panel';
+            items = '';
+        }
 
         Ext.create('Ext.window.Window',{
             title: 'Feature Info',
             name: 'hsi-window',
             items:[{
-                xtype: 'tabpanel',
-                items: tabs
+                xtype: xtype,
+                items: items
             }],
             listeners: {
                 close: function(){
@@ -396,6 +412,38 @@ Ext.define('MoMo.client.view.component.MapController', {
 
         map.getOverlays().forEach(function(o) {
             map.removeOverlay(o);
+        });
+    },
+
+    requestChartingData: function(feat) {
+        var url = 'http://188.40.113.28/geoserver/momo/ows?';
+
+        var params = {
+            service: 'WFS',
+            version: '1.1.0',
+            request: 'GetFeature',
+            outputFormat: 'application/json',
+            typeName: 'momo:ecotech_data',
+            srsname: 'EPSG:3857',
+            viewparams: 'station_id:' + feat.get('station_id')
+        }
+        Ext.Ajax.request({
+            url: url,
+            params: params,
+            method: 'GET',
+            callback: function(){
+                //me.pendingRequest = null;
+            },
+            success: function(response){
+                var format = new ol.format.GeoJSON();
+                var data = format.readFeatures(response.responseText);
+                console.log(data[0].getProperties());
+            },
+            failure: function(resp) {
+                if(!resp.aborted){
+                    Ext.log.error('Couldn\'t get FeatureInfo', resp);
+                }
+            }
         });
     }
 });
