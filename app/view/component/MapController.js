@@ -389,7 +389,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         } else {
             me.requestChartingData(olFeats[0]);
             xtype = 'panel';
-            items = '';
+            items = [];
         }
 
         Ext.create('Ext.window.Window',{
@@ -415,16 +415,21 @@ Ext.define('MoMo.client.view.component.MapController', {
         });
     },
 
+    /**
+     * Sends WFS GetFeature request to the geoserver to get all charting data
+     * @param {ol.Feature} feat feature containing station_id value
+     */
     requestChartingData: function(feat) {
-        var url = 'http://188.40.113.28/geoserver/momo/ows?';
-
+        var url = '/momo/geoserver.action';
+        var me = this;
+        var map = me.getView().getMap();
         var params = {
             service: 'WFS',
             version: '1.1.0',
             request: 'GetFeature',
             outputFormat: 'application/json',
             typeName: 'momo:ecotech_data',
-            srsname: 'EPSG:3857',
+            srsname: map.getView().getProjection().getCode(),
             viewparams: 'station_id:' + feat.get('station_id')
         }
         Ext.Ajax.request({
