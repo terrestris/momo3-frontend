@@ -386,29 +386,29 @@ Ext.define('MoMo.client.view.component.MapController', {
                 items.push(tab);
             });
             xtype = 'tabpanel;'
-        } else {
-            me.requestChartingData(olFeats[0]);
-            xtype = 'panel';
-            items = [];
-        }
-
-        Ext.create('Ext.window.Window',{
-            title: 'Feature Info',
-            name: 'hsi-window',
-            items:[{
-                xtype: xtype,
-                items: items
-            }],
-            listeners: {
-                close: function(){
-                    var selectInteraction = me.getView()
+            Ext.create('Ext.window.Window',{
+                title: 'Feature Info',
+                name: 'hsi-window',
+                items:[{
+                    xtype: xtype,
+                    items: items
+                }],
+                listeners: {
+                    close: function(){
+                        var selectInteraction = me.getView()
                         .getPlugin('momo-client-hover')
                         .getHoverVectorLayerInteraction();
-                    selectInteraction.getFeatures().clear();
-                },
-                scope: me.getView()
-            }
-        }).show();
+                        selectInteraction.getFeatures().clear();
+                    },
+                    scope: me.getView()
+                }
+            }).show();
+        } else {
+            me.requestChartingData(olFeats[0]);
+//            xtype = 'panel';
+//            items = [];
+        }
+
 
         map.getOverlays().forEach(function(o) {
             map.removeOverlay(o);
@@ -420,35 +420,20 @@ Ext.define('MoMo.client.view.component.MapController', {
      * @param {ol.Feature} feat feature containing station_id value
      */
     requestChartingData: function(feat) {
-        var url = '/momo/geoserver.action';
         var me = this;
-        var map = me.getView().getMap();
-        var params = {
-            service: 'WFS',
-            version: '1.1.0',
-            request: 'GetFeature',
-            outputFormat: 'application/json',
-            typeName: 'momo:ecotech_data',
-            srsname: map.getView().getProjection().getCode(),
-            viewparams: 'station_id:' + feat.get('station_id')
-        }
-        Ext.Ajax.request({
-            url: url,
-            params: params,
-            method: 'GET',
-            callback: function(){
-                //me.pendingRequest = null;
-            },
-            success: function(response){
-                var format = new ol.format.GeoJSON();
-                var data = format.readFeatures(response.responseText);
-                console.log(data[0].getProperties());
-            },
-            failure: function(resp) {
-                if(!resp.aborted){
-                    Ext.log.error('Couldn\'t get FeatureInfo', resp);
-                }
-            }
+
+        var win = Ext.create('MoMo.view.charts.WaterDataChart', {
+            chartFeature: feat
         });
+        win.show();
+
+        var map = me.getView().getMap();
+        var store = win.down('chart').getStore();
+        var proxy = store.getProxy();
+        proxy.setExtraParam("srsname", map.getView().getProjection().getCode());
+        proxy.setExtraParam("viewparams", 'station_id:' + feat.get('station_id'));
+        store.load();
+
     }
+
 });
