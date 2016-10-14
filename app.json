@@ -24,7 +24,8 @@
         "app",
         "${toolkit.name}/src",
         "../lib/geoext3/src",
-        "../lib/BasiGX/src"
+        "../lib/BasiGX/src",
+        "../lib/datetimeux/src"
     ],
 
     /**
