@@ -30,10 +30,15 @@ Ext.define('MoMo.client.model.WaterData', {
 
     fields: [{
         name: 'no',
-        type: 'int',
+        type: 'int'
     }, {
         name: 'time',
-        type: 'date'
+        type: 'date',
+        dateFormat: 'Y-m-d H:i',
+        convert: function(value){
+            var date = new Date(value);
+            return date;
+        }
     }, {
         name: '°C:1',
         type: 'float'

@@ -343,20 +343,18 @@ Ext.define('MoMo.client.view.component.MapController', {
     },
 
     /**
-    *
+    * Shows feature info window on hover feature clicked. If at least one
+    * feature with property `chartable` was retrieved a chart window
+    * as instance of `MoMo.view.window.WaterDataChartWindow` will be shown
+    * instead
+    * @param {Array} olFeats Array of retrieved features
     */
     onHoverFeatureClicked: function(olFeats){
-
         var me = this;
         var map = me.getView().getMap();
-        var win = Ext.ComponentQuery.query('window[name=hsi-window]')[0];
-        var showChartWin = false;
-        var xtype;
 
-        if(win){
-            win.destroy();
-        }
-        var items = [];
+        var showChartWin = false;
+
         Ext.each(olFeats, function(olFeat){
             var layer = olFeat.get('layer');
             if (layer.get('chartable')) {
@@ -364,51 +362,10 @@ Ext.define('MoMo.client.view.component.MapController', {
             }
         });
         if (!showChartWin) {
-            Ext.each(olFeats, function(olFeat){
-                var layer = olFeat.get('layer');
-                var tab = {
-                        title: layer.get('name'),
-                        xtype: 'propertygrid',
-                        width: 400,
-                        source: olFeat.getProperties(),
-                        closable: true,
-                        listeners: {
-                            close: function(card){
-                                var selectInteraction = me.getView()
-                                .getPlugin('momo-client-hover')
-                                .getHoverVectorLayerInteraction();
-                                selectInteraction.getFeatures()
-                                .remove(card.olFeature);
-                            },
-                            scope: me.getView()
-                        }
-                };
-                items.push(tab);
-            });
-            xtype = 'tabpanel;'
-            Ext.create('Ext.window.Window',{
-                title: 'Feature Info',
-                name: 'hsi-window',
-                items:[{
-                    xtype: xtype,
-                    items: items
-                }],
-                listeners: {
-                    close: function(){
-                        var selectInteraction = me.getView()
-                        .getPlugin('momo-client-hover')
-                        .getHoverVectorLayerInteraction();
-                        selectInteraction.getFeatures().clear();
-                    },
-                    scope: me.getView()
-                }
-            }).show();
+            me.showFeatureInfoResponseWindow(olFeats);
         } else {
             me.requestChartingData(olFeats[0]);
-//            xtype = 'panel';
-//            items = [];
         }
-
 
         map.getOverlays().forEach(function(o) {
             map.removeOverlay(o);
@@ -422,7 +379,12 @@ Ext.define('MoMo.client.view.component.MapController', {
     requestChartingData: function(feat) {
         var me = this;
 
-        var win = Ext.create('MoMo.view.charts.WaterDataChart', {
+        var win = Ext.ComponentQuery.query('momo-waterdatachart')[0];
+        if (win) {
+            win.destroy();
+        }
+
+        win = Ext.create('MoMo.view.window.WaterDataChartWindow', {
             chartFeature: feat
         });
         win.show();
@@ -431,9 +393,60 @@ Ext.define('MoMo.client.view.component.MapController', {
         var store = win.down('chart').getStore();
         var proxy = store.getProxy();
         proxy.setExtraParam("srsname", map.getView().getProjection().getCode());
-        proxy.setExtraParam("viewparams", 'station_id:' + feat.get('station_id'));
+        proxy.setExtraParam("viewparams", 'station_id:' +
+            feat.get('station_id'));
         store.load();
+    },
 
+    /**
+     * Shows a window with tabpanels where the attributes of all retrieved
+     * features are listed in a grid
+     * @param {Array} olFeats Array of retrieved features
+     */
+    showFeatureInfoResponseWindow: function (olFeats){
+        var me = this,
+            items = [];
+        var win = Ext.ComponentQuery.query('window[name=hsi-window]')[0];
+        if (win) {
+            win.destroy();
+        }
+        Ext.each(olFeats, function(olFeat){
+            var layer = olFeat.get('layer');
+            var tab = {
+                title: layer.get('name'),
+                xtype: 'propertygrid',
+                width: 400,
+                source: olFeat.getProperties(),
+                closable: true,
+                listeners: {
+                    close: function(card){
+                        var selectInteraction = me.getView()
+                            .getPlugin('momo-client-hover')
+                            .getHoverVectorLayerInteraction();
+                        selectInteraction.getFeatures()
+                            .remove(card.olFeature);
+                    },
+                    scope: me.getView()
+                }
+            };
+            items.push(tab);
+        });
+        Ext.create('Ext.window.Window',{
+            title: 'Feature Info',
+            name: 'hsi-window',
+            items:[{
+                xtype: 'tabpanel',
+                items: items
+            }],
+            listeners: {
+                close: function(){
+                    var selectInteraction = me.getView()
+                    .getPlugin('momo-client-hover')
+                    .getHoverVectorLayerInteraction();
+                    selectInteraction.getFeatures().clear();
+                },
+                scope: me.getView()
+            }
+        }).show();
     }
-
 });
