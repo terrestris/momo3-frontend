@@ -12,7 +12,7 @@ Ext.define('MoMo.client.plugin.Hover', {
 //      set pointerRest to false and activate it in the map, otherwise the here
 //      configured pointerRestInterval is set but not parsed
         pointerRest: false,
-        pointerRestInterval: 10
+        pointerRestInterval: 50
     },
 
     /**
