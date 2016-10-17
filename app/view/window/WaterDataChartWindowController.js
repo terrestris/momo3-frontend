@@ -18,6 +18,17 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
             handler();
         }
     },
+    
+    /**
+     * Creates chart header with some informations (e.g. station name and
+     * altitude) about clicked feature
+     * @param {ol.Feat} feat clicked feature
+     */
+    setChartHeader: function(feat){
+        var header = '<h3>' + feat.measuring_point + ' - ' + feat.station_id +
+            '</h3><p>Altitude: ' + feat.altitude + '</p>';
+        return header;
+    },
 
     /**
     * Updates chart values after some date and time are set and update button

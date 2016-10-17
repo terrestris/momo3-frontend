@@ -29,7 +29,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
 
     layout: 'auto',
 
-    width: 700,
+    width: 900,
 
     scrollable: true,
 
@@ -94,7 +94,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
             fieldStyle: {
                 "text-align": 'center'
             },
-            value: me.setChartHeader(feat)
+            value: me.getController().setChartHeader(feat)
         }, {
             xtype: 'panel',
             style: {
@@ -131,76 +131,79 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
                     type: 'line',
                     xField: 'time',
                     yField: '°C:1',
+                    bind: {
+                        title: '{chartlegendTemp}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'uS/cm:(do.)',
+                    yField: 'uS/cm',
+                    bind: {
+                        title: '{chartlegendLeitfaehigkeit}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'pH:(do.)',
+                    yField: 'pH',
+                    bind: {
+                        title: '{chartlegendpH}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'NTU:(do.)',
+                    yField: 'NTU',
+                    bind: {
+                        title: '{chartlegendTruebung}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'ug/l:(do.)',
+                    yField: 'ug/l',
+                    bind: {
+                        title: '{chartlegendChlorophyll}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: '%local:(do.)',
+                    yField: '%local',
+                    bind: {
+                        title: '{chartlegendSauerstoff}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'mg/l:(do.)',
+                    yField: 'mg/l',
+                    bind: {
+                        title: '{chartlegendSauerstoff2}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
                 }, {
                     type: 'line',
                     xField: 'time',
-                    yField: 'cm:0',
-                    marker: true,
-                    tooltip: commonSeriesTooltipConfig,
-                    highlightCfg: commonSeriesHighlightCfg
-                }, {
-                    type: 'line',
-                    xField: 'time',
-                    yField: 'HK-Bat:V',
-                    marker: true,
-                    tooltip: commonSeriesTooltipConfig,
-                    highlightCfg: commonSeriesHighlightCfg
-                }, {
-                    type: 'line',
-                    xField: 'time',
-                    yField: 'HK-Temp:oC',
-                    marker: true,
-                    tooltip: commonSeriesTooltipConfig,
-                    highlightCfg: commonSeriesHighlightCfg
-                }, {
-                    type: 'line',
-                    xField: 'time',
-                    yField: 'HK-rH:%',
+                    yField: 'cm',
+                    bind: {
+                        title: '{chartlegendWasserstand}'
+                    },
                     marker: true,
                     tooltip: commonSeriesTooltipConfig,
                     highlightCfg: commonSeriesHighlightCfg
@@ -209,18 +212,14 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
                     type: 'numeric',
                     position: 'left',
                     fields: [
-                        'no',
-                        '°C:1',
-                        'uS/cm:(do.)',
-                        'pH:(do.)',
-                        'NTU:(do.)',
-                        'ug/l:(do.)',
-                        '%local:(do.)',
-                        'mg/l:(do.)',
-                        'cm:0',
-                        'HK-Bat:V',
-                        'HK-Temp:oC',
-                        'HK-rH:%'
+                        '°C',
+                        'uS/cm',
+                        'pH',
+                        'NTU',
+                        'ug/l',
+                        '%local',
+                        'mg/l',
+                        'cm'
                     ]
                 }, {
                     type: 'time',
@@ -270,16 +269,6 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
                 ]
             }]
         }]);
-    },
-
-    /**
-     * Creates chart header with some informations (e.g. station name and
-     * altitude) about clicked feature
-     * @param {ol.Feat} feat clicked feature
-     */
-    setChartHeader: function(feat){
-        var header = '<h3>' + feat.measuring_point + ' - ' + feat.station_id +
-            '</h3><p>Altitude: ' + feat.altitude + '</p>';
-        return header;
     }
+
 });
