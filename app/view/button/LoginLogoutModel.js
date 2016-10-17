@@ -28,7 +28,11 @@ Ext.define('MoMo.client.view.button.LoginLogoutModel', {
     data: {
         text: '',
         tooltip: '',
-        isLoginButton: ''
+        isLoginButton: '',
+        /*i18n*/
+        loginBtnText: '',
+        logoutBtnText: '',
+        logoutConfirmMsgText: ''
+        /*i18n*/
     }
-
 });
