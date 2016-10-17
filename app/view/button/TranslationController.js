@@ -44,6 +44,19 @@ Ext.define('MoMo.client.view.button.TranslationController', {
     },
 
     /**
+     * Fires after language button is rendered to trigger the setting of the
+     * default application language
+     */
+    onAfterRender: function() {
+        var me = this;
+        var viewModel = me.getViewModel();
+        me.firstApplicationLoad = true;
+        if (me.getView().isDefaultLanguage) {
+            me.onClick();
+        }
+    },
+
+    /**
     *
     */
     onClick: function() {
@@ -98,10 +111,14 @@ Ext.define('MoMo.client.view.button.TranslationController', {
                     me.setAppLanguage(respObj);
                     me.recreateSingletons();
 
-                    Ext.toast(Ext.util.Format.format(
-                        me.getViewModel().get('setLanguageCallbackToastText'),
-                        me.locale.toUpperCase())
-                    );
+                    // avoid toast on first application load
+                    if (!me.firstApplicationLoad){
+                        Ext.toast(Ext.util.Format.format(
+                            me.getViewModel().get('setLanguageCallbackToastText'),
+                            me.locale.toUpperCase())
+                        );
+                        me.firstApplicationLoad = false;
+                    }
                 }
             }
         }

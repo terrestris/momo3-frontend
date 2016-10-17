@@ -22,6 +22,11 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
     scale: 'small',
 
     /**
+     * Check if application default language set to german
+     */
+    isDefaultLanguage: null,
+
+    /**
      *
      */
     bind: {
@@ -32,7 +37,8 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
      *
      */
     listeners: {
-        click: 'onClick'
+        click: 'onClick',
+        afterrender: 'onAfterRender'
     },
 
     /**
