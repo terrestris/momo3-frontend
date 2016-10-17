@@ -27,13 +27,15 @@ Ext.define('MoMo.client.view.form.PrintModel', {
 
     data: {
         title: '',
-        labelDpi: 'DPI',
-        printButtonSuffix: 'herunterladen',
-        printFormat: 'pdf',
-        genericFieldSetTitle: 'Druckeigenschaften',
-        attributesTitle: 'Attribute',
-        scalebarLabel: 'Maßstabsbalken',
-        northArrowLabel: 'Nordpfeil',
-        mapTitleLabel: 'Titel'
+        /* i18n */
+        labelDpi: '',
+        printButtonSuffix: '',
+        printFormat: '',
+        genericFieldSetTitle: '',
+        attributesTitle: '',
+        scalebarLabel: '',
+        northArrowLabel: '',
+        mapTitleLabel: ''
+        /* i18n */
     }
 });

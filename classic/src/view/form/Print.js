@@ -56,9 +56,9 @@ Ext.define("MoMo.client.view.form.Print", {
         var me = this,
             fl;
         if (attributeRec.get('name') === "scalebar") {
-            fl = me.getViewModel().get('scalebarLabel');
+            fl = '{scalebarLabel}';
         } else {
-            fl = me.getViewModel().get('northArrowLabel');
+            fl = '{northArrowLabel}';
         }
         return {
             xtype: 'checkbox',
