@@ -25,8 +25,7 @@ Ext.define('MoMo.client.view.button.translation.ToMongolian', {
      *
      */
     bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
+        tooltip: '{tooltipMn}'
     },
 
     /**
@@ -44,7 +43,7 @@ Ext.define('MoMo.client.view.button.translation.ToMongolian', {
         me.callParent([cfg]);
 
         var viewModel = me.getViewModel();
-        viewModel.set('translateTo', 'mn');
+        viewModel.set('translateTo', viewModel.get('tooltipMn'));
     }
 
 });

@@ -25,8 +25,7 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
      *
      */
     bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
+        tooltip: '{tooltipEn}'
     },
 
     /**
@@ -44,7 +43,7 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
         me.callParent([cfg]);
 
         var viewModel = me.getViewModel();
-        viewModel.set('translateTo', 'en');
+        viewModel.set('translateTo', viewModel.get('tooltipEn'));
     }
 
 });

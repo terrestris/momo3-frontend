@@ -25,8 +25,7 @@ Ext.define('MoMo.client.view.button.translation.ToGerman', {
      *
      */
     bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
+        tooltip: '{tooltipDe}'
     },
 
     /**
@@ -44,7 +43,7 @@ Ext.define('MoMo.client.view.button.translation.ToGerman', {
         me.callParent([cfg]);
 
         var viewModel = me.getViewModel();
-        viewModel.set('translateTo', 'de');
+        viewModel.set('translateTo', viewModel.get('tooltipDe'));
     }
 
 });
