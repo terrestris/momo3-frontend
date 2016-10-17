@@ -26,7 +26,9 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelModel', {
     alias: 'viewmodel.button.showmeasuretoolspanel',
 
     data: {
-        tooltip: 'Messwerkzeuge',
+        /* i18n */
+        tooltip: '',
+        /* i18n */
         text: null
     }
 });
