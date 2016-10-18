@@ -37,40 +37,33 @@ Ext.define('MoMo.client.model.WaterData', {
         dateFormat: 'Y-m-d H:i',
         convert: function(value){
             var date = new Date(value);
+//            var userOffset = date.getTimezoneOffset()*60000;
+//            var UTCDate = new Date(date.getTime()+userOffset);
             return date;
         }
     }, {
-        name: '°C:1',
+        name: '°C',
         type: 'float'
     }, {
-        name: 'uS/cm:(do.)',
+        name: 'uS/cm',
         type: 'float'
     }, {
-        name: 'pH:(do.)',
+        name: 'pH',
         type: 'float'
     }, {
-        name: 'NTU:(do.)',
+        name: 'NTU',
         type: 'float'
     }, {
-        name: 'ug/l:(do.)',
+        name: 'ug/l',
         type: 'float'
     }, {
-        name: '%local:(do.)',
+        name: '%local',
         type: 'float'
     }, {
-        name: 'mg/l:(do.)',
+        name: 'mg/l',
         type: 'float'
     }, {
-        name: 'cm:0',
-        type: 'float'
-    }, {
-        name: 'HK-Bat:V',
-        type: 'float'
-    }, {
-        name: 'HK-Temp:oC',
-        type: 'float'
-    }, {
-        name: 'HK-rH:%',
+        name: 'cm',
         type: 'float'
     }]
 });
