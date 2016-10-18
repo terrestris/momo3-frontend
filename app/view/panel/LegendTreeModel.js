@@ -7,6 +7,8 @@ Ext.define('MoMo.client.view.panel.LegendTreeModel', {
     alias: 'viewmodel.panel.legendtree',
 
     data: {
-        title: 'Legende'
+        /*i18n*/
+        title: ''
+        /*i18n*/
     }
 });
