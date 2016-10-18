@@ -46,6 +46,17 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
     */
     drawPolygonInteraction : null,
 
+    /**
+     * Instance of the `ol.interaction.Draw` with type `Circle`
+     */
+    drawCircleInteraction : null,
+
+    /**
+     * Instance of the `ol.interaction.Draw` with type `Linestring` and max
+     * points limited to 2.
+     */
+    drawRectangleInteraction : null,
+
    /**
     * Instance of the `ol.interaction.Draw` with type `Point` and predefined
     * image source to be used as postit image. The URL to the image has to be
@@ -53,6 +64,12 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
     * (s. {@link createRedliningButtonsPanel#createRedliningButtonsPanel}
     */
     drawPostitInteraction : null,
+
+    /**
+     * Instance of the `ol.interaction.Draw` with type `Point` to be used to
+     * represent labels on the map (the anchor point itself will be hidden)
+     */
+    drawTextInteraction : null,
 
     /**
      * Instance of the `ol.interaction.Select` to be used to copy the drawn
@@ -101,7 +118,6 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
      * {@link MoMo.client.window.RedliningStylerWindow'} class.
      */
     stylerWindow: null,
-
 
     /**
      * Fires if "draw point" button was toggled. Creates a #drawPointInteraction
@@ -169,6 +185,104 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
             me.drawPolygonInteraction.setActive(true);
         } else {
             me.drawPolygonInteraction.setActive(false);
+        }
+    },
+
+    /**
+     * Fires if "draw circle" button was toggled. Creates a
+     * #drawCircleInteraction if not already exist.
+     * @param {Ext.button.Button} btn
+     * @param {Boolean} pressed toggle state
+     */
+    onDrawCirclesBtnToggle: function(btn, pressed) {
+        var me = this,
+            view = me.getView();
+        if (!me.drawCircleInteraction) {
+            var geomFunc = function(coordinates, geometry) {
+                var start = coordinates[0];
+                var end = coordinates[1];
+                if (!geometry) {
+                    geometry = new ol.geom.Circle([start[0], start[1]]);
+                }
+                var radius = me.computeCircleRadius(start, end);
+                geometry.setRadius(radius);
+                return geometry;
+            };
+            me.drawCircleInteraction = new ol.interaction.Draw({
+                features: view.redlineFeatures,
+                type: 'LineString',
+                maxPoints: 2,
+                geometryFunction: geomFunc
+            });
+            view.map.addInteraction(me.drawCircleInteraction);
+        }
+        if (pressed) {
+            me.drawCircleInteraction.setActive(true);
+            view.redlineFeatures.on("add", me.translateCircleToPolygon, me);
+        } else {
+            me.drawCircleInteraction.setActive(false);
+            view.redlineFeatures.un("add", me.translateCircleToPolygon, me);
+        }
+    },
+
+    /**
+     * Fires if "draw rectangle" button was toggled. Creates a
+     * #drawRectangleInteraction if not already exist.
+     * @param {Ext.button.Button} btn
+     * @param {Boolean} pressed toggle state
+     */
+    onDrawRectanlgesBtnToggle: function(btn, pressed) {
+        var me = this,
+            view = me.getView();
+        if (!me.drawRectangleInteraction) {
+            var geomFunc = function(coordinates, geometry) {
+                if (!geometry) {
+                    geometry = new ol.geom.Polygon(null);
+                }
+                var start = coordinates[0];
+                var end = coordinates[1];
+                geometry.setCoordinates([
+                  [start, [start[0], end[1]], end, [end[0], start[1]], start]
+                ]);
+                return geometry;
+            };
+            me.drawRectangleInteraction = new ol.interaction.Draw({
+                features: view.redlineFeatures,
+                type: 'LineString',
+                maxPoints: 2,
+                geometryFunction: geomFunc
+            });
+            view.map.addInteraction(me.drawRectangleInteraction);
+        }
+        if (pressed) {
+            me.drawRectangleInteraction.setActive(true);
+        } else {
+            me.drawRectangleInteraction.setActive(false);
+        }
+    },
+
+    /**
+     * Fires if "draw postit" button was toggled.
+     * Creates a #drawPostitInteraction if not already exist.
+     * @param {Ext.button.Button} btn
+     * @param {Boolean} pressed toggle state
+     */
+    onTextBtnToggle: function(btn, pressed) {
+        var me = this,
+            view = me.getView();
+        if (!me.drawTextInteraction) {
+            me.drawTextInteraction = new ol.interaction.Draw({
+                features: view.redlineFeatures,
+                type: 'Point'
+            });
+            view.map.addInteraction(me.drawTextInteraction);
+        }
+        if (pressed) {
+            me.drawTextInteraction.setActive(true);
+            view.redlineFeatures.on("add", me.handleTextAdd, me);
+        } else {
+            me.drawTextInteraction.setActive(false);
+            view.redlineFeatures.un("add", me.handleTextAdd, me);
         }
     },
 
@@ -272,6 +386,7 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
                         firstFeat = selFeatures.getArray()[0];
 
                     if (firstFeat) {
+
                         var redlineFeat = me.getRedlineFeatFromClone(firstFeat);
 
                         if (me.translateFeatCol.getLength() === 0) {
@@ -457,15 +572,31 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
     },
 
     /**
+     * Prepares a #handlePostitAdd method to handle with simple text
+     * label adding
+     * @param {Ext.Event} evt click event on adding text label to the map
+     */
+    handleTextAdd: function(evt) {
+        var me = this;
+        me.handlePostitAdd(evt, true);
+    },
+
+    /**
      * Shows a prompt for the postit text.
      * @param {Ext.Event} evt click event on adding postit to the map
+     * @param {Boolean} textOnly additional parameter to determine between
+     * simple labels (textOnly = true) and postits.
      */
-    handlePostitAdd: function(evt) {
+    handlePostitAdd: function(evt, textOnly) {
         var me = this,
             view = me.getView(),
             feat = evt.element;
 
         feat.set('isPostit', true);
+
+        if (textOnly) {
+            feat.set('textOnly', textOnly);
+        }
 
         BasiGX.prompt(view.getViewModel().get('postItWindowTitle'), {
             fn: function(decision, text) {
@@ -473,13 +604,15 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
                     view.redlineFeatures.remove(feat);
                 } else {
                     text = me.stringDivider(text, 16, '\n');
-                    me.setPostitStyleAndTextOnFeature(text, feat);
+                    if (textOnly) {
+                        me.setTextOnFeature(text, feat);
+                    } else {
+                        me.setPostitStyleAndTextOnFeature(text, feat);
+                    }
                 }
             },
             multiline: 150
         });
-
-        view.query('button[name=postitBtn]')[0].toggle();
     },
 
     /**
@@ -501,6 +634,21 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
                 text: text,
                 scale: 1.5,
                 offsetY: 80
+            })
+        }));
+    },
+
+    /**
+     * Sets a postit (formatted) text on a feature
+     * @param {String} text text for a postit
+     * @param {ol.Feature} feat point feature bounded to the postit
+     */
+    setTextOnFeature: function(text, feat) {
+        feat.setStyle(new ol.style.Style({
+            text: new ol.style.Text({
+                text: text,
+                scale: 1.5,
+                offsetY: 20
             })
         }));
     },
@@ -557,10 +705,54 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
             fn: function(decision, text) {
                 if (decision === "ok") {
                     text = me.stringDivider(text, 16, '\n');
-                    me.setPostitStyleAndTextOnFeature(text, feature);
+                    if (feature.get('textOnly')){
+                        me.setTextOnFeature(text, feature);
+                    } else {
+                        me.setPostitStyleAndTextOnFeature(text, feature);
+                    }
                 }
             },
             multiline: 150
         });
+    },
+
+    /**
+     * The circle geometries are not supported by the WKT format, so it can't
+     * be used for modify iterations.
+     * Since ol3 still don't support it
+     * (s. also https://github.com/openlayers/ol3/issues/3777) we need to
+     * transform the drawn circle to the approximate regular polygon with
+     * given circle geometry.
+     */
+    translateCircleToPolygon: function(){
+        var me = this,
+            view = me.getView();
+
+        Ext.each(view.redlineFeatures.getArray(), function(f){
+            if (f.getGeometry().getType() === "Circle") {
+                var geom = f.getGeometry();
+                var newGeom = new ol.geom.Polygon.fromCircle(geom);
+                var newFeat = new ol.Feature(newGeom);
+
+                view.redlineFeatures.remove(f);
+                view.redlineFeatures.insertAt(
+                    view.redlineFeatures.getLength(),
+                    newFeat
+                );
+            }
+        });
+    },
+
+    /**
+     * Computes circle feature radius depending on given center and the second
+     * coordinate as distance from the circle center to the vertices.
+     * @param {Array} start start coordinates as array (lat/lon or x/y)
+     * @param {Array} end end coordinates as array (lat/lon or x/y)
+     */
+    computeCircleRadius: function(start, end) {
+        return Math.sqrt(
+            (end[0] - start[0]) * (end[0] - start[0]) +
+            (end[1] - start[1]) * (end[1] - start[1])
+        );
     }
 });

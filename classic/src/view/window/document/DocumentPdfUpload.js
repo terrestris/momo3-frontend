@@ -14,18 +14,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Panel where the RBMA documents should be uploaded via form submit to the
+ * Panel where the documents should be uploaded via form submit to the
  * backend
  *
- * @class RbmaPdfUpload
+ * @class MoMo.client.view.window.document.DocumentPdfUpload
  */
-Ext.define("MoMo.client.view.window.rbma.RbmaPdfUpload",{
+Ext.define("MoMo.client.view.window.document.DocumentPdfUpload",{
     extend: "Ext.window.Window",
-    xtype: "momo-rbma-pdf-upload",
+    xtype: "momo-document-pdf-upload",
 
-    controller: 'window.rbma.rbmapdfupload',
+    controller: 'window.document.documentpdfupload',
 
-    viewModel: 'window.rbma.rbmapdfupload',
+    viewModel: 'window.document.documentpdfupload',
 
     collapsible: false,
 

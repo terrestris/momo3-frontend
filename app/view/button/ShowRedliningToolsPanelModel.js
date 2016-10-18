@@ -37,7 +37,7 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelModel', {
             strokeWidth: 2
         },
         defLineStringStyle: {
-            strokeColor: '#ececec',
+            strokeColor: '#5fa2dd',
             strokeWidth: 2
         },
         defPolygonStyle: {

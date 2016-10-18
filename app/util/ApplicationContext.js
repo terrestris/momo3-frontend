@@ -19,7 +19,7 @@ Ext.define('MoMo.client.util.ApplicationContext', {
          * The path configs needed by this class.
          */
         pathConfig: {
-            appContextUrlTpl: '../rest/applications/{0}'
+            appContextUrlTpl: '../rest/momoapps/{0}'
         },
 
         /**

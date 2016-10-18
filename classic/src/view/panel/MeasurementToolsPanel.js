@@ -64,7 +64,7 @@ Ext.define("MoMo.client.view.panel.MeasurementToolsPanel", {
 
     items: [{
         measureType: 'line',
-        glyph: 'xf201@FontAwesome',
+        glyph: 'xf10f@Flaticon',
         listeners: {
             afterrender: function(btn){
                 btn.setBind({
@@ -75,7 +75,7 @@ Ext.define("MoMo.client.view.panel.MeasurementToolsPanel", {
         }
     }, {
         measureType: 'polygon',
-        glyph: 'xf1fe@FontAwesome',
+        glyph: 'xf10b@Flaticon',
         listeners: {
             afterrender: function(btn){
                 btn.setBind({

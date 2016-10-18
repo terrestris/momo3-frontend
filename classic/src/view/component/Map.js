@@ -13,7 +13,9 @@ Ext.define('MoMo.client.view.component.Map', {
         'MoMo.client.view.component.MapController',
         'MoMo.client.view.component.MapModel',
 
-        'MoMo.client.plugin.Hover'
+        'MoMo.client.plugin.Hover',
+
+        'MoMo.view.window.WaterDataChartWindow'
     ],
 
     controller: 'component.map',

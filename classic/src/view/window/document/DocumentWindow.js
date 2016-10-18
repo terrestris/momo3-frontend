@@ -14,27 +14,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * A modal window where the River Basin Management Atlas (RBMA) structure will
- * be represented.
+ * A modal window where the document structure will be represented.
  *
- * @class MoMo.client.view.window.RBMAWindow
+ * @class MoMo.client.view.window.DocumentWindow
  */
-Ext.define("MoMo.client.window.rbma.RbmaWindow", {
+Ext.define("MoMo.client.window.document.DocumentWindow", {
     extend: "Ext.window.Window",
-    xtype: 'momo-window-rbma',
+    xtype: 'momo-window-document',
 
     requires: [
-        'MoMo.client.view.panel.rbma.RbmaTree',
-        'MoMo.client.view.panel.rbma.RbmaPdfPreview'
+        'MoMo.client.view.panel.document.DocumentTree',
+        'MoMo.client.view.panel.document.DocumentPdfPreview'
     ],
 
-    controller: 'window.rbma.rbma',
+    controller: 'window.document.document',
 
-    viewModel: 'window.rbma.rbma',
+    viewModel: 'window.document.document',
 
     bind: {
         title: '{title}'
     },
+
+    docRootId: null,
 
     modal: true,
 
@@ -56,11 +57,11 @@ Ext.define("MoMo.client.window.rbma.RbmaWindow", {
 
     items: [
         {
-            xtype: 'momo-rbma-tree',
+            xtype: 'momo-document-tree',
             region: 'west'
         },
         {
-            xtype: 'momo-rbma-pdf-preview',
+            xtype: 'momo-document-pdf-preview',
             region: 'center'
         }
     ]

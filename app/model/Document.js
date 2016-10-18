@@ -1,10 +1,10 @@
-Ext.define('MoMo.client.model.Rbma', {
+Ext.define('MoMo.client.model.Document', {
 
     extend: 'Ext.data.TreeModel',
 
     proxy: {
         type: 'rest',
-        url: BasiGX.util.Url.getWebProjectBaseUrl() + 'rest/rbma',
+        url: BasiGX.util.Url.getWebProjectBaseUrl() + 'rest/doctree',
         headers: BasiGX.util.CSRF.getHeader(),
         reader: {
             type: 'json',
