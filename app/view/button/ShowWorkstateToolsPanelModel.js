@@ -26,7 +26,9 @@ Ext.define('MoMo.client.view.button.ShowWorkstateToolsPanelModel', {
     alias: 'viewmodel.button.showworkstatetoolspanel',
 
     data: {
-        tooltip: 'Arbeitsstand',
+        /*i18n*/
+        tooltip: '',
+        /*i18n*/
         text: null
     }
 });
