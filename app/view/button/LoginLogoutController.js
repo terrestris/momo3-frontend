@@ -106,8 +106,6 @@ Ext.define('MoMo.client.view.button.LoginLogoutController', {
                 isLoginButton = true;
             }
 
-            console.log(viewModel)
-
             viewModel.set('text', buttonText);
             viewModel.set('tooltip', buttonText);
             viewModel.set('isLoginButton', isLoginButton);

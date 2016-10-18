@@ -51,7 +51,6 @@ Ext.define('MoMo.client.view.button.TranslationController', {
      */
     onAfterRender: function() {
         var me = this;
-        var viewModel = me.getViewModel();
         if (me.getView().isDefaultLanguage) {
             me.firstApplicationLoad = true;
             me.onClick();
@@ -113,12 +112,11 @@ Ext.define('MoMo.client.view.button.TranslationController', {
                     me.setAppLanguage(respObj);
                     me.recreateSingletons();
 
-                    console.log(me.firstApplicationLoad);
-
                     // avoid toast on first application load
                     if (!me.firstApplicationLoad){
                         Ext.toast(Ext.util.Format.format(
-                            me.getViewModel().get('setLanguageCallbackToastText'),
+                            me.getViewModel()
+                                .get('setLanguageCallbackToastText'),
                             me.locale.toUpperCase())
                         );
                     }
