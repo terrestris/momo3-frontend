@@ -58,7 +58,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
         } else {
             Ext.each(form.getForm().getFields().items, function(f){
                 f.markInvalid({
-                    message: 'sgdfhfdh',
+                    message: '',
                     msgTarget: 'side'
                 });
             });

@@ -5,6 +5,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
 
     requires: [
         'Ext.chart.CartesianChart',
+        'Ext.chart.interactions.ItemHighlight',
         'Ext.chart.series.Line',
         'Ext.chart.axis.Numeric',
         'Ext.chart.axis.Time',
