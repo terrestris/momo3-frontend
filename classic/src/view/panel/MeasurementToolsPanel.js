@@ -54,7 +54,7 @@ Ext.define("MoMo.client.view.panel.MeasurementToolsPanel", {
                     continueLineMsg: '{continueLineMsg}',
                     clickToDrawText: '{clickToDrawText}'
                 }
-            },
+            }
         },
         toggleGroup: 'measure',
         ui: 'momo-tools',
