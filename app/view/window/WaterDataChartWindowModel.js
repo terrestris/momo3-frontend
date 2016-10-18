@@ -12,7 +12,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindowModel', {
         hourLabel: 'Std',
         minuteLabel: 'Min',
         chartlegendTemp: 'Temperatur',
-        chartlegendLeitfaehigkeit: 'Leitfähigkeit', 
+        chartlegendLeitfaehigkeit: 'Leitfähigkeit',
         chartlegendpH: 'pH',
         chartlegendTruebung: 'Trübung',
         chartlegendChlorophyll: 'Chlorophyll',

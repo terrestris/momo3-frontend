@@ -18,7 +18,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
             handler();
         }
     },
-    
+
     /**
      * Creates chart header with some informations (e.g. station name and
      * altitude) about clicked feature
