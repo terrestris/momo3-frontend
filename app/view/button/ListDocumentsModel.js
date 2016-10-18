@@ -14,20 +14,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * RbmaModel
+ * DocumentModel
  *
- * A View model for the RBMA module
+ * A View model for the "show documents" button
  *
- * @class MoMo.client.view.button.RbmaModel
+ * @class MoMo.client.view.button.DocumentModel
  */
-Ext.define('MoMo.client.view.button.RbmaModel', {
+Ext.define('MoMo.client.view.button.ListDocumentsModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.button.rbma',
+    alias: 'viewmodel.button.listdocuments',
 
     data: {
-        text: 'Open RBMA',
-        tooltip: 'River Basin Management Atlas'
+        text: 'Show Documents',
+        tooltip: 'Show Documents'
     }
 
 });

@@ -1,10 +1,10 @@
-Ext.define('MoMo.client.store.Rbma', {
+Ext.define('MoMo.client.store.Document', {
 
     extend: 'Ext.data.TreeStore',
 
-    alias: 'store.rbma',
+    alias: 'store.document',
 
-    model: 'MoMo.client.model.Rbma',
+    model: 'MoMo.client.model.Document',
 
     listeners: {
         beforesync: function(options){

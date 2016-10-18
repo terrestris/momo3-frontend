@@ -1,7 +1,7 @@
-Ext.define('MoMo.client.view.window.rbma.RbmaPdfUploadController', {
+Ext.define('MoMo.client.view.window.document.DocumentPdfUploadController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.window.rbma.rbmapdfupload',
+    alias: 'controller.window.document.documentpdfupload',
 
     /**
      *

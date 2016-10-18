@@ -1,7 +1,7 @@
-Ext.define('MoMo.client.view.panel.rbma.RbmaPdfPreviewController', {
+Ext.define('MoMo.client.view.panel.document.DocumentPdfPreviewController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.panel.rbma.rbmapdfpreview',
+    alias: 'controller.panel.document.documentpdfpreview',
 
     /**
      *
