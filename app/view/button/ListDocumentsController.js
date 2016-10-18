@@ -14,26 +14,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * RbmaController
+ * DocumentController
  *
- * This controller will be used to show/hide a RBMA modal window on click
- * on the corresponding RBMA button
+ * This controller will be used to show/hide a modal window on click,
+ * which lists all available documents (trees) for the current application.
  *
- * @class MoMo.client.view.button.RbmaController
+ * @class MoMo.client.view.button.DocumentController
  */
-Ext.define('MoMo.client.view.button.RbmaController', {
+Ext.define('MoMo.client.view.button.ListDocumentsController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
     ],
 
-    alias: 'controller.button.rbma',
+    alias: 'controller.button.listdocuments',
 
     /**
     *
     */
     onClick: function() {
-        var win = Ext.create('MoMo.client.window.rbma.RbmaWindow', {});
-        win.show();
+
+        Ext.create('MoMo.client.window.document.ListDocumentsWindow', {
+            autoShow: true
+        });
+
     }
 });

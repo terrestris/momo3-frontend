@@ -1,10 +1,10 @@
 /**
  *
  */
-Ext.define('MoMo.client.view.window.rbma.RbmaPdfUploadModel', {
+Ext.define('MoMo.client.view.window.document.DocumentPdfUploadModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.window.rbma.rbmapdfupload',
+    alias: 'viewmodel.window.document.documentpdfupload',
 
     data: {
         title: 'PDF document upload',

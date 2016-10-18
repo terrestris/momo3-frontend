@@ -14,50 +14,39 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * Instance of `Ext.tree.Panel` containing the structure of the RBMA documents
+ * Panel where the documents should be rendered as PDF preview into
  *
- * @class MoMo.client.view.panel.RbmaTree
+ * @class MoMo.client.view.panel.document.DocumentPdfPreview
  */
-Ext.define("MoMo.client.view.panel.rbma.RbmaTree",{
-    extend: "Ext.tree.Panel",
-    xtype: "momo-rbma-tree",
+Ext.define("MoMo.client.view.panel.document.DocumentPdfPreview",{
+    extend: "Ext.panel.Panel",
+    xtype: "momo-document-pdf-preview",
 
-    controller: 'panel.rbma.rbmatree',
+    controller: 'panel.document.documentpdfpreview',
 
-    viewModel: 'panel.rbma.rbmatree',
+    viewModel: 'panel.document.documentpdfpreview',
 
-    width: '30%',
-
-    collapsible: true,
+    collapsible: false,
 
     collapsed: false,
 
-    viewConfig: {
-        plugins: {
-            ptype: 'treeviewdragdrop',
-            dragText: 'Drag and drop to reorganize'
+    layout: 'fit',
+
+    items: [{
+        xtype: 'component',
+        hidden: true,
+        bind: {
+            html : '<iframe src="' + '{pdfFile}' +
+                '" width="100%" height="100%"></iframe>'
         }
-    },
-
-    bind: {
-        title: '{title}'
-    },
-
-    listeners: {
-        itemclick: 'onItemClick',
-        itemcontextmenu: 'onItemContextMenuClick',
-        drop: 'onDragDrop'
-    },
+    }],
 
    /**
     *
     */
     initComponent: function() {
         var me = this;
-        var ctrl = me.getController();
-
-        // set the store and load the root node
-        ctrl.setRbmaStoreAndRootNode();
+//        var ctrl = me.getController();
 
         // call parent
         me.callParent();

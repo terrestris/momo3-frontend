@@ -1,21 +1,21 @@
 /**
- * Rbma Button
+ * Document Button
  *
- * @class MoMo.client.view.button.Rbma
+ * @class MoMo.client.view.button.Document
  */
-Ext.define('MoMo.client.view.button.Rbma', {
+Ext.define('MoMo.client.view.button.ListDocuments', {
     extend: 'Ext.Button',
-    xtype: 'momo-rbma-button',
+    xtype: 'momo-list-documents-button',
     requires: [
         'Ext.app.ViewModel',
 
-        'MoMo.client.view.button.RbmaController',
-        'MoMo.client.view.button.RbmaModel'
+        'MoMo.client.view.button.ListDocumentsController',
+        'MoMo.client.view.button.ListDocumentsModel'
     ],
 
-    controller: 'button.rbma',
+    controller: 'button.listdocuments',
 
-    viewModel: 'button.rbma',
+    viewModel: 'button.listdocuments',
 
     ui: 'momo-header-tools',
 

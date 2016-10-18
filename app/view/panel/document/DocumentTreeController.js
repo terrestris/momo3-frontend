@@ -1,17 +1,18 @@
-Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
+Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.panel.rbma.rbmatree',
+    alias: 'controller.panel.document.documenttree',
 
     /**
      *
      */
     onItemClick: function(treePanel, nodeRecord) {
-        var me = this,
-            nodeId = nodeRecord.get('id'),
-            documentUrl =
-                nodeRecord.getProxy().getUrl() + '/' + nodeId + '/doc',
-            pdfPreviewPanel = me.getView().up().down('momo-rbma-pdf-preview');
+        var me = this;
+        var nodeId = nodeRecord.get('id');
+        var documentUrl =
+            nodeRecord.getProxy().getUrl() + '/' + nodeId + '/doc';
+        var pdfPreviewPanel =
+            me.getView().up().down('momo-document-pdf-preview');
 
         // set iframe component visible
         if (!pdfPreviewPanel.down('component').isVisible()){
@@ -23,25 +24,26 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
     },
 
     /**
-     * Set store for the RBMA document tree
+     * Set store for the document tree
      */
-    setRbmaStoreAndRootNode: function() {
+    setDocumentStoreAndRootNode: function() {
         var me = this,
             treeView = me.getView(),
-            rbmaStore;
+            docRootId = treeView.up('window').docRootId,
+            documentStore;
 
-        rbmaStore = Ext.create('MoMo.client.store.Rbma', {
+        documentStore = Ext.create('MoMo.client.store.Document', {
             autoLoad: false
         });
 
-        treeView.store = rbmaStore;
+        treeView.store = documentStore;
 
         // get the root node manually and set it
         // (as we did not yet mananged to
         // load the root node from the backend via rest-proxy)
         // TODO: make it better (so that store.load() would always work)
         Ext.Ajax.request({
-            url: rbmaStore.getModel().getProxy().getUrl() + '/root',
+            url: documentStore.getModel().getProxy().getUrl() + '/' + docRootId,
             success: function(response) {
                 var rootNode = Ext.decode(response.responseText);
                 treeView.setRootNode(rootNode);
@@ -51,7 +53,7 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
     },
 
     /**
-     * Shows a context menu on mouse right click in RBMA document tree
+     * Shows a context menu on mouse right click in document tree
      * @param {Ext.view.View} View Document tree view
      * @param {Ext.data.Model} rec The record that belongs to the item
      * @param {HTMLElement} item
@@ -103,7 +105,8 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
                             var cls =
-                                'de.terrestris.momo.model.tree.RbmaTreeFolder';
+                                'de.terrestris.momo.model.tree.' +
+                                'DocumentTreeFolder';
                             record.appendChild({
                                 '@class': cls,
                                 text: text,
@@ -128,7 +131,8 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
                             var cls =
-                                'de.terrestris.momo.model.tree.RbmaTreeLeaf';
+                                'de.terrestris.momo.model.tree.' +
+                                'DocumentTreeLeaf';
                             record.appendChild({
                                 '@class': cls,
                                 text: text,
@@ -153,9 +157,30 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                                 Ext.Msg.show(Ext.apply({}, cfg));
                             }
                             record.set('text', text);
+
+                            if(record.get('root')) {
+                                // root node need special handling because
+                                // for some reason phantom is (initially) true
+                                // here, which means the sync/save call would
+                                // not lead to an update=PUT, but create=POST,
+                                // which is wrong here
+                                record.phantom = false;
+
+                                // update the title of the window, which is
+                                // the document title, i.e. the name of the
+                                // root node
+                                var documentWindow = me.getView().up('window');
+                                var winVm = documentWindow.getViewModel();
+                                winVm.set('title', text);
+                            }
+
                             me.getView().getStore().sync();
+
                         }
-                    }
+                    },
+                    me,
+                    false,
+                    record.get('text') // default value in the prompt field
                 );
             }
         });
@@ -209,10 +234,11 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
             text: vm.get('addDocumentText'),
             handler: function() {
                 var uploadForm =
-                    Ext.create('MoMo.client.view.window.rbma.RbmaPdfUpload', {
-                        rec: record
-                    }
-                );
+                    Ext.create(
+                        'MoMo.client.view.window.document.DocumentPdfUpload', {
+                            rec: record
+                        }
+                    );
                 uploadForm.show();
             }
         });
@@ -231,7 +257,10 @@ Ext.define('MoMo.client.view.panel.rbma.RbmaTreeController', {
                             record.set('text', text);
                             me.getView().getStore().sync();
                         }
-                    }
+                    },
+                    me,
+                    false,
+                    record.get('text') // default value in the prompt field
                 );
             }
         });
