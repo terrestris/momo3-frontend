@@ -415,7 +415,7 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
             view = me.getView();
         if (!me.stylerWindow) {
             me.stylerWindow =
-                Ext.create('MoMo.client.window.RedliningStylerWindow', {
+                Ext.create('MoMo.client.view.window.RedliningStylerWindow', {
                     redliningVectorLayer: view.redliningVectorLayer,
                     redlinePointStyle: view.getRedlinePointStyle(),
                     redlineLineStringStyle: view.getRedlineLineStringStyle(),

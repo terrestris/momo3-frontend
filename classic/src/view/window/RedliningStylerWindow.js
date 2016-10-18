@@ -23,7 +23,7 @@
  *
  * @class MoMo.client.view.window.RedliningStylerWindow
  */
-Ext.define("MoMo.client.window.RedliningStylerWindow", {
+Ext.define("MoMo.client.view.window.RedliningStylerWindow", {
     extend: "Ext.window.Window",
     xtype: 'momo-window-redlining',
 

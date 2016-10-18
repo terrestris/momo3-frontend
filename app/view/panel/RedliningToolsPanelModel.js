@@ -26,15 +26,17 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelModel', {
     alias: 'viewmodel.panel.redliningtoolspanel',
 
     data: {
-        drawPointsBtnText: 'Punkt zeichnen',
-        drawLinesBtnText: 'Linie zeichnen',
-        drawPolygonsBtnText: 'Polygon zeichen',
-        drawPostItBtnText: 'Post-it zeichnen',
-        copyObjectBtnText: 'Objekt kopieren',
-        moveObjectBtnText: 'Objekt verschieben',
-        modifyObjectBtnText: 'Objekt modifizieren',
-        deleteObjectBtnText: 'Objekt löschen',
-        openStyleBtnText: 'Styler',
-        postItWindowTitle: 'Post-it Text eingeben'
+        /*i18n*/
+        drawPointsBtnText: '',
+        drawLinesBtnText: '',
+        drawPolygonsBtnText: '',
+        drawPostItBtnText: '',
+        copyObjectBtnText: '',
+        moveObjectBtnText: '',
+        modifyObjectBtnText: '',
+        deleteObjectBtnText: '',
+        openStyleBtnText: '',
+        postItWindowTitle: ''
+        /*i18n*/
     }
 });
