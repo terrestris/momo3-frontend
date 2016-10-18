@@ -38,15 +38,9 @@ Ext.define("MoMo.client.view.button.ShowMetaPanel", {
         text: '{text}'
     },
 
-    /**
-     *
-     */
-    viewModel: {
-        data: {
-            tooltip: 'Metainformationen anzeigen',
-            text: null
-        }
-    },
+    viewModel: 'button.showmetapanel',
+
+    controller: 'button.showmetapanel',
 
     glyph: 'xf278@FontAwesome',
 
@@ -54,48 +48,7 @@ Ext.define("MoMo.client.view.button.ShowMetaPanel", {
 
     iconCls: 'momo-showmetapanel-button-icon',
 
-    /**
-     *
-     */
-    config: {
-        handler: function(button){
-            var metaPanel = Ext.ComponentQuery.query('momo-panel-metainfos')[0];
-
-            if (metaPanel) {
-                if (!Ext.isDefined(metaPanel.fadedIn)) {
-                    metaPanel.fadedIn = false;
-                }
-                if(!metaPanel.fadedIn) {
-                    metaPanel.show();
-                    metaPanel.getEl().fadeIn({
-                        easing: 'easeIn',
-                        duration: 500
-                    });
-                    metaPanel.fadedIn = true;
-                } else {
-                    metaPanel.getEl().fadeOut({
-                        easing: 'easeOut',
-                        duration: 500,
-                        callback: function () {
-                            metaPanel.hide();
-                        }
-                    });
-                    metaPanel.fadedIn = false;
-                }
-                button.blur();
-            }
-        }
-    },
-
-    /**
-     *
-     */
-    constructor: function(config) {
-        this.callParent([config]);
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
+    listeners: {
+        click: 'onClick'
     }
 });

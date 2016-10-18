@@ -26,14 +26,16 @@ Ext.define('MoMo.client.view.window.RedliningStylerWindowModel', {
     alias: 'viewmodel.window.redliningstyler',
 
     data: {
-        title: 'Zeichnungsstil',
-        pointStyleFieldSetTitle: 'Punktstil',
-        pointStyleRadiusNumberFieldLabel: 'Punkt Radius',
-        styleStrokeWidthFieldLabel: 'Strichstärke',
-        styleStrokeColorFieldLabel: 'Strichfarbe',
-        styleFillColorFieldLabel: 'Füllfarbe',
-        lineStyleFieldSetTitle: 'Linienstil',
-        polygonStyleFieldSetTitle: 'Polygonstil',
-        closeStylerBtnText: 'Ok'
+        /*i18n*/
+        title: '',
+        pointStyleFieldSetTitle: '',
+        pointStyleRadiusNumberFieldLabel: '',
+        styleStrokeWidthFieldLabel: '',
+        styleStrokeColorFieldLabel: '',
+        styleFillColorFieldLabel: '',
+        lineStyleFieldSetTitle: '',
+        polygonStyleFieldSetTitle: '',
+        closeStylerBtnText: ''
+        /*i18n*/
     }
 });

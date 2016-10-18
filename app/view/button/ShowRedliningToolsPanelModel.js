@@ -26,7 +26,9 @@ Ext.define('MoMo.client.view.button.ShowRedliningToolsPanelModel', {
     alias: 'viewmodel.button.showredliningtoolspanel',
 
     data: {
-        tooltip: 'Zeichnen',
+        /*i18n*/
+        tooltip: '',
+        /*i18n*/
         text: null,
         defPointStyle: {
             radius: 7,

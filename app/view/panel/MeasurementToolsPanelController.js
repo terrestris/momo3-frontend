@@ -31,6 +31,44 @@ Ext.define('MoMo.client.view.panel.MeasurementToolsPanelController', {
     requires: [
     ],
 
-    alias: 'controller.panel.measurementoolspanel'
+    alias: 'controller.panel.measurementoolspanel',
+
+    /**
+     * Handle pointer move.
+     * @param {ol.MapBrowserEvent} evt
+     */
+    pointerMoveHandler: function(evt) {
+        var me = this;
+        var view = me.getView();
+
+        if (evt.dragging) {
+            return;
+        }
+
+        var helpMsg = view.getViewModel().get('clickToDrawText');
+        var helpTooltipCoord = evt.coordinate;
+        var measureTooltipCoord = evt.coordinate;
+
+        if (view.sketch) {
+            var output;
+            var geom = (view.sketch.getGeometry());
+            if (geom instanceof ol.geom.Polygon) {
+                output = me.formatArea(geom);
+                helpMsg = view.getViewModel().get('continuePolygonMsg');
+                helpTooltipCoord = geom.getLastCoordinate();
+                measureTooltipCoord = geom.getInteriorPoint().getCoordinates();
+            } else if (geom instanceof ol.geom.LineString) {
+                output = me.formatLength(geom);
+                helpMsg = view.getViewModel().get('continueLineMsg');
+                helpTooltipCoord = geom.getLastCoordinate();
+                measureTooltipCoord = geom.getLastCoordinate();
+            }
+            view.measureTooltipElement.innerHTML = output;
+            view.measureTooltip.setPosition(measureTooltipCoord);
+        }
+
+        view.helpTooltipElement.innerHTML = helpMsg;
+        view.helpTooltip.setPosition(helpTooltipCoord);
+    }
 
 });

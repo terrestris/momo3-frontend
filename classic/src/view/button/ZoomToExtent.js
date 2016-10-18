@@ -35,7 +35,9 @@ Ext.define("MoMo.client.view.button.ZoomToExtent", {
      */
     viewModel: {
         data: {
-            tooltip: 'Auf Gesamtansicht zoomen',
+            /* i18n */
+            tooltip: '',
+            /* i18n */
             text: null
         }
     },
@@ -44,7 +46,10 @@ Ext.define("MoMo.client.view.button.ZoomToExtent", {
      *
      */
     bind: {
-        text: '{text}'
+        /* i18n */
+        text: '{text}',
+        tooltip: '{tooltip}'
+        /* i18n */
     },
 
     /**
@@ -99,11 +104,6 @@ Ext.define("MoMo.client.view.button.ZoomToExtent", {
     constructor: function(config) {
         this.callParent([config]);
 
-        if (this.setTooltip) {
-            var bind = this.config.bind;
-            bind.tooltip = this.getViewModel().get('tooltip');
-            this.setBind(bind);
-        }
     },
 
     /**

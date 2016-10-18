@@ -42,7 +42,7 @@ Ext.define('MoMo.client.view.button.LoginLogoutController', {
         if(isLogin) {
             me.doLogin();
         } else {
-            BasiGX.confirm('Do you really want to log out?', {
+            BasiGX.confirm(viewModel.get('logoutConfirmMsgText'), {
                 fn: function(decision) {
                     if (decision === 'yes') {
                         // logout
@@ -98,10 +98,11 @@ Ext.define('MoMo.client.view.button.LoginLogoutController', {
             if(loggedInUser) {
                 var accountName = loggedInUser.get('accountName');
 
-                buttonText = 'Logout (' + accountName + ')';
+                buttonText = viewModel.get('logoutBtnText') +
+                    ' (' + accountName + ')';
                 isLoginButton = false;
             } else {
-                buttonText = 'Login';
+                buttonText = viewModel.get('loginBtnText');
                 isLoginButton = true;
             }
 

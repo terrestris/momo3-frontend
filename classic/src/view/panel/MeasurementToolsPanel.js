@@ -17,9 +17,9 @@
  * Panel containing the measure tools for the temporary drawing in the
  * client.
  *
- * @class MoMo.client.view.panel.MeasureToolsPanel
+ * @class MoMo.client.view.panel.MeasurementToolsPanel
  */
-Ext.define("MoMo.client.view.panel.MeasureToolsPanel", {
+Ext.define("MoMo.client.view.panel.MeasurementToolsPanel", {
     extend: "Ext.panel.Panel",
     xtype: 'momo-panel-measurement',
 
@@ -29,7 +29,7 @@ Ext.define("MoMo.client.view.panel.MeasureToolsPanel", {
 
     viewModel: 'panel.measurementoolspanel',
 
-//    controller: 'panel.measurementoolspanel',
+    controller: 'panel.measurementoolspanel',
 
     layout: {
         type: 'hbox',
@@ -47,6 +47,15 @@ Ext.define("MoMo.client.view.panel.MeasureToolsPanel", {
             margin: '0 5px 0 5px'
         },
         xtype: 'basigx-button-measure',
+        bind : {
+            viewModel: {
+                data: {
+                    continuePolygonMsg: '{continuePolygonMsg}',
+                    continueLineMsg: '{continueLineMsg}',
+                    clickToDrawText: '{clickToDrawText}'
+                }
+            }
+        },
         toggleGroup: 'measure',
         ui: 'momo-tools',
         scale: 'small',

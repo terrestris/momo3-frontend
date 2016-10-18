@@ -22,18 +22,23 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
     scale: 'small',
 
     /**
+     * Check if application default language set to german
+     */
+    isDefaultLanguage: null,
+
+    /**
      *
      */
     bind: {
-        tooltip: '{tooltip}',
-        text: '{text}'
+        tooltip: '{tooltipEn}'
     },
 
     /**
      *
      */
     listeners: {
-        click: 'onClick'
+        click: 'onClick',
+        afterrender: 'onAfterRender'
     },
 
     /**
@@ -44,7 +49,7 @@ Ext.define('MoMo.client.view.button.translation.ToEnglish', {
         me.callParent([cfg]);
 
         var viewModel = me.getViewModel();
-        viewModel.set('translateTo', 'en');
+        viewModel.set('translateTo', viewModel.get('tooltipEn'));
     }
 
 });

@@ -25,6 +25,7 @@ Ext.define('MoMo.client.view.button.PrintController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
+        'MoMo.client.view.form.Print'
     ],
 
     alias: 'controller.button.print',

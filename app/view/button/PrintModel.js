@@ -27,8 +27,10 @@ Ext.define('MoMo.client.view.button.PrintModel', {
 
     data: {
         text: null,
-        tooltip: 'Karte drucken',
-        winTitle: 'Karte drucken'
+        /* i18n */
+        tooltip: '',
+        winTitle: ''
+        /* i18n */
     }
 
 });

@@ -30,8 +30,10 @@ Ext.define("MoMo.client.view.panel.MapMetaInformation", {
 
     viewModel: {
         data: {
-            srsPrefix: 'Bezugssystem:',
-            mousePositionLabel: 'Zeigerposition'
+            /* i18n */
+            srsPrefix: ':',
+            mousePositionLabel: ''
+            /* i18n */
         }
     },
 

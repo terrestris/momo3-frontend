@@ -26,9 +26,11 @@ Ext.define('MoMo.client.view.button.TranslationModel', {
     alias: 'viewmodel.button.translation',
 
     data: {
-        text: '',
-        tooltip: '',
-        translateTo: ''
+        tooltipDe: 'de',
+        tooltipEn: 'en',
+        tooltipMn: 'mn',
+        translateTo: '',
+        setLanguageCallbackToastText: 'Applikationssprache ist jetzt {0}'
     }
 
 });

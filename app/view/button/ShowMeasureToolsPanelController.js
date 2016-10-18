@@ -40,7 +40,7 @@ Ext.define('MoMo.client.view.button.ShowMeasureToolsPanelController', {
     onToggle: function(btn, pressed){
         var me = this;
         if (pressed){
-            me.showToolsPanel("MoMo.client.view.panel.MeasureToolsPanel");
+            me.showToolsPanel("MoMo.client.view.panel.MeasurementToolsPanel");
         } else {
             me.hideToolsPanel();
             me.deactivateTools();

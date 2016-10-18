@@ -14,28 +14,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
- * PrintModel
+ * ShowMetaPanelModel
  *
- * A View model for the print window
+ * The view model for the metainformation panel
  *
- * @class MoMo.client.view.form.PrintModel
+ * @class ShowMetaPanelModel
  */
-Ext.define('MoMo.client.view.form.PrintModel', {
+Ext.define('MoMo.client.view.button.ShowMetaPanelModel', {
     extend: 'Ext.app.ViewModel',
 
-    alias: 'viewmodel.form.print',
+    alias: 'viewmodel.button.showmetapanel',
 
     data: {
-        title: '',
-        /* i18n */
-        labelDpi: '',
-        printButtonSuffix: '',
-        printFormat: '',
-        genericFieldSetTitle: '',
-        attributesTitle: '',
-        scalebarLabel: '',
-        northArrowLabel: '',
-        mapTitleLabel: ''
-        /* i18n */
+        /*i18n*/
+        tooltip: '',
+        /*i18n*/
+        text: null
     }
 });

@@ -53,12 +53,11 @@ Ext.define("MoMo.client.view.form.Print", {
      * @param {Object} attributeRec record with attribute properties
      */
     getCheckBoxAttributeFields: function (attributeRec) {
-        var me = this,
-            fl;
+        var fl;
         if (attributeRec.get('name') === "scalebar") {
-            fl = me.getViewModel().get('scalebarLabel');
+            fl = '{scalebarLabel}';
         } else {
-            fl = me.getViewModel().get('northArrowLabel');
+            fl = '{northArrowLabel}';
         }
         return {
             xtype: 'checkbox',

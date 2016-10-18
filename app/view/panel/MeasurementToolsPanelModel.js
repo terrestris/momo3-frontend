@@ -26,8 +26,13 @@ Ext.define('MoMo.client.view.panel.MeasurementToolsPanelModel', {
     alias: 'viewmodel.panel.measurementoolspanel',
 
     data: {
-        text: null, // overwrite for hardcoded BasiGX texts
-        lineTooltip: 'Strecke messen',
-        areaTooltip: 'Fläche messen'
+        text: null,
+        /* i18n */
+        lineTooltip: '',
+        areaTooltip: '',
+        continuePolygonMsg: '',
+        continueLineMsg: '',
+        clickToDrawText: ''
+        /* i18n */
     }
 });

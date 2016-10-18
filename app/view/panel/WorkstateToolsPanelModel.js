@@ -26,7 +26,10 @@ Ext.define('MoMo.client.view.panel.WorkstateToolsPanelModel', {
     alias: 'viewmodel.panel.workstatetoolspanel',
 
     data: {
-        loadSaveWorkstateBtnText: 'Arbeitstände laden/speichern',
-        permalinkBtnText: 'Permalink erzeugen'
+        /*i18n*/
+        loadSaveWorkstateBtnText: '',
+        permalinkBtnText: '',
+        permalinkTitle: ''
+        /*i18n*/
     }
 });
