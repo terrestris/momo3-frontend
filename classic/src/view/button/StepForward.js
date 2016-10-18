@@ -39,7 +39,9 @@ Ext.define("MoMo.client.view.button.StepForward", {
      */
     viewModel: {
         data: {
-            tooltip: 'Nächste Ansicht',
+            /* i18n */
+            tooltip: '',
+            /* i18n */
             text: null
         }
     },

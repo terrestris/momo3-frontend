@@ -37,7 +37,9 @@ Ext.define("MoMo.client.view.button.StepBack", {
      */
     viewModel: {
         data: {
-            tooltip: 'Vorherige Ansicht',
+            /* i18n */
+            tooltip: '',
+            /* i18n */
             text: null
         }
     },
