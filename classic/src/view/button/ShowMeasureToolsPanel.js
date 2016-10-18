@@ -39,7 +39,7 @@ Ext.define("MoMo.client.view.button.ShowMeasureToolsPanel", {
         text: '{text}'
     },
 
-    glyph: 'xf125@FontAwesome',
+    glyph: 'xf105@Flaticon',
 
     enableToggle: true,
 

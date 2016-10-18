@@ -31,7 +31,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
 
     controller: 'panel.redliningtoolspanel',
 
-    width: 200,
+    width: 250,
 
     bodyStyle: {
         background: 'transparent'
@@ -91,7 +91,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPointsBtnText}'
             },
             name: 'drawPointsBtn',
-            glyph: 'xf1db@FontAwesome', //fa fa-circle-thin
+            glyph: 'xf100@Flaticon',
             listeners: {
                 toggle: 'onDrawPointsBtnToggle'
             }
@@ -100,7 +100,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawLinesBtnText}'
             },
             name: 'drawLinesBtn',
-            glyph: 'xf0c9@FontAwesome', //fa fa-bars
+            glyph: 'xf104@Flaticon',
             listeners: {
                 toggle: 'onDrawLinesBtnToggle'
             }
@@ -109,18 +109,27 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 tooltip: '{drawPolygonsBtnText}'
             },
             name: 'drawPolygonsBtn',
-            glyph: 'xf096@FontAwesome', //fa fa-square-o
+            glyph: 'xf107@Flaticon',
             listeners: {
                 toggle: 'onDrawPolygonsBtnToggle'
             }
         }, {
             bind: {
-                tooltip: '{drawPostItBtnText}'
+                tooltip: '{drawCirclesBtnText}'
             },
-            name: 'postitBtn',
-            glyph: 'xf24a@FontAwesome', //fa fa-sticky-note-o
+            name: 'drawCirclesBtn',
+            glyph: 'xf103@Flaticon',
             listeners: {
-                toggle: 'onPostitBtnToggle'
+                toggle: 'onDrawCirclesBtnToggle'
+            }
+        }, {
+            bind: {
+                tooltip: '{drawRectanglesBtnText}'
+            },
+            name: 'drawRectanglesBtn',
+            glyph: 'xf109@Flaticon',
+            listeners: {
+                toggle: 'onDrawRectanlgesBtnToggle'
             }
         }]
     }, {
@@ -140,10 +149,28 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         },
         items: [{
             bind: {
+                tooltip: '{drawTextBtnText}'
+            },
+            name: 'textBtn',
+            glyph: 'xf10d@Flaticon',
+            listeners: {
+                toggle: 'onTextBtnToggle'
+            }
+        }, {
+            bind: {
+                tooltip: '{drawPostItBtnText}'
+            },
+            name: 'postitBtn',
+            glyph: 'xf10a@Flaticon',
+            listeners: {
+                toggle: 'onPostitBtnToggle'
+            }
+        }, {
+            bind: {
                 tooltip: '{copyObjectBtnText}'
             },
             name: 'copyObjectBtn',
-            glyph: 'xf24d@FontAwesome', //fa fa-clone
+            glyph: 'xf110@Flaticon',
             listeners: {
                 toggle: 'onCopyBtnToggle'
             }
@@ -151,7 +178,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             bind: {
                 tooltip: '{moveObjectBtnText}'
             },
-            glyph: 'xf047@FontAwesome', //fa fa-arrows
+            glyph: 'xf108@Flaticon',
             name: 'moveObjectBtn',
             listeners: {
                 toggle: 'onMoveBtnToggle'
@@ -165,7 +192,23 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             listeners: {
                 toggle: 'onModifyBtnToggle'
             }
-        }, {
+        }]
+    }, {
+        xtype: 'container',
+        layout: {
+            type: 'hbox',
+            pack: 'end'
+        },
+        defaults: {
+            xtype: 'button',
+            toggleGroup: 'draw',
+            ui: 'momo-tools',
+            scale: 'small',
+            style: {
+                margin: '0 5px 5px 5px'
+            }
+        },
+        items: [{
             bind: {
                 tooltip: '{deleteObjectBtnText}'
             },
@@ -174,21 +217,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             listeners: {
                 toggle: 'onDeleteBtnToggle'
             }
-        }]
-    }, {
-        xtype: 'container',
-        layout: {
-            type: 'hbox',
-            pack: 'end'
-        },
-        items: [{
-            xtype: 'button',
-            toggleGroup: 'draw',
-            ui: 'momo-tools',
-            scale: 'small',
-            style: {
-                margin: '0 5px 5px 5px'
-            },
+        }, {
             bind: {
                 tooltip: '{openStyleBtnText}'
             },
@@ -204,11 +233,9 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
      * @event redliningchanged
      * An event that fires everytime a feature is added, deleted, moved or
      * modified.
-     * @param {BasiGX.view.container.Redlining} container
+     * @param {MoMo.client.view.panel.RedliningToolsPanel} container
      *     The Redlining container.
      * @param {Object} state The current redlining state.
-     * @param {Boolean} stateChangeActive While setState is runnning this will
-     *     be true otherwise false.
      */
 
     /**
@@ -225,7 +252,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
         if (!me.redliningVectorLayer) {
             me.redlineFeatures = new ol.Collection();
             me.redlineFeatures.on(
-                'propertychange',
+                'add',
                 me.fireRedliningChanged,
                 me
             );
@@ -243,75 +270,29 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
     /**
      *
      */
-    fireRedliningChanged: function(){
+    fireRedliningChanged: function(evt){
         var me = this;
-        me.fireEvent('redliningchanged', me, me.getState(),
-                me.stateChangeActive);
+        var feat = evt.element;
+        me.fireEvent('redliningchanged', me, me.adjustFeatureStyle(feat));
     },
 
     /**
-     * Returns the current state of the redlining, containing all features
-     * and the configured styles
+     * Sets currently defined style to the new added features.
+     * @param {ol.Feature} feature drawn feature
      */
-    getState: function() {
-        var me = this;
-        var features = [];
-        me.redlineFeatures.forEach(function(feature) {
-            features.push(feature.clone());
-        });
-
-        var state = {
-            features: features,
-            pointStyle: me.getRedlinePointStyle(),
-            lineStyle: me.getRedlineLineStringStyle(),
-            polygonStyle: me.getRedlinePolygonStyle(),
-            styleFunction: me.getRedlineStyleFunction()
-        };
-
-        return state;
-    },
-
-    /**
-     * Sets the state of the redlining, containing drawn features
-     * and the configured styles
-     */
-    setState: function(state) {
+    adjustFeatureStyle: function(feature) {
         var me = this;
 
-        me.stateChangeActive = true;
+        if (feature) {
+            var geometry = feature.getGeometry();
 
-        var styler = Ext.ComponentQuery.query(
-            'basigx-container-redlinestyler')[0];
-
-        if (state.features) {
-            me.redliningVectorLayer.getSource().clear();
-            me.redliningVectorLayer.getSource().addFeatures(state.features);
+            if (geometry instanceof ol.geom.Point) {
+                feature.setStyle(me.getRedlinePointStyle());
+            } else if (geometry instanceof ol.geom.LineString) {
+                feature.setStyle(me.getRedlineLineStringStyle());
+            } else {
+                feature.setStyle(me.getRedlinePolygonStyle());
+            }
         }
-
-        if (state.pointStyle) {
-            me.setRedlinePointStyle(state.pointStyle);
-        }
-
-        if (state.lineStyle) {
-            me.setRedlineLineStringStyle(state.lineStyle);
-        }
-
-        if (state.polygonStyle) {
-            me.setRedlinePolygonStyle(state.polygonStyle);
-        }
-
-        if (styler) {
-            styler.setState(state);
-        }
-
-        if (state.styleFunction) {
-            me.setRedlineStyleFunction(state.styleFunction);
-        }
-
-        // reapply the styleFn on the layer so that ol3 starts redrawing
-        // with new styles
-        me.redliningVectorLayer.setStyle(me.redliningVectorLayer.getStyle());
-
-        me.stateChangeActive = false;
     }
 });

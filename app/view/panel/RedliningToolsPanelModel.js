@@ -29,12 +29,15 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelModel', {
         drawPointsBtnText: 'Punkt zeichnen',
         drawLinesBtnText: 'Linie zeichnen',
         drawPolygonsBtnText: 'Polygon zeichen',
-        drawPostItBtnText: 'Post-it zeichnen',
+        drawCirclesBtnText: 'Kreis zeichnen',
+        drawRectanglesBtnText: 'Rechteck zeichnen',
+        drawTextBtnText: 'Beschriftung einfügen',
+        drawPostItBtnText: 'Post-it einfügen',
         copyObjectBtnText: 'Objekt kopieren',
         moveObjectBtnText: 'Objekt verschieben',
         modifyObjectBtnText: 'Objekt modifizieren',
         deleteObjectBtnText: 'Objekt löschen',
         openStyleBtnText: 'Styler',
-        postItWindowTitle: 'Post-it Text eingeben'
+        postItWindowTitle: 'Text eingeben'
     }
 });

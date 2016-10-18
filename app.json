@@ -487,6 +487,9 @@
     "resources": [
         {
             "path": "${build.id}/resources"
+        },
+        {
+            "path": "sass/stylesheets/fonts" // flaticon font
         }
     ],
 
