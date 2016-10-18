@@ -27,10 +27,10 @@ Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
      * Set store for the document tree
      */
     setDocumentStoreAndRootNode: function() {
-        var me = this,
-            treeView = me.getView(),
-            docRootId = treeView.up('window').docRootId,
-            documentStore;
+        var me = this;
+        var treeView = me.getView();
+        var docRootId = treeView.up('window').docRootId;
+        var documentStore;
 
         documentStore = Ext.create('MoMo.client.store.Document', {
             autoLoad: false
