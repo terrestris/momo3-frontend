@@ -24,7 +24,9 @@ Ext.define("MoMo.client.window.document.ListDocumentsWindow", {
 
     requires: [
         'BasiGX.util.Url',
-        'MoMo.client.util.ApplicationContext'
+        'MoMo.client.util.ApplicationContext',
+        'MoMo.client.util.User',
+        'MoMo.client.plugin.VisibleForAdminsOnly'
     ],
 
     controller: 'window.document.listdocuments',
@@ -96,6 +98,7 @@ Ext.define("MoMo.client.window.document.ListDocumentsWindow", {
         {
             xtype: 'button',
             name: 'create-new-doc',
+            plugins: ['visibleforadminsonly'],
             bind: {
                 text: '{textCreateNewDoc}'
             },
@@ -103,6 +106,7 @@ Ext.define("MoMo.client.window.document.ListDocumentsWindow", {
         }, {
             xtype: 'button',
             name: 'delete-selected-doc',
+            plugins: ['visibleforadminsonly'],
             bind: {
                 text: '{textDeleteSelectedDoc}',
                 disabled: '{!docSelected}'
