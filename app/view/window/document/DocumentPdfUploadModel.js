@@ -7,8 +7,10 @@ Ext.define('MoMo.client.view.window.document.DocumentPdfUploadModel', {
     alias: 'viewmodel.window.document.documentpdfupload',
 
     data: {
-        title: 'PDF document upload',
-        uploadBtnText: 'Start upload'
+        /*i18n*/
+        title: '',
+        uploadBtnText: ''
+        /*i18n*/
     }
 
 });

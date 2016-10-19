@@ -10,7 +10,8 @@ Ext.define('MoMo.client.view.button.ListDocuments', {
         'Ext.app.ViewModel',
 
         'MoMo.client.view.button.ListDocumentsController',
-        'MoMo.client.view.button.ListDocumentsModel'
+        'MoMo.client.view.button.ListDocumentsModel',
+        'MoMo.client.view.window.document.ListDocumentsWindow'
     ],
 
     controller: 'button.listdocuments',

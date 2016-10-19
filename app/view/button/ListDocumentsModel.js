@@ -26,8 +26,10 @@ Ext.define('MoMo.client.view.button.ListDocumentsModel', {
     alias: 'viewmodel.button.listdocuments',
 
     data: {
-        text: 'Show Documents',
-        tooltip: 'Show Documents'
+        /*i18n*/
+        text: '',
+        tooltip: ''
+        /*i18n*/
     }
 
 });

@@ -18,7 +18,7 @@
  *
  * @class MoMo.client.view.window.DocumentWindow
  */
-Ext.define("MoMo.client.window.document.ListDocumentsWindow", {
+Ext.define("MoMo.client.view.window.document.ListDocumentsWindow", {
     extend: "Ext.window.Window",
     xtype: 'momo-window-listdocuments',
 

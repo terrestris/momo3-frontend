@@ -34,7 +34,7 @@ Ext.define('MoMo.client.view.button.ListDocumentsController', {
     */
     onClick: function() {
 
-        Ext.create('MoMo.client.window.document.ListDocumentsWindow', {
+        Ext.create('MoMo.client.view.window.document.ListDocumentsWindow', {
             autoShow: true
         });
 
