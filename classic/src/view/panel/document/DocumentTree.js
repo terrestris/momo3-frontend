@@ -34,8 +34,9 @@ Ext.define("MoMo.client.view.panel.document.DocumentTree",{
 
     viewConfig: {
         plugins: {
-            ptype: 'treeviewdragdrop',
-            dragText: 'Drag and drop to reorganize'
+            ptype: 'treeviewdragdrop'
+              // outcommented for i18n
+//            dragText: 'Drag and drop to reorganize'
         }
     },
 
