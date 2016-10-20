@@ -9,7 +9,8 @@ Ext.define('MoMo.client.Application', {
     requires: [
         'MoMo.client.util.ApplicationContext',
         'MoMo.client.util.URL',
-        'MoMo.client.util.Module'
+        'MoMo.client.util.Module',
+        'MoMo.client.util.User'
     ],
 
     name: 'MoMo.client',

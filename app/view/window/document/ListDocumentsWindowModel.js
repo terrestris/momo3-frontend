@@ -6,13 +6,17 @@ Ext.define('MoMo.client.view.window.document.ListDocumentsWindowModel', {
 
     data: {
         /*i18n*/
-        title: 'gdj',
+        title: '',
         textOpenSelectedDoc: '',
         textDeleteSelectedDoc: '',
         textCreateNewDoc: '',
         textPromptMessageNewDoc: '',
+        textDeleteDoc: '',
+        textPromptDeleteDoc: '',
         textUnknownError: '',
         textCouldNotCreateDocument: '',
+        textCouldNotDeleteDocument: '',
+        textSuccessDeleteDoc: '',
         /*i18n*/
         docSelected: false
     }

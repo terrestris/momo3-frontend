@@ -1,6 +1,8 @@
 Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
     extend: 'Ext.app.ViewController',
 
+    requires: ['MoMo.client.util.User'],
+
     alias: 'controller.panel.document.documenttree',
 
     /**
@@ -67,16 +69,21 @@ Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
         // forbid the standard browser context menu
         e.preventDefault();
 
-        // folder was clicked
-        if (rec && rec.get('leaf') === false) {
-            rec.contextmenu = me.createFolderContextMenu(rec);
-        // leaf was clicked
-        } else {
-            if (!rec.contextmenu) {
-                rec.contextmenu = me.createLeafContextMenu(rec);
+        // show this only for admins...
+        if(MoMo.client.util.User.currentUserIsAdmin()) {
+
+            // folder was clicked
+            if (rec && rec.get('leaf') === false) {
+                rec.contextmenu = me.createFolderContextMenu(rec);
+                // leaf was clicked
+            } else {
+                if (!rec.contextmenu) {
+                    rec.contextmenu = me.createLeafContextMenu(rec);
+                }
             }
+            rec.contextmenu.showAt(e.pageX, e.pageY);
         }
-        rec.contextmenu.showAt(e.pageX, e.pageY);
+
     },
 
     /**
@@ -195,6 +202,14 @@ Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
                     ich: Ext.Msg.WARNING,
                     fn: function(btn){
                         if(btn === 'ok') {
+                            // remove all child nodes from the tree
+                            // as the backend will remove them from the DB
+                            // when erase is called on the parent node/folder
+                            // that will be deleted here...
+                            // otherwise some confusing situations may occur.
+                            record.removeAll(false);
+
+                            // remove the folder (and also trigger the proxy)
                             record.erase();
                         }
                     }
