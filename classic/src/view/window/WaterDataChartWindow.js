@@ -131,7 +131,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
                 series: [{
                     type: 'line',
                     xField: 'time',
-                    yField: '°C:1',
+                    yField: '°C',
                     bind: {
                         title: '{chartlegendTemp}'
                     },
