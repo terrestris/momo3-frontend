@@ -25,8 +25,9 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
      * @param {ol.Feat} feat clicked feature
      */
     setChartHeader: function(feat){
+        var altitude = this.getViewModel().get('altitude');
         var header = '<h3>' + feat.measuring_point + ' - ' + feat.station_id +
-            '</h3><p>Altitude: ' + feat.altitude + '</p>';
+            '</h3><p>' + altitude + ': ' + feat.altitude + '</p>';
         return header;
     },
 
