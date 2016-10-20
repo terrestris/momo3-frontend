@@ -49,7 +49,7 @@ Ext.define('MoMo.client.view.button.translation.ToMongolian', {
         me.callParent([cfg]);
 
         var viewModel = me.getViewModel();
-        viewModel.set('translateTo', viewModel.get('tooltipMn'));
+        viewModel.set('translateTo', viewModel.get('languageCodeMn'));
     }
 
 });
