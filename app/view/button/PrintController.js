@@ -25,7 +25,8 @@ Ext.define('MoMo.client.view.button.PrintController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
-        'MoMo.client.view.form.Print'
+        'MoMo.view.window.PrintWindow',
+        'BasiGX.view.form.Print'
     ],
 
     alias: 'controller.button.print',
@@ -41,16 +42,12 @@ Ext.define('MoMo.client.view.button.PrintController', {
             var winX = BasiGX.util.Map.getMapComponent().getX() + 40;
             var winY = BasiGX.util.Map.getMapComponent().getY();
             if (!printWin) {
-                printWin = Ext.create('Ext.window.Window', {
-                    name: 'print-window',
-                    title: me.getView().getViewModel().get('winTitle'),
-                    autoScroll: true,
+                printWin = Ext.create('MoMo.view.window.PrintWindow', {
                     listeners: {
                         'close': function(){
                             btn.toggle(false);
                         }
                     },
-                    constrainHeader: true,
                     items: [{
                         xtype: 'momo-form-print',
                         url: view.getPrintUrl() + '/print/'

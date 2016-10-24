@@ -28,8 +28,7 @@ Ext.define('MoMo.client.view.button.PrintModel', {
     data: {
         text: null,
         /* i18n */
-        tooltip: '',
-        winTitle: ''
+        tooltip: ''
         /* i18n */
     }
 
