@@ -78,12 +78,14 @@ Ext.define("MoMo.client.view.form.Print", {
         var me = this,
             fl='';
         if (attributeRec.get('name') === 'title') {
-            fl = me.getViewModel().get('mapTitleLabel');
+            fl = '{mapTitleLabel}';
         }
         return {
             xtype: 'textfield',
             name: attributeRec.get('name'),
-            fieldLabel: fl,
+            bind: {
+                fieldLabel: fl
+            },
             labelWidth: 40,
             value: attributeRec.get('default'),
             allowBlank: true
