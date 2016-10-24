@@ -75,8 +75,7 @@ Ext.define("MoMo.client.view.form.Print", {
      * @param {Object} attributeRec record with attribute properties
      */
     getStringField: function (attributeRec) {
-        var me = this,
-            fl='';
+        var fl = '';
         if (attributeRec.get('name') === 'title') {
             fl = '{mapTitleLabel}';
         }

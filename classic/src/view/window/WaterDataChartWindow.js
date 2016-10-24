@@ -95,7 +95,9 @@ Ext.define('MoMo.view.window.WaterDataChartWindow',{
             fieldStyle: {
                 "text-align": 'center'
             },
-            value: me.getController().setChartHeader(feat)
+            bind: {
+                value: me.getController().setChartHeader('{altitude}', feat)
+            }
         }, {
             xtype: 'panel',
             style: {
