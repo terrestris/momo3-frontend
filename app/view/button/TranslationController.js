@@ -121,6 +121,13 @@ Ext.define('MoMo.client.view.button.TranslationController', {
                         );
                     }
                     me.firstApplicationLoad = false;
+
+                    // adjust locale of login/logout button
+                    var loginBtn =
+                        Ext.ComponentQuery.query('momo-login-logout-button')[0];
+                    if (loginBtn){
+                        loginBtn.getController().setCurrentUserAccountName();
+                    }
                 }
             }
         }
