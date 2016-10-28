@@ -352,12 +352,11 @@ Ext.define('MoMo.client.view.form.PrintController', {
 
             if(field.getName() === 'legend') {
                 attributes.legend = this.getLegendObject();
+                attributes.printLegend = field.getValue();
             } else if (field.getName() === 'scalebar') {
-                //attributes.scalebar = view.getScaleBarObject();
                 // override basigx method here
                 attributes.printScalebar = field.getValue();
             } else if (field.getName() === 'northArrowDef') {
-                //attributes.northArrowDef = view.getNorthArrowObject();
                 // override basigx method here
                 attributes.printNorthArrow = field.getValue();
             } else if (field.childFieldKey &&
@@ -466,9 +465,11 @@ Ext.define('MoMo.client.view.form.PrintController', {
             }
         });
 
+        var legendName = this.getView().query('checkbox[name=legend]')[0].
+            getFieldLabel();
         var legendObj = {
             classes: classes,
-            name: ""
+            name: legendName
         };
 
         return legendObj;
