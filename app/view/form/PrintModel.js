@@ -31,11 +31,25 @@ Ext.define('MoMo.client.view.form.PrintModel', {
         labelDpi: '',
         printButtonSuffix: '',
         printFormat: '',
+        formatComboLabel: '',
+        layoutComboLabel: '',
         genericFieldSetTitle: '',
         attributesTitle: '',
         scalebarLabel: '',
         northArrowLabel: '',
-        mapTitleLabel: ''
+        legendLabel: '',
+        mapTitleLabel: '',
+        mapNumberLabel: '',
+        titleAuthorName: '',
+        titleDataSource: '',
+        titleCoordSystemString: '',
+        coordSystemString: '',
+        titleProjString: '',
+        projString: '',
+        titleDatumString: '',
+        datumString: '',
+        titleScale: '',
+        titleDate: ''
         /* i18n */
     }
 });
