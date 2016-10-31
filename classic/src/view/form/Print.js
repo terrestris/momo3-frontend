@@ -33,6 +33,9 @@ Ext.define("MoMo.client.view.form.Print", {
 
     controller: 'form.print',
 
+    bodyPadding: 0,
+
+
     bbar: [{
         xtype: 'button',
         name: 'createPrint',

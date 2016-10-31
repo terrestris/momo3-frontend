@@ -59,7 +59,7 @@ Ext.define('MoMo.client.view.form.PrintController', {
                 name: 'generic-fieldset',
                 layout: {
                     type: 'hbox',
-                    pack: 'end'
+                    pack: 'center'
                 }
             });
         }
