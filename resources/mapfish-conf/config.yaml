@@ -1,30 +1,74 @@
 
 templates:
   #===========================================================================
-  A4 Hochformat: !template
+  a4_portrait: !template
   #===========================================================================
     reportTemplate: a4_portrait.jrxml
     attributes:
       title: !string {}
+      mapNumber: !string {}
+      authorName: !string {}
+      coordSystemString: !string {}
+      projString: !string {}
+      datumString: !string {}
       printScalebar: !boolean {}
       printNorthArrow: !boolean {}
+      printLegend: !boolean {}
+      dataSource: !string {}
+      titleAuthorName: !string {}
+      titleCoordSystemString: !string {}
+      titleProjString: !string {}
+      titleDatumString: !string {}
+      titleDataSource: !string {}
+      titleDate: !string {}
+      titleScale: !string {}
       map: !map
         maxDpi: 576
         dpiSuggestions: [72,144,288,576]
         width: 535
-        height: 630
-      scalebar: !scalebar
-        width: 240
-        height: 40
+        height: 590
+      overlayLayers: !staticLayers
         default:
-          backgroundColor: "rgba(214, 214, 214, 200)"
-          align: "right"
+          layers:
+            - type: "grid"
+              gridType: "lines"
+              renderAsSvg: false
+              haloRadius: 2
+              haloColor: "#cccccc"
+              labelColor: "#000000"
+              numberOfLines: [5,5]
+              #indent: 10
+              labelProjection: "EPSG:4326"
+              labelFomat: "%1.2f %s"
+              rotateLabels: false
+              #horizontalYOffset: 15.0
+              #verticalXOffset: 15.0
+              style: "file://grid.sld"
+              font:
+                name: ["Arial"]
+                size: 7
+      scalebar: !scalebar
+        width: 230
+        height: 30
+        default:
+          backgroundColor: "rgba(214, 214, 214, 220)"
+          align: "left"
+          type: "line"
+          fontSize: 8
+          labelDistance: 5
+          padding: 5
+          barSize: 5
+          subIntervals: true
       northArrowDef: !northArrow
         size: 50
         default:
           graphic: "file://NorthArrow_10.svg"
-          backgroundColor: "rgba(214, 214, 214, 200)"
+      legend: !legend {}
     processors:
+    - !addOverlayLayers
+      inputMapper:
+          overlayLayers: staticLayers
+          map: map
     - !reportBuilder # compile all reports in current directory
       directory: '.'
     - !createMap
@@ -33,31 +77,85 @@ templates:
     - !createScalebar {}
     - !createNorthArrow
         inputMapper: {map: map, northArrowDef: northArrow}
+    - !prepareLegend
+      maxWidth: 222
+      dpi: 150
+      template: legend.jrxml
+      inputMapper: {legend: legend}
+      outputMapper: {
+        legend: legend,
+        legendSubReport: legendSubReport,
+        numberOfLegendRows: numberOfLegendRows
+        }
   #===========================================================================
-  A4 Querformat: !template
+  a4_landscape: !template
   #===========================================================================
     reportTemplate: a4_landscape.jrxml
     attributes:
       title: !string {}
+      mapNumber: !string {}
+      authorName: !string {}
+      coordSystemString: !string {}
+      projString: !string {}
+      datumString: !string {}
       printScalebar: !boolean {}
       printNorthArrow: !boolean {}
+      printLegend: !boolean {}
+      dataSource: !string {}
+      titleAuthorName: !string {}
+      titleCoordSystemString: !string {}
+      titleProjString: !string {}
+      titleDatumString: !string {}
+      titleDataSource: !string {}
+      titleDate: !string {}
+      titleScale: !string {}
       map: !map
         maxDpi: 576
         dpiSuggestions: [72,144,288,576]
-        width: 780
-        height: 360
+        width: 550
+        height: 445
+      overlayLayers: !staticLayers
+        default:
+          layers:
+            - type: "grid"
+              gridType: "lines"
+              renderAsSvg: false
+              haloRadius: 2
+              haloColor: "#cccccc"
+              labelColor: "#000000"
+              numberOfLines: [5,5]
+              #indent: 10
+              labelProjection: "EPSG:4326"
+              labelFomat: "%1.2f %s"
+              rotateLabels: false
+              horizontalYOffset: -15.0
+              #verticalXOffset: 10.0
+              style: "file://grid.sld"
+              font:
+                name: ["Arial"]
+                size: 7
       scalebar: !scalebar
         width: 240
-        height: 40
+        height: 30
         default:
-          backgroundColor: "rgba(214, 214, 214, 200)"
-          align: "right"
+          backgroundColor: "rgba(214, 214, 214, 220)"
+          align: "left"
+          type: "line"
+          fontSize: 8
+          labelDistance: 5
+          padding: 5
+          barSize: 5
+          subIntervals: true
       northArrowDef: !northArrow
         size: 50
         default:
           graphic: "file://NorthArrow_10.svg"
-          backgroundColor: "rgba(214, 214, 214, 200)"
+      legend: !legend {}
     processors:
+    - !addOverlayLayers
+      inputMapper:
+          overlayLayers: staticLayers
+          map: map
     - !reportBuilder # compile all reports in current directory
       directory: '.'
     - !createMap
@@ -66,4 +164,13 @@ templates:
     - !createScalebar {}
     - !createNorthArrow
         inputMapper: {map: map, northArrowDef: northArrow}
-
+    - !prepareLegend
+      maxWidth: 222
+      dpi: 150
+      template: legend.jrxml
+      inputMapper: {legend: legend}
+      outputMapper: {
+        legend: legend,
+        legendSubReport: legendSubReport,
+        numberOfLegendRows: numberOfLegendRows
+        }

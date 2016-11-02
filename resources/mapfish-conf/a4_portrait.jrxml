@@ -1,76 +1,148 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
-<!-- 2016-10-06T15:41:18 -->
+<!-- 2016-10-28T14:38:46 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9a3e59f5-6675-48cf-ad74-9c42b5a5b290">
-	<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<parameter name="mapSubReport" class="java.lang.String"/>
-	<parameter name="printScalebar" class="java.lang.Boolean"/>
-	<parameter name="printNorthArrow" class="java.lang.Boolean"/>
-	<parameter name="title" class="java.lang.String"/>
-	<parameter name="scalebarSubReport" class="java.lang.String"/>
-	<parameter name="northArrowSubReport" class="java.lang.String"/>
-	<title>
-		<band height="760" splitType="Stretch">
-			<textField>
-				<reportElement x="120" y="0" width="435" height="50" uuid="2d409ff6-2227-488a-aefb-94cdab92f3d2"/>
-				<textElement textAlignment="Center">
-					<font size="33"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
-			</textField>
-			<subreport>
-				<reportElement x="10" y="65" width="535" height="630" uuid="fa145068-76a5-4834-98ed-ce65b1976b3d">
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<subreportExpression><![CDATA[$P{mapSubReport}]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement x="315" y="705" width="240" height="40" isRemoveLineWhenBlank="true" uuid="fa145068-76a5-4834-98ed-ce65b1976b3d">
-					<printWhenExpression><![CDATA[$P{printScalebar}]]></printWhenExpression>
-				</reportElement>
-				<subreportExpression><![CDATA[$P{scalebarSubReport}]]></subreportExpression>
-			</subreport>
-			<subreport>
-				<reportElement x="10" y="75" width="50" height="50" uuid="fa145068-76a5-4834-98ed-ce65b1976b3d">
-					<property name="local_mesure_unitwidth" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="local_mesure_unitheight" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-					<printWhenExpression><![CDATA[$P{printNorthArrow}]]></printWhenExpression>
-				</reportElement>
-				<subreportExpression><![CDATA[$P{northArrowSubReport}]]></subreportExpression>
-			</subreport>
-			<image>
-				<reportElement x="60" y="0" width="50" height="50" uuid="6c8a705b-413f-4ab0-94a5-5583b6658f78"/>
-				<imageExpression><![CDATA["./logo_momo.jpg"]]></imageExpression>
-			</image>
-			<image>
-				<reportElement x="0" y="0" width="50" height="50" uuid="60c78cf5-deda-4ba1-b6dd-c3e801cb0a5c"/>
-				<imageExpression><![CDATA["./bmbf.png"]]></imageExpression>
-			</image>
-			<rectangle>
-				<reportElement mode="Transparent" x="0" y="55" width="555" height="650" uuid="ccbbadc4-2ede-4fe2-a68a-58c6ed680de5"/>
-				<graphicElement>
-					<pen lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="75" y="705" width="100" height="35" uuid="388ff29c-4d09-4088-98ca-4be9e7295130">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-				</reportElement>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="0" y="705" width="70" height="35" uuid="0e67ef1a-6c4d-4003-88df-2affed38e8e0">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
-				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<text><![CDATA[Gedruckt am:]]></text>
-			</staticText>
-		</band>
-	</title>
+    <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+    <property name="com.jaspersoft.studio.unit." value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+    <property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+    <parameter name="mapSubReport" class="java.lang.String"/>
+    <parameter name="printScalebar" class="java.lang.Boolean"/>
+    <parameter name="printNorthArrow" class="java.lang.Boolean"/>
+    <parameter name="printLegend" class="java.lang.Boolean"/>
+    <parameter name="title" class="java.lang.String"/>
+    <parameter name="scalebarSubReport" class="java.lang.String"/>
+    <parameter name="northArrowSubReport" class="java.lang.String"/>
+    <parameter name="dataSource" class="java.lang.String"/>
+    <parameter name="authorName" class="java.lang.String"/>
+    <parameter name="coordSystemString" class="java.lang.String"/>
+    <parameter name="projString" class="java.lang.String"/>
+    <parameter name="datumString" class="java.lang.String"/>
+    <parameter name="mapNumber" class="java.lang.String"/>
+    <parameter name="legendSubReport" class="java.lang.String"/>
+    <parameter name="legend" class="net.sf.jasperreports.engine.data.JRTableModelDataSource">
+        <parameterDescription><![CDATA[]]></parameterDescription>
+    </parameter>
+    <parameter name="titleAuthorName" class="java.lang.String"/>
+    <parameter name="titleCoordSystemString" class="java.lang.String"/>
+    <parameter name="titleProjString" class="java.lang.String"/>
+    <parameter name="titleDatumString" class="java.lang.String"/>
+    <parameter name="titleDataSource" class="java.lang.String"/>
+    <parameter name="titleDate" class="java.lang.String"/>
+    <parameter name="mapContext" class="org.mapfish.print.attribute.map.MapfishMapContext"/>
+    <parameter name="titleScale" class="java.lang.String"/>
+    <title>
+        <band>
+            <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+        </band>
+    </title>
+    <detail>
+        <band height="802">
+            <image>
+                <reportElement x="362" y="0" width="50" height="50" uuid="7025d6e2-8309-48a0-8c96-a0b9fd3be4ef"/>
+                <imageExpression><![CDATA["./bmbf.png"]]></imageExpression>
+            </image>
+            <image>
+                <reportElement x="432" y="0" width="50" height="50" uuid="638fad5e-100f-401e-9d51-7b7204d0c99a"/>
+                <imageExpression><![CDATA["./logo_momo.jpg"]]></imageExpression>
+            </image>
+            <image>
+                <reportElement x="504" y="0" width="50" height="50" uuid="17b93a09-42b3-494e-8257-96f86ef00adf"/>
+                <imageExpression><![CDATA["./sojombo.png"]]></imageExpression>
+            </image>
+            <textField>
+                <reportElement x="0" y="0" width="90" height="30" uuid="6771bd6b-b37f-4fd3-93ed-b71ba2ed4645"/>
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <font size="16"/>
+                    <paragraph lineSpacing="AtLeast"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{mapNumber}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement stretchType="RelativeToTallestObject" x="0" y="60" width="554" height="30" isPrintInFirstWholeBand="true" uuid="68be5c7b-10b2-4c47-8849-854e834713a4"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="20"/>
+                    <paragraph lineSpacing="AtLeast"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" mode="Transparent" x="0" y="100" width="555" height="610" uuid="4ff896a7-7937-45e8-9302-f87fe878c0d7">
+                    <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                </reportElement>
+                <graphicElement>
+                    <pen lineStyle="Solid"/>
+                </graphicElement>
+            </rectangle>
+            <subreport>
+                <reportElement x="9" y="110" width="535" height="590" uuid="bdb0d042-b412-4c45-8146-d20686b81c80">
+                    <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+                </reportElement>
+                <subreportExpression><![CDATA[$P{mapSubReport}]]></subreportExpression>
+            </subreport>
+            <subreport>
+                <reportElement x="19" y="120" width="40" height="40" uuid="ff4a5c05-96da-40c4-a01e-6446e243e955">
+                    <property name="local_mesure_unitwidth" value="pixel"/>
+                    <property name="local_mesure_unitheight" value="pixel"/>
+                    <printWhenExpression><![CDATA[$P{printNorthArrow}]]></printWhenExpression>
+                </reportElement>
+                <subreportExpression><![CDATA[$P{northArrowSubReport}]]></subreportExpression>
+            </subreport>
+            <subreport>
+                <reportElement x="9" y="670" width="230" height="30" isRemoveLineWhenBlank="true" uuid="b933dea9-ca5a-4318-a6f6-ebba5c83da1d">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                    <printWhenExpression><![CDATA[$P{printScalebar}]]></printWhenExpression>
+                </reportElement>
+                <subreportExpression><![CDATA[$P{scalebarSubReport}]]></subreportExpression>
+            </subreport>
+            <textField>
+                <reportElement x="0" y="713" width="555" height="27" uuid="1a41b48d-2ce7-442d-bad1-447ade1d4cc8"/>
+                <textElement textAlignment="Left" verticalAlignment="Top">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[String.format($P{titleScale} + " 1: %.0f", $P{mapContext}.getRoundedScale()) + "\n" + $P{titleCoordSystemString} + ": " +  $P{coordSystemString} + ", " +  $P{titleProjString} + ": " +  $P{projString} + ", " +  $P{titleDatumString} + ": " + $P{datumString}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="740" width="554" height="20" uuid="bc71513c-2530-40d5-9eb5-af92f9bef7cc"/>
+                <textElement textAlignment="Justified" verticalAlignment="Middle">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{titleDataSource} + ": " +  $P{dataSource}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="760" width="310" height="20" uuid="4c9a287e-54fc-4044-bf00-448cb72f8828"/>
+                <textElement textAlignment="Left" verticalAlignment="Bottom">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{titleAuthorName} + ": " + $P{authorName}]]></textFieldExpression>
+            </textField>
+            <textField pattern="&quot;mm/yyyy&quot;">
+                <reportElement x="330" y="756" width="220" height="24" uuid="d618d458-dd8a-4a30-9a9b-73e9755f52ed"/>
+                <textElement textAlignment="Right" verticalAlignment="Bottom">
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{titleDate} + ": " + new SimpleDateFormat("MM/yyyy").format(new java.util.Date())]]></textFieldExpression>
+            </textField>
+        </band>
+        <band height="800">
+            <subreport>
+                <reportElement positionType="Float" x="0" y="20" width="554" height="760" uuid="fb0cf12b-3b7b-4321-927e-1e93112a99f8">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+                    <printWhenExpression><![CDATA[$P{printLegend}]]></printWhenExpression>
+                </reportElement>
+                <dataSourceExpression><![CDATA[$P{legend}]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{legendSubReport}]]></subreportExpression>
+            </subreport>
+        </band>
+    </detail>
 </jasperReport>

@@ -33,6 +33,24 @@ Ext.define("MoMo.client.view.form.Print", {
 
     controller: 'form.print',
 
+    bodyPadding: 0,
+
+
+    bbar: [{
+        xtype: 'button',
+        name: 'createPrint',
+        bind: {
+            text: '{printFormat:uppercase} {printButtonSuffix}'
+        },
+        formBind: true,
+        handler: function(btn){
+            btn.up('form').getController().createPrint();
+        }
+    }],
+
+    /**
+     * Initializes this component
+     */
     initComponent: function(){
         this.callParent();
         var appCombo = this.down('combo[name=appCombo]');
@@ -41,135 +59,32 @@ Ext.define("MoMo.client.view.form.Print", {
         this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {
-                ready: 'onPrintProviderReady',
+                ready: function(){
+                    this.getController().onPrintProviderReady(this.provider);
+                },
                 scope: this
             }
         });
     },
 
     /**
-     * Override for BasiGX method to get translatable labels for print
-     * attributes scalebar and northArrow
-     * @param {Object} attributeRec record with attribute properties
+     * Override for BasiGX class to make use of our own controller
      */
-    getCheckBoxAttributeFields: function (attributeRec) {
-        var fl;
-        if (attributeRec.get('name') === "scalebar") {
-            fl = '{scalebarLabel}';
-        } else {
-            fl = '{northArrowLabel}';
-        }
-        return {
-            xtype: 'checkbox',
-            name: attributeRec.get('name'),
-            checked: true,
-            bind: {
-                fieldLabel: fl
-            }
-        };
+    getNorthArrowAttributeFields: function (attributeRec) {
+        return this.getController().getCheckBoxAttributeFields(attributeRec);
     },
 
     /**
-     * Override for BasiGX method to get translatable labels for print
-     * attribute map title
-     * @param {Object} attributeRec record with attribute properties
+     * Override for BasiGX class to make use of our own controller
      */
-    getStringField: function (attributeRec) {
-        var fl = '';
-        if (attributeRec.get('name') === 'title') {
-            fl = '{mapTitleLabel}';
-        }
-        return {
-            xtype: 'textfield',
-            name: attributeRec.get('name'),
-            bind: {
-                fieldLabel: fl
-            },
-            labelWidth: 40,
-            value: attributeRec.get('default'),
-            allowBlank: true
-        };
+    getLegendAttributeFields: function (attributeRec) {
+        return this.getController().getCheckBoxAttributeFields(attributeRec);
     },
 
     /**
-     * Override for BasiGX method to control the visibility of scalebar and
-     * north arrow dynamically through (un)check the corresponding properties
-     * in print window
+     * Override for BasiGX class to make use of our own controller
      */
-    createPrint: function(){
-        var view = this;
-        var spec = {};
-        var mapComponent = view.getMapComponent();
-        var mapView = mapComponent.getMap().getView();
-        var layout = view.down('combo[name="layout"]').getValue();
-        var format = view.down('combo[name="format"]').getValue();
-        var attributes = {};
-        var projection = mapView.getProjection().getCode();
-        var rotation = mapView.getRotation();
-
-        var gxPrintProvider = GeoExt.data.MapfishPrintProvider;
-
-        var serializedLayers = gxPrintProvider.getSerializedLayers(
-            mapComponent, this.layerFilter, this
-        );
-
-        var fieldsets = view.query('fieldset[name=attributes] fieldset');
-
-        Ext.each(fieldsets, function(fs){
-            var name = fs.name;
-            // TODO double check when rotated
-            var featureBbox = fs.extentFeature.getGeometry().getExtent();
-            var dpi = fs.down('[name="dpi"]').getValue();
-
-            attributes[name] = {
-                bbox: featureBbox,
-                dpi: dpi,
-                // TODO Order of Layers in print seems to be reversed.
-                layers: serializedLayers.reverse(),
-                projection: projection,
-                rotation: rotation
-            };
-
-        }, this);
-        // Get all Fields except the DPI Field
-        // TODO This query should be optimized or changed into some
-        // different kind of logic
-        var additionalFields = view.query(
-            'fieldset[name=attributes]>field[name!=dpi]'
-        );
-        Ext.each(additionalFields, function(field){
-
-            if(field.getName() === 'legend') {
-                attributes.legend = view.getLegendObject();
-            } else if (field.getName() === 'scalebar') {
-                attributes.scalebar = view.getScaleBarObject();
-                // override basigx method here
-                attributes.printScalebar = field.getValue();
-            } else if (field.getName() === 'northArrowDef') {
-                attributes.northArrowDef = view.getNorthArrowObject();
-                // override basigx method here
-                attributes.printNorthArrow = field.getValue();
-            } else {
-                attributes[field.getName()] = field.getValue();
-            }
-        }, this);
-
-        var url = view.getUrl();
-        var app = view.down('combo[name=appCombo]').getValue();
-        spec.attributes = attributes;
-        spec.layout = layout;
-        var submitForm = Ext.create('Ext.form.Panel', {
-            standardSubmit: true,
-            url: url + app + '/buildreport.' + format,
-            method: 'POST',
-            items: [
-                {
-                    xtype: 'textfield',
-                    name: 'spec',
-                    value: Ext.encode(spec)
-                }
-            ]
-        });
-        submitForm.submit();
+    getScalebarAttributeFields: function (attributeRec) {
+        return this.getController().getCheckBoxAttributeFields(attributeRec);
     }
 });
