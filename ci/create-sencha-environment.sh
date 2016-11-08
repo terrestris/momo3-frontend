@@ -30,10 +30,10 @@ BASIGX_IN_SENCHA_WS_FOLDER="$SENCHA_WS/packages/BasiGX"
 SENCHA_CMD="$INSTALL_DIR/sencha"
 
 # The version of sencha command to downlaod and install
-SENCHA_CMD_VERSION="6.1.2.15"
+SENCHA_CMD_VERSION="6.2.0.103"
 
 # The version of ExtJS to download and configure the sencha workspace with
-SENCHA_EXTJS_VERSION="6.0.1"
+SENCHA_EXTJS_VERSION="6.2.0"
 
 #(if needed), will not fail if they are there already
 mkdir -p $DOWN_DIR
@@ -46,23 +46,23 @@ mkdir -p $INSTALL_DIR
 cd $DOWN_DIR
 
 # DOWNLOAD (if needed)
-# 1) Sencha cmd (v6.1.2.15)
+# 1) Sencha cmd (v6.2.0.103)
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip" ]; then
     wget "http://cdn.sencha.com/cmd/$SENCHA_CMD_VERSION/no-jre/SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
 fi
 
-# 2) Ext JS (v6.0.1)
+# 2) Ext JS (v6.2.0)
 if [ ! -f "ext-$SENCHA_EXTJS_VERSION-gpl.zip" ]; then
     wget "http://cdn.sencha.com/ext/gpl/ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
 
 # EXTRACT (if needed)
-# 1) Sencha cmd (v6.1.2.15)
+# 1) Sencha cmd (v6.2.0.103)
 if [ ! -f "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh" ]; then
     unzip -q "SenchaCmd-$SENCHA_CMD_VERSION-linux-amd64.sh.zip"
 fi
 
-# 2) Ext JS (v6.0.1)
+# 2) Ext JS (v6.2.0)
 if [ ! -d "ext-$SENCHA_EXTJS_VERSION" ]; then
     unzip -q "ext-$SENCHA_EXTJS_VERSION-gpl.zip"
 fi
