@@ -1,0 +1,11 @@
+.default-trigger {
+    display: none;
+}
+
+.multisearch-refresh-trigger:before {
+    content: '\f021';
+}
+
+.multisearch-settings-trigger:before {
+    content: '\f013';
+}

@@ -15,8 +15,9 @@ Ext.define("MoMo.client.view.grid.GazetteerGrid",{
 
     viewModel: {
         data: {
-            title: 'Gazetteer Suche',
-            hideToolTooltip: 'Gazetteer verbergen'
+            /*i18n*/
+            title: ''
+            /*i18n*/
         }
     },
 
@@ -24,32 +25,26 @@ Ext.define("MoMo.client.view.grid.GazetteerGrid",{
         title: '{title}'
     },
 
+    cls: 'search-result-grid',
+
     collapsible: true,
+
     titleCollapse: true,
 
-    tools:[{
-        type: 'minimize',
-        bind: {
-            tooltip: '{hideToolTooltip}'
-        },
-        handler: function(e, target, gridheader){
-            var grid = gridheader.up('grid');
-            grid.getEl().slideOut('t', {
-                duration: 250,
-                callback: function(){
-                    grid.hide();
-                }
-            });
-        }
-    }],
+    collapseDirection: 'top',
 
+    headerPosition: 'left',
 
-    maxHeight: 250,
+    hideHeaders: true,
+
+    maxHeight: 180,
 
     config: {
+
         layer: null,
 
         map: null
+
     },
 
     columns: {
@@ -66,12 +61,9 @@ Ext.define("MoMo.client.view.grid.GazetteerGrid",{
                 '</div>',
             flex: 2
         }, {
-            text: 'Class',
-            dataIndex: 'class',
-            flex: 1
-        }, {
-            text: 'Type',
-            dataIndex: 'type',
+            text: 'Class Type',
+            xtype: 'templatecolumn',
+            tpl: '{class} - {type}',
             flex: 1
         }]
     },
@@ -160,6 +152,35 @@ Ext.define("MoMo.client.view.grid.GazetteerGrid",{
         me.un('itemmouseenter', me.onItemMouseEnter, me);
         me.un('itemmouseleave', me.onItemMouseLeave, me);
         me.un('itemclick', me.onItemClick, me);
+    },
+
+    doGazetteerSearch: function(value, limitToBBox){
+
+        var me = this;
+
+        var store = me.getStore();
+
+        Ext.Ajax.abort(store._lastRequest);
+
+        store.getProxy().setExtraParam('q', value);
+
+        if(limitToBBox){
+            var map = BasiGX.util.Map.getMapComponent().getMap();
+            var olView = map.getView();
+            var projection = olView.getProjection().getCode();
+            var bbox = map.getView().calculateExtent(map.getSize());
+            var transformedBbox = ol.proj.transformExtent(bbox, projection,
+                    'EPSG:4326');
+            store.getProxy().setExtraParam('viewboxlbrt',
+                    transformedBbox.toString());
+        } else {
+            store.getProxy().setExtraParam('viewboxlbrt', null);
+        }
+        store.load();
+        store._lastRequest = Ext.Ajax.getLatest();
+
+        me.expand();
+
     }
 
 

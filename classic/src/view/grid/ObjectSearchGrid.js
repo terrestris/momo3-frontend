@@ -14,8 +14,10 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 
     viewModel: {
         data: {
-            title: 'Objektsuche',
-            hideToolTooltip: 'Gazetteer verbergen'
+            /*i18n*/
+            title: '',
+            hideToolTooltip: ''
+            /*i18n*/
         }
     },
 
@@ -25,168 +27,105 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 
     store: null,
 
+    cls: 'search-result-grid',
+
     searchResultVectorLayer: null,
-
-    flashFeature: null,
-
-    searchTerm: null,
-
-    clusterLayer: null,
-
-    clusterResults: false,
 
     collapsible: true,
 
     titleCollapse: true,
 
-    maxHeight: 400,
+    collapseDirection: 'top',
 
-    sortable: false,
+    headerPosition: 'left',
+
+    hideHeaders: true,
+
+    maxHeight: 180,
+
 
     config: {
-        searchBlackList: [
-            "hoverVectorLayer",
-            "OSM-WMS GRAY",
-            "01_kharaa_river_basin_32648",
-            "01_kharaa_subbasins_32648",
-            "02_surface_water_bodies_32648",
-            "exploitable_groundwater"
-        ],
-        searchLayers: [],
+
         wfsServerUrl:"/momo/geoserver.action",
+
         minSearchTextChars: 3,
+
         typeDelay: 300,
+
         allowedFeatureTypeDataTypes: [
             'xsd:string'
         ],
+
         searchTerm: null,
+
         map: null,
+
         layer: null,
 
         searchResultFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
                 radius: 6,
                 fill: new ol.style.Fill({
-                    color: '#C5000B'
+                    color: '#4990D1'
                 }),
                 stroke: new ol.style.Stroke({
                     color: '#fff',
                     width: 2
                 })
             }),
-//            fill: new ol.style.Fill({
-//                color: '#C5000B'
-//            }),
             stroke: new ol.style.Stroke({
-                color: '#C5000B',
+                color: '#4990D1',
                 width: 4
             })
         }),
 
-        /**
-         *
-         */
-        searchResultHighlightFeatureStyleFn: function(radius, text) {
-            return new ol.style.Style({
+        searchResultHighlightFeatureStyle: new ol.style.Style({
                 image: new ol.style.Circle({
-                    radius: radius,
+                    radius: 8,
                     fill: new ol.style.Fill({
                         color: '#EE0000'
                     }),
                     stroke: new ol.style.Stroke({
-                        color: 'gray',
-                        width: 3
+                        color: '#fff',
+                        width: 2
                     })
                 }),
-                text: text ? new ol.style.Text({
-                    text: text.toString(),
-                    fill: new ol.style.Fill({
-                        color: '#fff'
-                    })
-                }) : undefined
-            });
-        },
+                stroke: new ol.style.Stroke({
+                    color: '#EE0000',
+                    width: 6
+                })
+            }),
 
         /**
          *
          */
         searchResultSelectFeatureStyle: new ol.style.Style({
             image: new ol.style.Circle({
-                radius: 8,
+                radius: 10,
                 fill: new ol.style.Fill({
-                    color: '#0099CC'
+                    color: '#EE0000'
                 }),
                 stroke: new ol.style.Stroke({
                     color: '#fff',
                     width: 2
                 })
             }),
-            fill: new ol.style.Fill({
-                color: '#0099CC'
-            }),
             stroke: new ol.style.Stroke({
-                color: '#0099CC',
-                width: 6
+                color: '#EE0000',
+                width: 8
             })
         }),
-
-        clusterStyleFn: function(amount, radius) {
-            // set maxradius
-            var maxRadius = this.clusterLayer.getSource().distance_ / 2;
-            if (radius > maxRadius) {
-                radius = maxRadius;
-            }
-            return [new ol.style.Style({
-                image: new ol.style.Circle({
-                    radius: radius,
-                    stroke: new ol.style.Stroke({
-                        color: '#fff'
-                    }),
-                    fill: new ol.style.Fill({
-                        color: '#3399CC'
-                    })
-                }),
-                text: new ol.style.Text({
-                    text: amount.toString(),
-                    fill: new ol.style.Fill({
-                        color: '#fff'
-                    })
-                })
-            })];
-        },
 
         flashStyle: function() {
             return [new ol.style.Style({
                     image: new ol.style.Circle({
                         radius: 5
-                    }),
-                    text: new ol.style.Text({
-                        text: ""
                     })
             })];
         }
 
     },
 
-
-    /**
-    *
-    */
-    tools:[{
-        type: 'minimize',
-        bind: {
-            tooltip: '{hideToolTooltip}'
-        },
-        handler: function(e, target, gridheader){
-            var grid = gridheader.up('grid');
-            grid.getEl().slideOut('t', {
-                duration: 250,
-                callback: function(){
-                    grid.hide();
-                }
-            });
-        }
-    }],
 
     /**
     *
@@ -208,11 +147,10 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
             },
             onWidgetAttach: function(column, gxRenderer, record) {
                 // update the symbolizer with the related feature
-                var feature = record.olObject;
+                var feature = record.getFeature();
                 gxRenderer.update({
                     feature: feature,
-                    symbolizers: feature.getStyle() || feature.getStyleFunction() ||
-                    (record.store ? record.store.layer.getStyle() : null)
+                    symbolizers: this.up('grid').getSearchResultFeatureStyle()
                 });
             }
         },
@@ -224,35 +162,6 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
                 return '<span data-qtip="' + value + '">' +
                 value + '</span>';
             }
-        },
-        {
-            text: 'Area',
-            dataIndex: 'area_km2',
-            flex: 1,
-            renderer: function(value) {
-                if (value) {
-                    return '<span data-qtip="' + Math.round(value) + ' km²">' +
-                    Math.round(value) + ' km²</span>';
-                }
-            }
-        },
-        {
-            text: 'Length',
-            dataIndex: 'length',
-            flex: 1,
-            renderer: function(value) {
-                if (value) {
-                    return '<span data-qtip="' + Math.round(value) + '">' +
-                    Math.round(value) + '</span>';
-                }
-            }
-        },
-        {
-            text: 'Altitude',
-            flex: 1,
-            xtype: 'templatecolumn',
-            tpl: '<div data-qtip="{altitude}">'+
-            '{altitude}'+ '</div>'
         }
     ],
 
@@ -261,57 +170,23 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
     */
     initComponent: function() {
         var me = this;
+
         me.callParent(arguments);
 
         me.map = BasiGX.util.Map.getMapComponent().getMap();
-        var allLayers = BasiGX.util.Layer.getAllLayers(me.map);
-        Ext.each(allLayers, function(l) {
-            if (l instanceof ol.layer.Tile && !Ext.Array.contains(me.getSearchBlackList(),
-                    l.get('name'))) {
-                me.searchLayers.push(l);
-            }
-        });
-
-        if (Ext.isEmpty(me.getSearchLayers())) {
-            Ext.log.error('No layers given to search component!');
-        }
 
         if (!me.searchResultVectorLayer) {
             me.searchResultVectorLayer = new ol.layer.Vector({
                 name: "Object Search Results",
                 source: new ol.source.Vector(),
                 style: me.getSearchResultFeatureStyle(),
-//                visible: !me.clusterResults,
                 hoverable: false
             });
+
             var displayInLayerSwitcherKey =
                 BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
             me.searchResultVectorLayer.set(displayInLayerSwitcherKey, false);
             me.map.addLayer(me.searchResultVectorLayer);
-        }
-
-        if (me.clusterResults && !me.clusterLayer) {
-            var clusterSource = new ol.source.Cluster({
-                distance: 40,
-                source: me.searchResultVectorLayer.getSource()//new ol.source.Vector()
-            });
-
-            me.clusterLayer = new ol.layer.Vector({
-                source: clusterSource,
-                style: function(feature) {
-                    var amount = feature.get('features').length;
-                    var style = me.styleCache[amount];
-                    if (!style) {
-                        style = me.clusterStyleFn(amount, amount + 10);
-                        me.styleCache[amount] = style;
-                    }
-                    return style;
-                }
-            });
-            me.map.addLayer(me.clusterLayer);
-
-            // correct the vectorlayerstyle for the grid symbolizer
-            me.searchResultVectorLayer.setStyle(me.clusterStyleFn('', 8));
         }
 
         var searchResultStore = Ext.create('GeoExt.data.store.Features', {
@@ -325,7 +200,6 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 
         me.on('describeFeatureTypeResponse', me.getFeatures);
         me.on('getFeatureResponse', me.showSearchResults);
-//        me.on('show', me.down('textfield').focus);
 
         // add listeners
         me.on('boxready', me.onBoxReady, me);
@@ -354,7 +228,10 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 
         me.setSearchTerm(searchterm);
 
-        Ext.each(me.getSearchLayers(), function(l) {
+        var combo = Ext.ComponentQuery.query('momo-combo-multisearch')[0];
+        var searchLayers = combo.getConfiguredSearchLayers();
+
+        Ext.each(searchLayers, function(l) {
             if (l.getSource().getParams) {
                 typeNames.push(l.getSource().getParams().LAYERS);
             }
@@ -464,8 +341,8 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
     setupXmlPostBody: function(featureTypes) {
         var me = this;
 
-        var checkbox = me.up().down('checkbox[name=limitcheckbox]');
-        var limitToBBox = checkbox.getValue();
+        var combo = Ext.ComponentQuery.query('momo-combo-multisearch')[0];
+        var limitToBBox = combo.getLimitToBBox();
 
         var map = BasiGX.util.Map.getMapComponent().getMap();
         var projection = map.getView().getProjection().getCode();
@@ -476,7 +353,6 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 //        'EPSG:4326').toString();
 
         if(limitToBBox){
-            console.log("limited extent");
             bbox = visibleExtent;
         } else {
             bbox = totalExtent;
@@ -530,31 +406,37 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
         var me = this,
             parser = new ol.format.GeoJSON();
 
-        if(features.length > 0){
-            me.show();
-        }
+        if (!features) {
+            Ext.log.error("No feature found");
+        } else {
 
-        Ext.each(features, function(feature) {
-            var featuretype = feature.id.split(".")[0];
-            var displayfield;
+            if(features.length > 0){
+                me.show();
+            }
 
-            // find the matching value in order to display it
-            Ext.iterate(feature.properties, function(k, v) {
-                if (v && v.toString().toLowerCase().indexOf(me.searchTerm) > -1) {
-                    displayfield = v;
-                    return false;
-                }
+            Ext.each(features, function(feature) {
+                var featuretype = feature.id.split(".")[0];
+                var displayfield;
+
+                // find the matching value in order to display it
+                Ext.iterate(feature.properties, function(k, v) {
+                    if (v && v.toString().toLowerCase().indexOf(me.searchTerm) > -1) {
+                        displayfield = v;
+                        return false;
+                    }
+                });
+
+                feature.properties.displayfield = displayfield;
+                feature.properties.featuretype = featuretype;
+
+                var olFeat = parser.readFeatures(feature, {
+                    dataProjection: 'EPSG:32648',
+                    featureProjection: 'EPSG:3857'
+                })[0];
+                me.searchResultVectorLayer.getSource().addFeature(olFeat);
+
             });
-
-            feature.properties.displayfield = displayfield;
-            feature.properties.featuretype = featuretype;
-
-            var olFeat = parser.readFeatures(feature, {
-                dataProjection: 'EPSG:32648',
-                featureProjection: 'EPSG:3857'
-            })[0];
-            me.searchResultVectorLayer.getSource().addFeature(olFeat);
-        });
+        }
 
     },
 
@@ -597,10 +479,10 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
     *
     */
     updateRenderer: function(item, style){
-//        var renderer = Ext.getCmp(
-//            Ext.query('div[id^=gx_renderer', true, item)[0].id);
-//        var src = renderer.map.getLayers().getArray()[0].getSource();
-//        src.getFeatures()[0].setStyle(style);
+        var renderer = Ext.getCmp(
+            Ext.query('div[id^=gx_renderer', true, item)[0].id);
+        var src = renderer.map.getLayers().getArray()[0].getSource();
+        src.getFeatures()[0].setStyle(style);
     },
 
     /**
@@ -610,43 +492,15 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
 
         var me = this;
         var layer = me.getLayer();
-        var feature = record.getFeature()
-        layer.getSource().addFeature(feature);
+        layer.getSource().clear();
 
+        var feature = record.getFeature();
 
-        if(this.enterEventRec === record){
-            return;
-        }
-        var me = this;
-        var feature;
-        var radius;
-        var text;
-
-        this.enterEventRec = record;
-        ol.Observable.unByKey(this.flashListenerKey);
-
-        if (this.clusterResults) {
-            feature = this.getClusterFeatureFromFeature(record.olObject);
-            var featureStyle = this.clusterLayer.getStyle()(
-                feature, me.map.getView().getResolution())[0];
-            radius = featureStyle.getImage().getRadius();
-            text = featureStyle.getText().getText();
-        } else {
-            feature = record.olObject;
-            radius = 5; // default value
-        }
-
-        if (tableView.getSelection()[0] !== record) {
-            feature.setStyle(
-                this.getSearchResultHighlightFeatureStyleFn()(radius, text)
-            );
-            this.updateRenderer(item,
-                this.getSearchResultHighlightFeatureStyleFn()(8, text)
-            );
-        }
         if (feature) {
-//            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
-//                feature, 1000, radius);
+            this.flashListenerKey = BasiGX.util.Animate.flashFeature(
+                feature, 1000);
+            feature.setStyle(me.getSearchResultHighlightFeatureStyle());
+            layer.getSource().addFeature(feature);
         }
     },
 
@@ -659,19 +513,12 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
         var layer = me.getLayer();
         layer.getSource().clear();
 
+        var feature = record.getFeature();
 
-        if(this.leaveEventRec === record){
-            return;
+        if (feature) {
+            feature.setStyle(me.getSearchResultFeatureStyle());
         }
-        this.leaveEventRec = record;
-        if (tableView.getSelection()[0] !== record) {
-            record.olObject.setStyle(this.getSearchResultFeatureStyle());
-            if (this.clusterResults) {
-//                this.updateRenderer(item, this.clusterStyleFn('', 8));
-            } else {
-//                this.updateRenderer(item, this.getSearchResultFeatureStyle());
-            }
-        }
+
     },
 
     /**
@@ -680,16 +527,39 @@ Ext.define("MoMo.client.view.grid.ObjectSearchGrid",{
     highlightSelectedFeature: function(tableView, record, item) {
 
         var me = this;
-        var projection = me.getMap().getView().getProjection().getCode();
-        var feature = record.getFeature()
-        var geom = feature.getGeometry();
-        me.getMap().getView().fit(geom, me.getMap().getSize());
+        var layer = me.getLayer();
+        var feature = record.getFeature();
+        var extent;
+        var X;
+        var Y;
+
+        layer.getSource().clear();
 
 
-        record.olObject.setStyle(this.getSearchResultSelectFeatureStyle());
-        this.updateRenderer(item, this.getSearchResultSelectFeatureStyle());
+        if (feature) {
+            feature.setStyle(me.getSearchResultSelectFeatureStyle());
+            layer.getSource().addFeature(feature);
+            extent = feature.getGeometry().getExtent();
+            X = extent[0] + (extent[2]-extent[0])/2;
+            Y = extent[1] + (extent[3]-extent[1])/2;
 
-        this.zoomToExtent(record.olObject.getGeometry());
+            me.getMap().getView().setCenter([X, Y]);
+        }
+
+    },
+
+    zoomToExtent: function(extent){
+        var me = this;
+        var olView = me.map.getView();
+        var pan = ol.animation.pan({
+            source: olView.getCenter()
+        });
+        var zoom = ol.animation.zoom({
+           resolution: olView.getResolution()
+        });
+        me.map.beforeRender(pan, zoom);
+
+//        olView.fit(extent, me.map.getSize());
     }
 
 });
