@@ -30,13 +30,15 @@ Ext.define('MoMo.client.view.panel.LegendTreeController', {
 
         // add legendStore filter for "displayInLayerSwitcher" key
         legendStore.addFilter(function(rec) {
-            var layer = rec.getOlLayer();
-            var util = BasiGX.util.Layer;
-            var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
-            if (layer.get(showKey) === false) {
-                return false;
+            if(!rec.isRoot()){
+                var layer = rec.getOlLayer();
+                var util = BasiGX.util.Layer;
+                var showKey = util.KEY_DISPLAY_IN_LAYERSWITCHER;
+                if (layer.get(showKey) === false) {
+                    return false;
+                }
+                return true;
             }
-            return true;
         });
 
         view.store = legendStore;
