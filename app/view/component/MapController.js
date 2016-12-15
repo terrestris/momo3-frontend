@@ -6,6 +6,14 @@ Ext.define('MoMo.client.view.component.MapController', {
     /**
      *
      */
+    statics: {
+        FOLDER_CLASS_NAME: 'de.terrestris.momo.model.tree.LayerTreeFolder',
+        LEAF_CLASS_NAME: 'de.terrestris.momo.model.tree.LayerTreeLeaf'
+    },
+
+    /**
+     *
+     */
     setMap: function() {
         var me = this;
         var view = me.getView();
@@ -14,7 +22,7 @@ Ext.define('MoMo.client.view.component.MapController', {
             var olMap = me.createOlMap();
             view.setMap(olMap);
         }
-        olMap.on('moveend',me.setRouting, me);
+        olMap.on('moveend', me.setRouting, me);
     },
 
     /**
@@ -57,7 +65,7 @@ Ext.define('MoMo.client.view.component.MapController', {
             view: me.createOlMapView(mapConfig)
         });
 
-        var layerGroup = new ol.layer.Group({layers: me.createOlLayers()});
+        var layerGroup = me.createOlLayers();
         map.setLayerGroup(layerGroup);
 
         return map;
@@ -105,22 +113,103 @@ Ext.define('MoMo.client.view.component.MapController', {
     createOlLayers: function() {
         var me = this;
         var appCtxUtil = MoMo.client.util.ApplicationContext;
+        var appCtx = appCtxUtil.getApplicationContext();
         var mapLayers = appCtxUtil.getValue('mapLayers');
-        var olLayers = [];
+        var layerTreeRootNode = appCtx.layerTree;
 
-        // reverse the layers array to obtain the given order by the
-        // context
-        Ext.each(mapLayers.reverse(), function(mapLayer) {
-            olLayers.push(me.createOlLayer(mapLayer));
-        });
+        var layerTreeLayers = me.createTreeNodeOlLayer(
+                layerTreeRootNode,
+                mapLayers
+            );
 
-        return olLayers;
+        return layerTreeLayers;
+    },
+
+    /**
+     *
+     * Creates an OL layer "tree" hierarchy (with ol.layer.Group as folders)
+     * based on the given tree structure coming from the SHOGun2/MoMo
+     * backend. In case of folders, this function will be called recursively
+     * with the children of a folder.
+     *
+     * @param {Object} layerTreeNode A node of the layerTree that is attached
+     * to the appContext. This information is based on the TreeNode Java model
+     * and represents a Ext.data.NodeInterface
+     *
+     * @param {Array} mapLayers A flat array of the layers that are available in
+     * the given application. Necessary to find complete layer information as
+     * they are referenced by their IDs in the layerTreeNodes.
+     *
+     * @return {Object} An instance of ol.layer.Group in case of folders. An
+     * instance of ol.layer.Layer otherwise.
+     *
+     */
+    createTreeNodeOlLayer: function(layerTreeNode, mapLayers) {
+        var me = this;
+        var nodeClass = layerTreeNode['@class'];
+        var statics = me.statics();
+        var olLayer;
+
+        if (nodeClass === statics.FOLDER_CLASS_NAME) {
+            // handle folders/ol-layergroups
+
+            // children of the folder/group
+            var layers = [];
+
+            // reverse() as ol uses painters algorithm...
+            Ext.each(layerTreeNode.children.reverse(), function(childNode) {
+                // recursive call
+                var childNodeOlLayer = me.createTreeNodeOlLayer(
+                        childNode,
+                        mapLayers
+                    );
+
+                if (childNodeOlLayer instanceof ol.layer.Base) {
+                    layers.push(childNodeOlLayer);
+                } else {
+                    Ext.Logger.warn('Could not build a valid instance of ' +
+                            ' "ol.layer.Base"');
+                }
+            });
+
+            olLayer = new ol.layer.Group({
+                layers: layers,
+                name: layerTreeNode.text,
+                visible: layerTreeNode.checked,
+                // set expanded here even though GeoExt does not handle it.
+                // 'MoMo.client.model.NetviewLayerTreeNode' as an extension
+                // of 'GeoExt.data.model.LayerTreeNode' will care about this!
+                expanded: layerTreeNode.expanded
+            });
+        } else if (nodeClass === statics.LEAF_CLASS_NAME) {
+            // handle leafs/ol-layers
+
+            // fetch full layer info from the mapLayer array
+            var mapLayer = Ext.Array.findBy(mapLayers, function(mL) {
+                return mL.id === layerTreeNode.layer;
+            });
+
+            if (mapLayer) {
+                // currently we dont get any type info from the backend
+                olLayer = me.createOlLayer(mapLayer, layerTreeNode);
+            } else {
+                Ext.Logger.warn('Could not find a layer in the mapLayer array' +
+                        ' that is referenced in a tree node by its id.');
+            }
+
+        } else {
+            Ext.Logger.error('Unknown class information ' +
+                    'for layertree node!');
+            return;
+        }
+
+        return olLayer;
     },
 
     /**
      *
      */
-    createOlLayer: function(mapLayer) {
+    createOlLayer: function(mapLayer, layerTreeNode) {
         var me = this;
         var mapLayerAppearance = mapLayer.appearance;
 
@@ -129,12 +218,12 @@ Ext.define('MoMo.client.view.component.MapController', {
         var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
             routingId: mapLayer.id,
-            hoverable: mapLayer.hoverable || false,
+            hoverable: mapLayerAppearance.hoverable || false,
             chartable: mapLayer.chartable || false,
+            minResolution: mapLayerAppearance.minResolution || undefined,
+            maxResolution: mapLayerAppearance.maxResolution || undefined,
             opacity: mapLayerAppearance.opacity,
-            visible: mapLayerAppearance.visible,
-            minResolution: mapLayerAppearance.minResolution,
-            maxResolution: mapLayerAppearance.maxResolution,
+            visible: layerTreeNode.checked,
             source: me.createOlLayerSource(mapLayer)
         });
 
