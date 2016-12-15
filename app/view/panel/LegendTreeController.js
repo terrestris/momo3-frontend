@@ -25,6 +25,7 @@ Ext.define('MoMo.client.view.panel.LegendTreeController', {
         map = MoMo.client.view.component.Map.guess().getMap();
 
         var legendStore = Ext.create('GeoExt.data.store.LayersTree', {
+            model: 'MoMo.client.model.LayerTreeNode',
             layerGroup: map.getLayerGroup()
         });
 

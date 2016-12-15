@@ -219,7 +219,7 @@ Ext.define('MoMo.client.util.ApplicationContext', {
                 }
 
                 // if the value is an object, let's call ourself recursively
-                if (Ext.isObject(value)) {
+                if (Ext.isObject(value) && !Ext.isEmpty(value)) {
                     queryMatch = me.getValue(queryKey, value);
                     if (queryMatch) {
                         return queryMatch;
