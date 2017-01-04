@@ -218,7 +218,9 @@ Ext.define('MoMo.client.view.component.MapController', {
         var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
             routingId: mapLayer.id,
-            hoverable: mapLayerAppearance.hoverable || false,
+            hoverable: mapLayerAppearance.hoverable || mapLayer.hoverable ||
+                false,
+            hoverTemplate: mapLayerAppearance.hoverTemplate,
             chartable: mapLayer.chartable || false,
             minResolution: mapLayerAppearance.minResolution || undefined,
             maxResolution: mapLayerAppearance.maxResolution || undefined,
