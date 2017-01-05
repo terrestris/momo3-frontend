@@ -30,20 +30,32 @@ Ext.define('MoMo.client.plugin.Hover', {
 
     /**
     * Overrides the BasiGX method.
-    * At the moment only the layer name will be shown as tooltip. If
-    * #BasiGX.plugin.Hover.LAYER_HOVERFIELD_PROPERTY_NAME is set the provided
-    * property name can be used for hovering. In this case the original BasiGX
-    * method or extension of this override can be used.
     */
-    getToolTipHtml: function(layers){
-
+    getToolTipHtml: function(layers, features) {
+        var me = this;
         var innerHtml = '';
         Ext.each(layers, function(layer, index, allItems){
             innerHtml += '<b>' + layer.get('name') + '</b>';
+            Ext.each(features, function(feat) {
+                if(feat && feat.get('layer') === layer){
+                    var tpl = layer.get("hoverTemplate");
+                    innerHtml += '<br />' + me.replaceAttributesTpl(tpl,
+                            feat.getProperties()) + '<br />';
+                }
+            });
             if(index + 1 !== allItems.length){
                 innerHtml += '<br />';
             }
         });
         return innerHtml;
+    },
+
+    /**
+     *
+     */
+    replaceAttributesTpl: function(tpl, feat){
+        var xtpl = new Ext.XTemplate(tpl);
+        var html = xtpl.apply(feat);
+        return html;
     }
 });
