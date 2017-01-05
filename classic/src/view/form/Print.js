@@ -23,6 +23,7 @@
  */
 Ext.define("MoMo.client.view.form.Print", {
     extend: "BasiGX.view.form.Print",
+
     xtype: "momo-form-print",
 
     layout: 'vbox',
@@ -56,6 +57,8 @@ Ext.define("MoMo.client.view.form.Print", {
         var appCombo = this.down('combo[name=appCombo]');
         appCombo.setValue("momo");
         appCombo.setHidden(true);
+        // hide the containing fieldset, which is empty now
+        appCombo.up().setHidden(true);
         this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {

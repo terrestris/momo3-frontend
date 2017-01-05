@@ -44,19 +44,26 @@ Ext.define('MoMo.client.view.button.PrintController', {
             if (!printWin) {
                 printWin = Ext.create('MoMo.view.window.PrintWindow', {
                     listeners: {
-                        'close': function(){
+                        'close': function() {
+                            btn.suspendEvents(false);
                             btn.toggle(false);
+                            btn.resumeEvents(true);
                         }
                     },
                     items: [{
                         xtype: 'momo-form-print',
-                        url: view.getPrintUrl() + '/print/'
+                        url: view.getPrintUrl() + '/print/',
+                        printExtentAlwaysCentered: false,
+                        printExtentMovable: true,
+                        printExtentScalable: true
                     }]
                 });
                 printWin.showAt(winX, winY);
             }
         } else {
-            printWin.destroy();
+            if (printWin) {
+                printWin.close();
+            }
         }
     }
 });

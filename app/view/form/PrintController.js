@@ -287,18 +287,21 @@ Ext.define('MoMo.client.view.form.PrintController', {
         }
 
         if (!Ext.isEmpty(fl)){
-            return {
+            var el = {
                 xtype: xtype,
                 width: 400,
                 hidden: hidden,
                 name: attributeRec.get('name'),
                 childFieldKey: childFieldKey,
                 bind: {
-                    fieldLabel: fl,
-                    value: value
+                    fieldLabel: fl
                 },
                 allowBlank: true
             };
+            if (value) {
+                el.bind.value = value;
+            }
+            return el;
         }
     },
 
