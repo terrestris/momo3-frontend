@@ -226,11 +226,22 @@ Ext.define('MoMo.client.view.component.MapController', {
             maxResolution: mapLayerAppearance.maxResolution || undefined,
             opacity: mapLayerAppearance.opacity,
             visible: layerTreeNode.checked,
-            source: me.createOlLayerSource(mapLayer),
-            metadataIdentifier: mapLayer.metadataIdentifier
+            metadataIdentifier: mapLayer.metadataIdentifier,
+            legendUrl: mapLayer.legendUrl || me.generateLegendUrl(mapLayer),
+            source: me.createOlLayerSource(mapLayer)
         });
 
         return olLayer;
+    },
+
+    generateLegendUrl: function(mapLayer) {
+        var layer = mapLayer.source.layerNames;
+        var url = mapLayer.source.url + Ext.urlAppend(
+            '?SERVICE=WMS&VERSION=1.1.1&' +
+            'REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&' +
+            'LAYER=' + layer
+        );
+        return url;
     },
 
     /**

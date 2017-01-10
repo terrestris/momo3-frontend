@@ -2,6 +2,10 @@ Ext.define("MoMo.client.view.panel.LegendTree",{
     extend: "BasiGX.view.panel.LegendTree",
     xtype: "momo-panel-legendtree",
 
+    requires: [
+        'MoMo.client.plugin.BasicTreeColumnLegends'
+    ],
+
     controller: 'panel.legendtree',
 
     viewModel: 'panel.legendtree',
@@ -14,6 +18,18 @@ Ext.define("MoMo.client.view.panel.LegendTree",{
 
     bind: {
         title: '{title}'
+    },
+
+    columns: {
+        header: false,
+        items: [
+            {
+                xtype: 'treecolumn',
+                dataIndex: 'text',
+                flex: 1,
+                plugins: ['basic_tree_column_legend']
+            }
+        ]
     },
 
    /**
