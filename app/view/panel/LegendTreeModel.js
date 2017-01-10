@@ -8,7 +8,9 @@ Ext.define('MoMo.client.view.panel.LegendTreeModel', {
 
     data: {
         /*i18n*/
-        title: ''
+        title: '',
+        opacityLabel: 'Opazität',
+        showMetadataLabel: 'Metadaten anzeigen'
         /*i18n*/
     }
 });

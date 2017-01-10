@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "author": "terrestris GmbH & Co. KG",
   "scripts": {
-    "js-lint": "eslint -c .eslintrc ./",
+    "lint": "eslint -c .eslintrc ./",
     "test": "mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true test/index.html",
     "coverage-clean": "rm -rf .instrumented/ && rm -rf ./coverage/ && rm -f ./test/.index_coverage.html",
     "coverage-sed": "sed -e 's/..\\/app/..\\/.instrumented\\/app/g' ./test/index.html > ./test/.index_coverage.html",

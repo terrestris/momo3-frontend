@@ -226,7 +226,8 @@ Ext.define('MoMo.client.view.component.MapController', {
             maxResolution: mapLayerAppearance.maxResolution || undefined,
             opacity: mapLayerAppearance.opacity,
             visible: layerTreeNode.checked,
-            source: me.createOlLayerSource(mapLayer)
+            source: me.createOlLayerSource(mapLayer),
+            metadataIdentifier: mapLayer.metadataIdentifier
         });
 
         return olLayer;
