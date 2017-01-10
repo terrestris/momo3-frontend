@@ -28,5 +28,9 @@ Ext.define("MoMo.client.view.panel.LegendTree",{
 
         // call parent
         me.callParent();
+    },
+
+    listeners: {
+        'itemcontextmenu': 'showLayerContextMenu'
     }
 });
