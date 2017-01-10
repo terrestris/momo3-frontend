@@ -98,9 +98,6 @@ Ext.define('MoMo.client.view.panel.LegendTreeController', {
     showMetadata: function(rec){
         var layer = rec.getOlLayer();
         var uuid = layer.get('metadataIdentifier');
-
-        var me = this;
-        var viewModel = me.getViewModel();
         Ext.Ajax.request({
             url: BasiGX.util.Url.getWebProjectBaseUrl() + 'metadata/csw.action',
             method: "POST",
@@ -117,7 +114,7 @@ Ext.define('MoMo.client.view.panel.LegendTreeController', {
                     Ext.create('MoMo.client.view.window.MetadataWindow', {
                         autoShow: true,
                         metadata: metadataObj
-                    })
+                    });
                 }
             },
             failure: function(){
