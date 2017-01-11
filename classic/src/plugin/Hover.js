@@ -21,7 +21,8 @@ Ext.define('MoMo.client.plugin.Hover', {
      */
     hoverLayerFilter: function(candidate) {
         var hoverableProp = BasiGX.plugin.Hover.LAYER_HOVERABLE_PROPERTY_NAME;
-        if(candidate.get(hoverableProp) && candidate.get('hoverTemplate')){
+        if(candidate.get(hoverableProp) && candidate.get('hoverTemplate') ||
+                candidate.get(hoverableProp) &&  candidate.get('chartable')){
             return true;
         } else {
             return false;
