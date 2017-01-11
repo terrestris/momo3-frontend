@@ -21,11 +21,15 @@ build/
 ext/
 packages/remote/
 classic.json
+classic.jsonp
+modern.json
 sass/example/example.css
 sass/example/bootstrap.json
+sass/example/bootstrap.jsonp
 sass/example/bootstrap.js
 bootstrap.js
 bootstrap.css
+index.html
 
 # Libs
 lib/
