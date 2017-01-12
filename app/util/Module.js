@@ -84,6 +84,21 @@ Ext.define('MoMo.client.util.Module', {
             // set all given module properties
             me.setModuleProperties(module);
 
+            // Hide tools that are not contained in activeTools
+            // "id" would be a better comparator but it is blacklisted
+            if(module.ui === "momo-tools"){
+                var activeTools = MoMo.client.util
+                        .ApplicationContext.getValue('activeTools');
+                var hidden = true;
+                Ext.each(activeTools, function(activeTool){
+                    if(activeTool.xtype === module.xtype &&
+                            activeTool.name === module.name){
+                        hidden = false;
+                    }
+                });
+                module.hidden = hidden;
+            }
+
             // call ourself recursively if we could find any submodule in the
             // current module
             if (module.subModules) {
