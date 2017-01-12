@@ -47,6 +47,16 @@ Ext.define("MoMo.client.view.form.Print", {
         handler: function(btn){
             btn.up('form').getController().createPrint();
         }
+    }, {
+        xtype: 'button',
+        name: 'downloadPrint',
+        bind: {
+            text: '{printDownload}'
+        },
+        hidden: true,
+        handler: function(btn){
+            window.open(btn.link);
+        }
     }],
 
     /**
