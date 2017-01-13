@@ -311,6 +311,7 @@ Ext.define('MoMo.client.view.form.PrintController', {
      * the corresponding properties in print window
      */
     createPrint: function(){
+        var me = this;
         var view = this.getView();
         var spec = {};
         var mapComponent = view.getMapComponent();
@@ -376,19 +377,79 @@ Ext.define('MoMo.client.view.form.PrintController', {
         var app = view.down('combo[name=appCombo]').getValue();
         spec.attributes = attributes;
         spec.layout = layout;
-        var submitForm = Ext.create('Ext.form.Panel', {
-            standardSubmit: true,
-            url: url + app + '/buildreport.' + format,
+        var startTime = new Date().getTime();
+        Ext.Ajax.request({
+            url: url + app + '/report.' + format,
             method: 'POST',
-            items: [
-                {
-                    xtype: 'textfield',
-                    name: 'spec',
-                    value: Ext.encode(spec)
-                }
-            ]
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            jsonData: Ext.encode(spec),
+            scope: view,
+            success: function(response) {
+                var data = Ext.decode(response.responseText);
+                view.setLoading(true);
+                me.downloadWhenReady(startTime, data);
+            }
         });
-        submitForm.submit();
+    },
+
+    /**
+     *
+     */
+    downloadWhenReady: function(startTime, data){
+        var me = this;
+        var view = me.getView();
+        var url = view.getUrl();
+        var app = view.down('combo[name=appCombo]').getValue();
+        var elapsedMs = (new Date().getTime() - startTime);
+
+        var dspElapsedMs = (elapsedMs/1000).toFixed(3) + ' s';
+        var loadMsg = dspElapsedMs;
+        view.setLoading(loadMsg);
+
+        if (elapsedMs > 60000) {
+            Ext.log.warn('Download aborted after ' + dspElapsedMs);
+            view.setLoading(false);
+            Ext.Msg.show({
+                buttons: Ext.MessageBox.OK,
+                icon: Ext.MessageBox.ERROR,
+                title: '{printErrorTitle}',
+                message: '{printErrorMsg}'
+            });
+
+        } else {
+            setTimeout(function () {
+                Ext.Ajax.request({
+                    url: url + app + '/status/' + data.ref + '.json',
+                    success: function(response) {
+                        var statusData = Ext.decode(response.responseText);
+                        if(statusData.done){
+                            view.setLoading(false);
+                            var dlBtn = view.down(
+                                    'button[name="downloadPrint"]');
+                            dlBtn.link = url + app + '/report/' + data.ref;
+                            dlBtn.show();
+                            BasiGX.util.Animate.shake(dlBtn);
+                            var fields = dlBtn.up(
+                                    'momo-form-print').query('field');
+                            Ext.each(fields, function(field){
+                                field.on('change', function(){
+                                    dlBtn.hide();
+                                }, field, {single: true});
+                            });
+                        } else {
+                            me.downloadWhenReady(startTime, data);
+                        }
+                    },
+                    failure: function(response) {
+                        Ext.log.warn('server-side failure with status code '
+                            + response.status);
+                    },
+                    timeout: 500
+                });
+            }, 500);
+        }
     },
 
     /**
