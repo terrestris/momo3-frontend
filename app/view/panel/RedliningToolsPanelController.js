@@ -120,6 +120,11 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
     stylerWindow: null,
 
     /**
+     * @private
+     */
+    stateChangeActive: null,
+
+    /**
      * Fires if "draw point" button was toggled. Creates a #drawPointInteraction
      * if not already exist.
      * @param {Ext.button.Button} btn
@@ -754,5 +759,75 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
             (end[0] - start[0]) * (end[0] - start[0]) +
             (end[1] - start[1]) * (end[1] - start[1])
         );
+    },
+
+    /**
+     * Method return the current state of the redlining, containing all features
+     * and the configured styles
+     */
+    getState: function() {
+        var me = this;
+        var view = me.getView();
+        var features = [];
+
+        view.redlineFeatures.forEach(function(feature) {
+            features.push(feature.clone());
+        });
+
+        var state = {
+            features: features,
+            pointStyle: view.getRedlinePointStyle(),
+            lineStyle: view.getRedlineLineStringStyle(),
+            polygonStyle: view.getRedlinePolygonStyle(),
+            styleFunction: view.getRedlineStyleFunction()
+        };
+
+        return state;
+    },
+
+    /**
+     * Method sets the state of the redlining, containing drawn features
+     * and the configured styles
+     */
+    setState: function(state) {
+        var me = this;
+        var view = me.getView();
+
+        me.stateChangeActive = true;
+
+        var styler = Ext.ComponentQuery.query('momo-window-redlining')[0];
+
+        if (state.features) {
+            view.redliningVectorLayer.getSource().clear();
+            view.redliningVectorLayer.getSource().addFeatures(state.features);
+        }
+
+        if (state.pointStyle) {
+            view.setRedlinePointStyle(state.pointStyle);
+        }
+
+        if (state.lineStyle) {
+            view.setRedlineLineStringStyle(state.lineStyle);
+        }
+
+        if (state.polygonStyle) {
+            view.setRedlinePolygonStyle(state.polygonStyle);
+        }
+
+        if (styler) {
+            styler.setState(state);
+        }
+
+        if (state.styleFunction) {
+            view.setRedlineStyleFunction(state.styleFunction);
+        }
+
+        // reapply the styleFn on the layer so that ol3 starts redrawing
+        // with new styles
+        view.redliningVectorLayer.setStyle(view.redliningVectorLayer
+                .getStyle());
+
+        me.stateChangeActive = false;
     }
+
 });

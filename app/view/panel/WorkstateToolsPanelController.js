@@ -23,14 +23,13 @@
  * @class MoMo.client.view.panel.WorkstateToolsPanelController
  */
 Ext.define('MoMo.client.view.panel.WorkstateToolsPanelController', {
-
     extend: 'Ext.app.ViewController',
 
     requires: [
+        'MoMo.client.view.grid.ApplicationState'
     ],
 
     alias: 'controller.panel.workstatetoolspanel',
-
 
     /**
      * Fires if load/save workstate button was toggled.
@@ -38,8 +37,46 @@ Ext.define('MoMo.client.view.panel.WorkstateToolsPanelController', {
      * @param {Boolean} pressed toggle state
      */
     onLoadSaveWorkstateBtnToggle: function(btn, pressed) {
-        if(pressed) {
-            Ext.toast('Arbeitstände laden/speichern');
+        var me = this;
+        var win = Ext.ComponentQuery.query('window[name=application-state]')[0];
+
+        if (pressed) {
+            if (!win) {
+                win = Ext.create('Ext.window.Window', {
+                    name: 'application-state',
+                    layout: 'fit',
+                    viewModel: me.getViewModel(),
+                    bind: {
+                        title: '{applicationStateWinTitle}'
+                    },
+                    closeAction: 'hide',
+                    items: [{
+                        xtype: 'momo-grid-applicationstate'
+                    }],
+                    listeners: {
+                        close: me.onWindowClose,
+                        scope: me
+                    }
+                });
+            }
+            win.show();
+        } else {
+            if (win) {
+                win.close();
+            }
+        }
+    },
+
+    /**
+     *
+     */
+    onWindowClose: function() {
+        var workstateToolsBtn = Ext.ComponentQuery.query(
+                'momo-button-showworkstatetoolspanel')[0];
+
+        if (workstateToolsBtn) {
+            workstateToolsBtn.toggle(false);
         }
     }
+
 });

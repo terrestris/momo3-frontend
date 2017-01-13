@@ -273,7 +273,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
     fireRedliningChanged: function(evt){
         var me = this;
         var feat = evt.element;
-        me.fireEvent('redliningchanged', me, me.adjustFeatureStyle(feat));
+        me.adjustFeatureStyle(feat);
     },
 
     /**
@@ -282,6 +282,11 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
      */
     adjustFeatureStyle: function(feature) {
         var me = this;
+        var controller = me.getController();
+
+        if (controller.stateChangeActive) {
+            return;
+        }
 
         if (feature) {
             var geometry = feature.getGeometry();
