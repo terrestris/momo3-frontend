@@ -19,8 +19,8 @@
  *
  * @class MoMo.client.view.panel.WorkstateToolsPanel
  */
-Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
-    extend: "Ext.panel.Panel",
+Ext.define('MoMo.client.view.panel.WorkstateToolsPanel', {
+    extend: 'Ext.panel.Panel',
     xtype: 'momo-panel-workstate',
 
     requires: [
@@ -54,7 +54,8 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
 
     items: [{
         bind: {
-            tooltip: '{loadSaveWorkstateBtnText}'
+            tooltip: '{loadSaveWorkstateBtnText}',
+            text: null
         },
         name: 'loadSaveWorkstateBtn',
         glyph: 'xf07c@FontAwesome', //fa fa-folder-open
@@ -64,8 +65,8 @@ Ext.define("MoMo.client.view.panel.WorkstateToolsPanel", {
     }, {
         xtype: 'basigx-button-permalink',
         bind: {
-            tooltip: '{permalinkBtnText}',
-            text: null
+            tooltip: '{permalinkBtnTooltip}',
+            text: '{permalinkBtnText}'
         },
         name: 'permalinkBtn',
         glyph: 'xf0c1@FontAwesome' //fa fa-link

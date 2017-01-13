@@ -28,8 +28,10 @@ Ext.define('MoMo.client.view.panel.WorkstateToolsPanelModel', {
     data: {
         /*i18n*/
         loadSaveWorkstateBtnText: '',
-        permalinkBtnText: '',
-        permalinkTitle: ''
+        permalinkBtnText: null,
+        permalinkBtnTooltip: '',
+        permalinkTitle: '',
+        applicationStateWinTitle: ''
         /*i18n*/
     }
 });

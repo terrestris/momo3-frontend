@@ -8,6 +8,7 @@ Ext.define('MoMo.client.Application', {
 
     requires: [
         'MoMo.client.util.ApplicationContext',
+        'MoMo.client.util.ApplicationState',
         'MoMo.client.util.URL',
         'MoMo.client.util.Module',
         'MoMo.client.util.User'
@@ -28,6 +29,7 @@ Ext.define('MoMo.client.Application', {
     init: function() {
         var me = this;
         var appCtxUtil = MoMo.client.util.ApplicationContext;
+        var appStateUtil = MoMo.client.util.ApplicationState;
         var moduleUtil = MoMo.client.util.Module;
         var urlUtil = MoMo.client.util.URL;
 
@@ -45,8 +47,46 @@ Ext.define('MoMo.client.Application', {
             moduleUtil.createViewport(viewportName);
             // and set it to the application
             me.setMainView(viewportName);
+
+            // get the state token, if given
+            var appStateToken = urlUtil.getUrlQueryParameter('state');
+
+            if (!Ext.isEmpty(appStateToken)) {
+                appStateUtil.loadApplicationState(appStateToken,
+                        me.onLoadAppStateSuccess, me.onLoadAppStateFailure, me);
+            }
         });
 
+    },
+
+    /**
+     *
+     */
+    onLoadAppStateSuccess: function(appStateRecord) {
+
+        if (!(appStateRecord instanceof MoMo.client.model.ApplicationState)) {
+            return false;
+        }
+
+        var appId = parseInt(MoMo.client.util.URL
+                .getUrlQueryParameter('id'), 10);
+        var appStateId = appStateRecord.get('application');
+
+        // Only proceed if the current application ID matches the
+        // assignedWebApp ID of the loaded application state
+        if (appId !== appStateId) {
+            return false;
+        }
+
+        MoMo.client.util.ApplicationState.setState(appStateRecord);
+    },
+
+    /**
+     *
+     */
+    onLoadAppStateFailure: function(error) {
+        Ext.Logger.error('Error while requesting ApplicationState: ',
+                            error);
     },
 
     /**

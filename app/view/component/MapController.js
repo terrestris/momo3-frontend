@@ -218,6 +218,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         var olLayer = new ol.layer['Tile']({
             name: mapLayer.name || 'UNNAMED LAYER',
             routingId: mapLayer.id,
+            shogunId: mapLayer.id,
             hoverable: mapLayerAppearance.hoverable || mapLayer.hoverable ||
                 false,
             hoverTemplate: mapLayerAppearance.hoverTemplate,
@@ -231,9 +232,14 @@ Ext.define('MoMo.client.view.component.MapController', {
             source: me.createOlLayerSource(mapLayer)
         });
 
+        olLayer.set(BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER, true);
+
         return olLayer;
     },
 
+    /**
+     *
+     */
     generateLegendUrl: function(mapLayer) {
         var layer = mapLayer.source.layerNames;
         var url = mapLayer.source.url + Ext.urlAppend(
@@ -524,10 +530,10 @@ Ext.define('MoMo.client.view.component.MapController', {
                 listeners: {
                     close: function(card){
                         var selectInteraction = me.getView()
-                            .getPlugin('momo-client-hover')
-                            .getHoverVectorLayerInteraction();
+                                .getPlugin('momo-client-hover')
+                                .getHoverVectorLayerInteraction();
                         selectInteraction.getFeatures()
-                            .remove(card.olFeature);
+                                .remove(card.olFeature);
                     },
                     scope: me.getView()
                 }
@@ -551,5 +557,75 @@ Ext.define('MoMo.client.view.component.MapController', {
                 scope: me.getView()
             }
         }).show();
+    },
+
+    /**
+     * Method gets the current maps state and returns an state object containing
+     * the center, zoom and visibility of layers
+     */
+    getState: function() {
+        var me = this;
+        var map = me.getView().getMap();
+        var mapView = map.getView();
+        var center = mapView.getCenter();
+        var zoom = mapView.getZoom();
+        var rotation = mapView.getRotation();
+        var allLayers = BasiGX.util.Layer.getAllLayers(map);
+        var stateLayers = [];
+
+        Ext.each(allLayers, function(layer) {
+            var showKey = BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER;
+
+            if (layer.get(showKey)) {
+                stateLayers.push({
+                    identifier: layer.get('shogunId'),
+                    visible: layer.get('visible')
+                });
+            }
+        });
+
+        var state = {
+            mapView: {
+                center: center,
+                zoom: zoom,
+                rotation: rotation
+            },
+            layers: stateLayers
+        };
+
+        return state;
+    },
+
+    /**
+     * Method sets the maps state by the given state object, which may contain
+     * the center, zoom and visibility of layers
+     */
+    setState: function(state) {
+        var me = this;
+        var map = me.getView().getMap();
+        var mapView = map.getView();
+
+        // take care of the map view settings (center, zoom, etc.)
+        if (!Ext.isEmpty(state.mapView.center)) {
+            mapView.setCenter(state.mapView.center);
+        }
+        if (!Ext.isEmpty(state.mapView.zoom)) {
+            mapView.setZoom(state.mapView.zoom);
+        }
+        if (!Ext.isEmpty(state.mapView.rotation)) {
+            mapView.setRotation(state.mapView.rotation);
+        }
+
+        // take care of the map layers
+        if (!Ext.isEmpty(state.layers)) {
+            Ext.each(state.layers, function(layer) {
+                var mapLayer = BasiGX.util.Layer.getLayerBy('shogunId',
+                        parseInt(layer.identifier, 0));
+                if (mapLayer) {
+                    mapLayer.set('visible', layer.visible);
+                }
+            });
+        }
     }
+
 });
