@@ -59,6 +59,45 @@ Ext.define("MoMo.client.view.form.field.MultiSearchCombo", {
             // sublayers need to be used
             "exploitable_groundwater"
         ]
+    },
+
+    /**
+     * override of basdigx class to filter out raster layers from search
+     */
+    initComponent: function(){
+        var me = this;
+
+        me.callParent(arguments);
+
+        // we need to clean up the default behaviour of the basigx component
+        // to avoid using of raster layers
+        me.setAllSearchLayers([]);
+        me.setConfiguredSearchLayers([]);
+
+        me.setHideTrigger(false);
+
+        // get all layers from the map except the blacklisted ones
+        var map = BasiGX.util.Map.getMapComponent().getMap();
+        var allLayers = BasiGX.util.Layer.getAllLayers(map);
+        var blackList = me.getSearchLayerBlackList();
+
+        Ext.each(allLayers, function(l) {
+            if (l instanceof ol.layer.Tile && !Ext.Array.contains(blackList,
+                    l.get('name')) && l.get('dataType') !== "Raster") {
+                me.allSearchLayers.push(l);
+            }
+        });
+
+        // set search layers to all above layers if not configured different
+        if (me.getConfiguredSearchLayers().length === 0 ) {
+            Ext.each(me.getAllSearchLayers(), function(l) {
+                me.configuredSearchLayers.push(l);
+            });
+        }
+
+        me.on('boxready', me.onBoxReady, me);
+        me.on('change', me.onComboValueChange, me);
+
     }
 
 });
