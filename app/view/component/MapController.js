@@ -229,7 +229,8 @@ Ext.define('MoMo.client.view.component.MapController', {
             visible: layerTreeNode.checked,
             metadataIdentifier: mapLayer.metadataIdentifier,
             legendUrl: mapLayer.legendUrl || me.generateLegendUrl(mapLayer),
-            source: me.createOlLayerSource(mapLayer)
+            source: me.createOlLayerSource(mapLayer),
+            dataType: mapLayer.dataType
         });
 
         olLayer.set(BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER, true);
