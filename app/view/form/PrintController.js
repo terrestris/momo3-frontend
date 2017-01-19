@@ -306,6 +306,35 @@ Ext.define('MoMo.client.view.form.PrintController', {
     },
 
     /**
+     * Filters the layer by properties or params. Used in createPrint.
+     * This method is overridden for basigx.
+     *
+     * @param ol.layer
+     */
+    layerFilter: function(layer) {
+        var isChecked = !!layer.checked;
+        var hasName = isChecked && !!layer.get('name');
+        var nonOpaque = hasName && (layer.get('opacity') > 0);
+        var inTree = nonOpaque && (layer.get(
+            BasiGX.util.Layer.KEY_DISPLAY_IN_LAYERSWITCHER
+        ) !== false); // may be undefined for certain layers
+
+        if (layer.text && layer.text === 'redliningVectorLayer' &&
+            layer.getSource().getFeatures().length > 0) {
+            return true;
+        }
+        if (isChecked && hasName && nonOpaque && inTree) {
+            if(layer instanceof ol.layer.Vector &&
+                layer.getSource().getFeatures().length < 1){
+                return false;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    /**
      * Override for BasiGX method to control the visibility of scalebar,
      * north arrow and legend dynamically through (un)check
      * the corresponding properties in print window
@@ -325,7 +354,7 @@ Ext.define('MoMo.client.view.form.PrintController', {
         var gxPrintProvider = GeoExt.data.MapfishPrintProvider;
 
         var serializedLayers = gxPrintProvider.getSerializedLayers(
-            mapComponent, view.layerFilter, view
+            mapComponent, me.layerFilter, view
         );
 
         var fieldsets = view.query('fieldset[name=attributes] fieldset');
