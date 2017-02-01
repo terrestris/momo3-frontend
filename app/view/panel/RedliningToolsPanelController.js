@@ -595,15 +595,18 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelController', {
     handlePostitAdd: function(evt, textOnly) {
         var me = this,
             view = me.getView(),
-            feat = evt.element;
+            feat = evt.element,
+            title;
 
-        feat.set('isPostit', true);
-
-        if (textOnly) {
+        if (!textOnly) {
+            feat.set('isPostit', true);
+            title = view.getViewModel().get('postItWindowTitle');
+        } else {
             feat.set('textOnly', textOnly);
+            title = view.getViewModel().get('textWindowTitle');
         }
 
-        BasiGX.prompt(view.getViewModel().get('postItWindowTitle'), {
+        BasiGX.prompt(title, {
             fn: function(decision, text) {
                 if (decision === "cancel") {
                     view.redlineFeatures.remove(feat);

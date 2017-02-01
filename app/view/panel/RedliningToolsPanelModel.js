@@ -39,7 +39,8 @@ Ext.define('MoMo.client.view.panel.RedliningToolsPanelModel', {
         modifyObjectBtnText: '',
         deleteObjectBtnText: '',
         openStyleBtnText: '',
-        postItWindowTitle: ''
+        postItWindowTitle: '',
+        textWindowTitle: ''
         /*i18n*/
     }
 });
