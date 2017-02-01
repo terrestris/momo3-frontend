@@ -257,6 +257,7 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
                 me
             );
             me.redliningVectorLayer = new ol.layer.Vector({
+                name: 'redliningVectorLayer',
                 source: new ol.source.Vector({features: me.redlineFeatures}),
                 style: me.getRedlineStyleFunction()
             });
