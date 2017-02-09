@@ -41,7 +41,7 @@ Ext.define("MoMo.client.view.panel.MapMetaInformation", {
 
     collapsible: false,
 
-    width: 600,
+    width: 625,
 
     layout: {
         type: 'hbox'
@@ -74,7 +74,7 @@ Ext.define("MoMo.client.view.panel.MapMetaInformation", {
             }
         }, {
             xtype: 'displayfield',
-            width: 255,
+            width: 285,
             bind: {
                 fieldLabel: '{mousePositionLabel}'
             },
