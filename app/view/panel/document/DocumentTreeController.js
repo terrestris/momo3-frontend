@@ -70,7 +70,7 @@ Ext.define('MoMo.client.view.panel.document.DocumentTreeController', {
         e.preventDefault();
 
         // show this only for admins...
-        if(MoMo.client.util.User.currentUserIsAdmin()) {
+        if(MoMo.client.util.User.currentUserHasAtLeastEditorRole()) {
 
             // folder was clicked
             if (rec && rec.get('leaf') === false) {
