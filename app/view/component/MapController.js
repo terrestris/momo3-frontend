@@ -186,7 +186,7 @@ Ext.define('MoMo.client.view.component.MapController', {
 
             // fetch full layer info from the mapLayer array
             var mapLayer = Ext.Array.findBy(mapLayers, function(mL) {
-                return mL.id === layerTreeNode.layer;
+                return mL.id === layerTreeNode.layer.id;
             });
 
             if (mapLayer) {
