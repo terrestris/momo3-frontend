@@ -39,7 +39,7 @@ Ext.define("MoMo.client.view.form.Print", {
 
     bbar: [{
         xtype: 'button',
-        name: 'createPrint',
+        name: 'createMomoPrint',
         bind: {
             text: '{printFormat:uppercase} {printButtonSuffix}'
         },
@@ -49,7 +49,7 @@ Ext.define("MoMo.client.view.form.Print", {
         }
     }, {
         xtype: 'button',
-        name: 'downloadPrint',
+        name: 'downloadMomoPrint',
         bind: {
             text: '{printDownload}'
         },
@@ -69,6 +69,14 @@ Ext.define("MoMo.client.view.form.Print", {
         appCombo.setHidden(true);
         // hide the containing fieldset, which is empty now
         appCombo.up().setHidden(true);
+        // hide the basigx component buttons as we have our own
+        var basigxBtns = this.query('button');
+        Ext.each(basigxBtns, function(btn) {
+            if (btn.name !== "createMomoPrint" &&
+                btn.name !== "downloadMomoPrint") {
+                btn.setHidden(true);
+            }
+        });
         this.provider = Ext.create('GeoExt.data.MapfishPrintProvider', {
             url: this.getUrl() + appCombo.getValue() + '/capabilities.json',
             listeners: {
