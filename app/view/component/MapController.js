@@ -177,7 +177,7 @@ Ext.define('MoMo.client.view.component.MapController', {
                 name: layerTreeNode.text,
                 visible: layerTreeNode.checked,
                 // set expanded here even though GeoExt does not handle it.
-                // 'MoMo.client.model.NetviewLayerTreeNode' as an extension
+                // 'MoMo.client.model.LayerTreeNode' as an extension
                 // of 'GeoExt.data.model.LayerTreeNode' will care about this!
                 expanded: layerTreeNode.expanded
             });
