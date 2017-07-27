@@ -4,6 +4,11 @@ Ext.define('MoMo.client.view.viewport.ViewportModel', {
 
     data: {
         currentView: null,
-        user: null
+        user: null,
+        currentLanguage: 'en',
+        i18n: {
+            helpButtonText: '',
+            contextHelpTooltip: ''
+        }
     }
 });

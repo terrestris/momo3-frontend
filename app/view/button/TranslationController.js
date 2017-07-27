@@ -122,6 +122,10 @@ Ext.define('MoMo.client.view.button.TranslationController', {
                     }
                     me.firstApplicationLoad = false;
 
+                    var mainVm = Ext.ComponentQuery.query(
+                        'viewport')[0].getViewModel();
+                    mainVm.set('currentLanguage', me.locale);
+
                     // adjust locale of login/logout button
                     var loginBtn =
                         Ext.ComponentQuery.query('momo-login-logout-button')[0];

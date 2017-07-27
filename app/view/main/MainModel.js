@@ -7,7 +7,7 @@ Ext.define('MoMo.client.view.main.MainModel', {
     alias: 'viewmodel.main',
 
     data: {
-        name: 'MoMo.client'
+        name: 'MoMo.client',
     }
 
     //TODO - add data, formulas and/or methods to support your view
