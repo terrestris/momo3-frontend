@@ -123,96 +123,97 @@ Ext.define('MoMo.client.Application', {
     },
 
     /**
-    *
-    */
-   addCustomNorthPanelItems: function(cmp) {
-       cmp.add([{
-           xtype: 'button',
-           cls: 'helpbtn',
-           bind: {
-               text: '{i18n.helpButtonText}'
-           },
-           handler: function(btn) {
-               var lang = btn.up('viewport').getViewModel().get(
-                   'currentLanguage').toLowerCase();
-               var win = Ext.create('Ext.window.Window', {
-                   width: '80%',
-                   height: '80%',
-                   layout: 'fit',
-                   items: {
-                       xtype: 'component',
-                       autoEl: {
-                           tag: 'iframe',
-                           style: 'height: 100%; width: 100%; border: none',
-                           src: '../userdocs/build/MoMo_doc_' + lang + '.pdf'
-                       }
-                   },
-               });
-               win.show();
-           }
-       }, {
-           xtype: 'basigx-button-help',
-           cls: 'contexthelpbtn',
-           viewModel: {
-               data: {
-                   tooltip: '{i18n.contextHelpTooltip}'
-               }
-           },
-           bind: {
-               helpUrl: '../userdocs/build/MoMo_doc_{currentLanguage}_html.html',
-           },
-           additonalHelpKeys: [
-               /* the north panel */
-               'momo-login-logout-button',
-               'momo-translation-en-button',
-               'momo-translation-de-button',
-               'momo-translation-mn-button',
-               'momo-list-documents-button',
-               'momo-form-field-multisearch',
-               /* the center panel */
-               'momo-component-map',
-               'momo-button-stepback',
-               'momo-button-stepforward',
-               'momo-button-print',
-               'momo-button-showworkstatetoolspanel',
-               'momo-button-showmetapanel',
-               'momo-button-showmeasuretoolspanel',
-               'momo-button-showredliningtoolspanel',
-               'momo-button-zoomtoextent',
-               'momo-button-addwms',
-               'momo-combo-scale',
-               /* the west panel */
-               'momo-panel-legendtree'
-           ]
-       }])
-   },
+     *
+     */
+    addCustomNorthPanelItems: function(cmp) {
+        cmp.add([{
+            xtype: 'button',
+            cls: 'helpbtn',
+            bind: {
+                text: '{i18n.helpButtonText}'
+            },
+            handler: function(btn) {
+                var lang = btn.up('viewport').getViewModel().get(
+                    'currentLanguage').toLowerCase();
+                var win = Ext.create('Ext.window.Window', {
+                    width: '80%',
+                    height: '80%',
+                    layout: 'fit',
+                    items: {
+                        xtype: 'component',
+                        autoEl: {
+                            tag: 'iframe',
+                            style: 'height: 100%; width: 100%; border: none',
+                            src: '../userdocs/build/MoMo_doc_' + lang + '.pdf'
+                        }
+                    }
+                });
+                win.show();
+            }
+        }, {
+            xtype: 'basigx-button-help',
+            cls: 'contexthelpbtn',
+            viewModel: {
+                data: {
+                    tooltip: '{i18n.contextHelpTooltip}'
+                }
+            },
+            bind: {
+                helpUrl: '../userdocs/build/MoMo_doc_{currentLanguage}_html' +
+                    '.html',
+            },
+            additonalHelpKeys: [
+                /* the north panel */
+                'momo-login-logout-button',
+                'momo-translation-en-button',
+                'momo-translation-de-button',
+                'momo-translation-mn-button',
+                'momo-list-documents-button',
+                'momo-form-field-multisearch',
+                /* the center panel */
+                'momo-component-map',
+                'momo-button-stepback',
+                'momo-button-stepforward',
+                'momo-button-print',
+                'momo-button-showworkstatetoolspanel',
+                'momo-button-showmetapanel',
+                'momo-button-showmeasuretoolspanel',
+                'momo-button-showredliningtoolspanel',
+                'momo-button-zoomtoextent',
+                'momo-button-addwms',
+                'momo-combo-scale',
+                /* the west panel */
+                'momo-panel-legendtree'
+            ]
+        }]);
+    },
 
-   /**
-    *
-    */
-   addCustomEastPanelItems: function(cmp) {
+    /**
+     *
+     */
+    addCustomEastPanelItems: function(/*cmp*/) {
 
-   },
+    },
 
-   /**
-    *
-    */
-   addCustomSouthPanelItems: function(cmp) {
+    /**
+     *
+     */
+    addCustomSouthPanelItems: function(/*cmp*/) {
 
-   },
+    },
 
-   /**
-    *
-    */
-   addCustomWestPanelItems: function(cmp) {
+    /**
+     *
+     */
+    addCustomWestPanelItems: function(/*cmp*/) {
 
-   },
+    },
 
-   /**
-    *
-    */
-   addCustomCenterPanelItems: function(cmp) {
+    /**
+     *
+     */
+    addCustomCenterPanelItems: function(/*cmp*/) {
 
-   }
+    }
 
 });
