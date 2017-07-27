@@ -160,7 +160,7 @@ Ext.define('MoMo.client.Application', {
             },
             bind: {
                 helpUrl: '../userdocs/build/MoMo_doc_{currentLanguage}_html' +
-                    '.html',
+                    '.html'
             },
             additonalHelpKeys: [
                 /* the north panel */
