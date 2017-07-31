@@ -42,30 +42,30 @@ Ext.define('MoMo.client.util.User', {
        /**
         *
         */
-       currentUserHasAtLeastEditorRole: function() {
-           var currentUserHasAtLeastEditorRole = false;
-           var userInfo = this.getUserInfo();
+        currentUserHasAtLeastEditorRole: function() {
+            var currentUserHasAtLeastEditorRole = false;
+            var userInfo = this.getUserInfo();
 
-           if(userInfo) {
-               var userRoles = userInfo.get('groupRoles');
-               Ext.each(userRoles, function(role) {
-                   if (role.indexOf('ROLE_ADMIN') > -1) {
-                       currentUserHasAtLeastEditorRole = true;
-                       return false;
-                   }
-                   if (role.indexOf('ROLE_SUBADMIN') > -1) {
-                       currentUserHasAtLeastEditorRole = true;
-                       return false;
-                   }
-                   if (role.indexOf('ROLE_EDITOR') > -1) {
-                       currentUserHasAtLeastEditorRole = true;
-                       return false;
-                   }
-               });
-           }
+            if(userInfo) {
+                var userRoles = userInfo.get('groupRoles');
+                Ext.each(userRoles, function(role) {
+                    if (role.indexOf('ROLE_ADMIN') > -1) {
+                        currentUserHasAtLeastEditorRole = true;
+                        return false;
+                    }
+                    if (role.indexOf('ROLE_SUBADMIN') > -1) {
+                        currentUserHasAtLeastEditorRole = true;
+                        return false;
+                    }
+                    if (role.indexOf('ROLE_EDITOR') > -1) {
+                        currentUserHasAtLeastEditorRole = true;
+                        return false;
+                    }
+                });
+            }
 
-           return currentUserHasAtLeastEditorRole;
-       }
+            return currentUserHasAtLeastEditorRole;
+        }
     }
 
 });
