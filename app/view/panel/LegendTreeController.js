@@ -102,7 +102,8 @@ Ext.define('MoMo.client.view.panel.LegendTreeController', {
             url: BasiGX.util.Url.getWebProjectBaseUrl() + 'metadata/csw.action',
             method: "POST",
             params: {
-                xml: MoMo.shared.MetadataUtil.getLoadXml(uuid)
+                xml: MoMo.shared.MetadataUtil.getLoadXml(uuid),
+                layerId: layer.get('shogunId')
             },
             defaultHeaders: BasiGX.util.CSRF.getHeader(),
             success: function(response){
