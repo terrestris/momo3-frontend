@@ -35,7 +35,10 @@ Ext.define('MoMo.client.model.ApplicationState', {
         name: 'owner',
         type: 'int',
         convert: function(data) {
-            return data.id;
+            if (data) {
+                return data.id;
+            }
+            return MoMo.client.app._user.id;
         },
         persist: false
     }, {

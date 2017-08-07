@@ -97,7 +97,32 @@ Ext.define("MoMo.client.view.form.field.MultiSearchCombo", {
 
         me.on('boxready', me.onBoxReady, me);
         me.on('change', me.onComboValueChange, me);
+        me.on('afterrender', function() {
+            me.el.down('.default-trigger').on('click', function() {
+                if (me.searchContainer.isHidden()) {
+                    me.searchContainer.show();
+                } else {
+                    me.searchContainer.hide();
+                }
+            });
+        });
+    },
 
+    showResults: function() {
+        this.callParent(arguments);
+        if (!this.showHideTriggerListenersSet) {
+            this.showHideTriggerListenersSet = true;
+            var me = this;
+            var elm = me.el.down('.default-trigger');
+            me.searchContainer.on('show', function() {
+                elm.toggleCls('x-tool-collapse-top');
+                elm.toggleCls('x-form-trigger-default');
+            });
+            me.searchContainer.on('hide', function() {
+                elm.toggleCls('x-tool-collapse-top');
+                elm.toggleCls('x-form-trigger-default');
+            });
+        }
     }
 
 });
