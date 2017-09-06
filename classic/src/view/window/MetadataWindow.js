@@ -246,7 +246,7 @@ Ext.define('MoMo.client.view.window.MetadataWindow',{
             },
             items: [{
                 xtype: 'fieldcontainer',
-                layout: 'hbox',
+                layout: 'vbox',
                 defaults: {
                     xtype: 'displayfield',
                     labelWidth: 40,
