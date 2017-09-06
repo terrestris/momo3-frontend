@@ -39,15 +39,20 @@ Ext.define('MoMo.client.container.ViewportController', {
             method: 'GET',
             success: function(response) {
                 if (response && response.responseText) {
-                    var responseObj = Ext.decode(response.responseText);
-                    var momoUser = Ext.create(
-                        MoMo.client.model.MomoUser,
-                        responseObj.data
-                    );
+                    try {
+                        var responseObj = Ext.decode(response.responseText);
+                        var momoUser = Ext.create(
+                            MoMo.client.model.MomoUser,
+                            responseObj.data
+                        );
 
-                    viewModel.set('user', momoUser);
-                    MoMo.client.app.setUser(momoUser);
-
+                        viewModel.set('user', momoUser);
+                        MoMo.client.app.setUser(momoUser);
+                    } catch (e) {
+                        // parsing may fail e.g. when anonymous user calls
+                        // this interface. Its ok to simply return in this case
+                        return;
+                    }
                 } else {
                     Ext.Error.raise('Could not get user by session.');
                 }
