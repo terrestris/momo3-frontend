@@ -50,7 +50,7 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
             var to = Ext.Date.format(to_date, 'Ymd\\THis');
             var station_id = chartFeat.getProperties().station_id;
 
-            var store = me.getView().down('chart').getStore();
+            var store = me.getView().store;
             var proxy = store.getProxy();
             proxy.setExtraParam("viewparams", 'station_id:' + station_id +
                     ';startdate:' + from + ';enddate:' + to);
@@ -89,6 +89,18 @@ Ext.define('MoMo.view.window.WaterDataChartWindowController', {
      * @param
      */
     onSeriesTooltipRender: function (tooltip, record, item) {
-        tooltip.setHtml(item.field + ': ' + record.get(item.field));
+        if (record.get('parameter') && record.get('parameter_name')) {
+            var key = record.get('parameter') + ' (' +
+                record.get('parameter_name') + ')';
+            var unit = record.get('parameter_unit');
+            if (unit) {
+                tooltip.setHtml(key + ': ' + record.get(item.field) +
+                    ' ' + unit);
+            } else {
+                tooltip.setHtml(key + ': ' + record.get(item.field));
+            }
+        } else {
+            tooltip.setHtml(item.field + ': ' + record.get(item.field));
+        }
     }
 });
