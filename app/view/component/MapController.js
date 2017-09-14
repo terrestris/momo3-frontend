@@ -502,8 +502,9 @@ Ext.define('MoMo.client.view.component.MapController', {
         var map = me.getView().getMap();
         var store = win.down('chart').getStore();
         var proxy = store.getProxy();
-        proxy.setExtraParam("srsname", map.getView().getProjection().getCode());
-        proxy.setExtraParam("viewparams", 'station_id:' +
+
+        proxy.setExtraParam('srsname', map.getView().getProjection().getCode());
+        proxy.setExtraParam('viewparams', 'station_id:' +
             feat.get('station_id'));
         store.load();
     },
