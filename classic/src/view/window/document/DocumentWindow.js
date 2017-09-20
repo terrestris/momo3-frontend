@@ -58,6 +58,7 @@ Ext.define("MoMo.client.window.document.DocumentWindow", {
     items: [
         {
             xtype: 'momo-document-tree',
+            resizable: true,
             region: 'west'
         },
         {
