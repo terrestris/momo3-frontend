@@ -19,6 +19,8 @@ Ext.define('MoMo.client.view.button.LoginLogout', {
 
     ui: 'momo-header-tools',
 
+    cls: 'loginlogout',
+
     scale: 'small',
 
     /**
