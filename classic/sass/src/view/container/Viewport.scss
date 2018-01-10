@@ -1,6 +1,11 @@
 .momo-header-right-container {
     left: auto !important;
     right: 0 !important;
+    width: 300px !important;
+}
+
+.momo-header-right-container > .x-box-inner {
+    width: 300px !important;
 }
 
 .momo-viewport-header-body{

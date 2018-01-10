@@ -22,6 +22,10 @@ Ext.define('MoMo.client.view.button.ListDocuments', {
 
     scale: 'small',
 
+    cls: 'dms-button',
+
+    icon: 'resources/img/dms.svg',
+
     /**
      *
      */
