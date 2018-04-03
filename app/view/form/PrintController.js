@@ -163,7 +163,20 @@ Ext.define('MoMo.client.view.form.PrintController', {
             defaultFieldContainer = view.down(
                 'fieldcontainer[name=defaultFieldContainer]');
 
-        view.remove(attributesFieldset);
+        // only setup the attributes fieldset once (instantiation) and update
+        // the dimensions (landscape / portrait)
+        if (attributesFieldset) {
+            layoutRec.attributes().each(function(attribute){
+                if (attribute.data.name === "map") {
+                    var attr = view.getMapAttributeFields(attribute);
+                    var oldFieldset = view.query('fieldset[name=map]')[0];
+                    attributesFieldset.remove(oldFieldset);
+                    attributesFieldset.add(attr);
+                }
+            }, this);
+            view.renderAllClientInfos();
+            return;
+        }
 
         // add the layout attributes fieldset:
         if(defaultFieldContainer && attributesFieldset){
