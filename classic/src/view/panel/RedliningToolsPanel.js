@@ -47,6 +47,10 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             if (!(feature instanceof ol.Feature)) {
                 return;
             }
+            // do not overwrite style for (copied) postits
+            if (feature.get('isPostit')) {
+                return feature.getStyle();
+            }
             var geometry = feature.getGeometry();
             if (geometry instanceof ol.geom.Point) {
                 return me.getRedlinePointStyle();
@@ -293,6 +297,10 @@ Ext.define("MoMo.client.view.panel.RedliningToolsPanel", {
             var geometry = feature.getGeometry();
 
             if (geometry instanceof ol.geom.Point) {
+                // do not overwrite style for (copied) postits
+                if (feature.get('isPostit')) {
+                    return;
+                }
                 feature.setStyle(me.getRedlinePointStyle());
             } else if (geometry instanceof ol.geom.LineString) {
                 feature.setStyle(me.getRedlineLineStringStyle());
