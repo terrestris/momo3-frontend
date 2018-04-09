@@ -32,6 +32,7 @@ Ext.define('MoMo.client.view.form.PrintModel', {
         printButtonSuffix: '',
         printFormat: '',
         printDownload: '',
+        saveLoadSettings: '',
         printErrorTitle: '',
         printErrorMsg: '',
         formatComboLabel: '',

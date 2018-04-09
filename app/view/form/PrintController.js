@@ -28,6 +28,7 @@ Ext.define('MoMo.client.view.form.PrintController', {
     extend: 'Ext.app.ViewController',
 
     requires: [
+        'MoMo.client.view.grid.PrintFormSettings'
     ],
 
     alias: 'controller.form.print',
@@ -589,5 +590,21 @@ Ext.define('MoMo.client.view.form.PrintController', {
         if (field.getName() !== field.childFieldKey) {
             attributes[field.childFieldKey] = field.getValue();
         }
+    },
+
+    saveLoadSettings: function() {
+        var me = this;
+        var viewModel = me.getView().getViewModel();
+        Ext.create('Ext.window.Window', {
+            width: 800,
+            height: 350,
+            modal: true,
+            bind: {
+                title: viewModel.get('saveLoadSettings')
+            },
+            items: [{
+                xtype: 'momo-grid-printformsettings'
+            }]
+        }).show();
     }
 });

@@ -39,6 +39,15 @@ Ext.define("MoMo.client.view.form.Print", {
 
     bbar: [{
         xtype: 'button',
+        name: 'saveLoadSettings',
+        bind: {
+            text: '{saveLoadSettings}'
+        },
+        handler: function(btn) {
+            btn.up('form').getController().saveLoadSettings();
+        }
+    }, {
+        xtype: 'button',
         name: 'createMomoPrint',
         bind: {
             text: '{printFormat:uppercase} {printButtonSuffix}'
@@ -73,7 +82,8 @@ Ext.define("MoMo.client.view.form.Print", {
         var basigxBtns = this.query('button');
         Ext.each(basigxBtns, function(btn) {
             if (btn.name !== "createMomoPrint" &&
-                btn.name !== "downloadMomoPrint") {
+                btn.name !== "downloadMomoPrint" &&
+                btn.name !== "saveLoadSettings") {
                 btn.setHidden(true);
             }
         });
