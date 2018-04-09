@@ -11,26 +11,6 @@ Ext.define('MoMo.client.view.grid.PrintFormSettingsController', {
     /**
      *
      */
-    registerKeyNav: function() {
-        var me = this;
-        var view = me.getView();
-
-        new Ext.util.KeyMap({
-            target: view.getEl(),
-            binding: [{
-                key: 'c',
-                ctrl: true,
-                fn: function() {
-                    me.copyUrlToClipboard();
-                },
-                scope: me
-            }]
-        });
-    },
-
-    /**
-     *
-     */
     onDeleteBtnClick: function() {
         var me = this;
         var view = me.getView();

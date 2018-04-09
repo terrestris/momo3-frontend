@@ -34,10 +34,6 @@ Ext.define('MoMo.client.view.grid.PrintFormSettings', {
         enableTextSelection: true
     },
 
-    listeners: {
-        afterrender: 'registerKeyNav'
-    },
-
     plugins: {
         ptype: 'cellediting',
         clicksToEdit: 2
