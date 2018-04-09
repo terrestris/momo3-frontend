@@ -167,7 +167,7 @@ Ext.define('MoMo.client.view.form.PrintController', {
         // the dimensions (landscape / portrait)
         if (attributesFieldset) {
             layoutRec.attributes().each(function(attribute){
-                if (attribute.data.name === "map") {
+                if (attribute.data.name === 'map') {
                     var attr = view.getMapAttributeFields(attribute);
                     var oldFieldset = view.query('fieldset[name=map]')[0];
                     attributesFieldset.remove(oldFieldset);
