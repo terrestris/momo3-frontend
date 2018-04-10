@@ -217,6 +217,12 @@ Ext.define('MoMo.client.view.button.TranslationController', {
                 if ('config' in locale && 'data' in locale.config) {
                     clazz.getViewModel().setData(locale.config.data);
                 }
+                // fixup button binds
+                if (clazz instanceof Ext.button.Button) {
+                    clazz.config.bind.tooltip =
+                        clazz.getViewModel().get('tooltip');
+                    clazz.setBind(clazz.config.bind);
+                }
                 // … and don't do anything if it doesn't. This is not
                 // technically an error, or sth. we should warn the user about.
                 // Consider the following: A specific button class (with a
