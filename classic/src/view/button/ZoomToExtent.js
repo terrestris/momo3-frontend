@@ -82,19 +82,11 @@ Ext.define("MoMo.client.view.button.ZoomToExtent", {
 
             var olView = olMap.getView(),
                 targetCenter = this.getCenter(),
-                targetZoom = this.getZoom(),
-                pan = ol.animation.pan({
-                    source: olView.getCenter()
-                }),
-                zoom = ol.animation.zoom({
-                    resolution: olView.getResolution()
-                });
-
-            olMap.beforeRender(pan);
-            olMap.beforeRender(zoom);
-
-            olView.setCenter(targetCenter);
-            olView.setZoom(targetZoom);
+                targetZoom = this.getZoom();
+            olView.animate({
+                zoom: targetZoom,
+                center: targetCenter
+            });
         }
     },
 

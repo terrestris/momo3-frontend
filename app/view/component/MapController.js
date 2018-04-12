@@ -410,28 +410,21 @@ Ext.define('MoMo.client.view.component.MapController', {
         var mapComponent = this.getView();
         var map = mapComponent.getMap();
         var center = centerString.split(',');
-        var olView = map.getView();
-        var pan = ol.animation.pan({
-            source: olView.getCenter()
-        });
-
         center[0] = parseInt(center[0], 10);
         center[1] = parseInt(center[1], 10);
-
-        map.beforeRender(pan);
-        map.getView().setCenter(center);
+        var olView = map.getView();
+        olView.animate({
+            center: center
+        });
     },
 
     loadZoom: function(zoomString){
         var mapComponent = this.getView();
         var map = mapComponent.getMap();
         var olView = map.getView();
-        var zoom = ol.animation.zoom({
-            resolution: olView.getResolution()
+        olView.animate({
+            zoom: parseInt(zoomString, 10)
         });
-
-        map.beforeRender(zoom);
-        map.getView().setZoom(parseInt(zoomString, 10));
     },
 
     loadLayer: function(layersString){
