@@ -413,6 +413,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         center[0] = parseInt(center[0], 10);
         center[1] = parseInt(center[1], 10);
         var olView = map.getView();
+        olView.cancelAnimations();
         olView.animate({
             center: center
         });
@@ -422,6 +423,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         var mapComponent = this.getView();
         var map = mapComponent.getMap();
         var olView = map.getView();
+        olView.cancelAnimations();
         olView.animate({
             zoom: parseInt(zoomString, 10)
         });
