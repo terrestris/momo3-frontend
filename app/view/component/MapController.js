@@ -216,7 +216,7 @@ Ext.define('MoMo.client.view.component.MapController', {
         // currently we dont get any type info from the backend
         // TODO support more than just 'Tile'
         var olLayer = new ol.layer['Tile']({
-            name: mapLayer.name || 'UNNAMED LAYER',
+            name: layerTreeNode.text || mapLayer.name || 'UNNAMED LAYER',
             routingId: mapLayer.id,
             shogunId: mapLayer.id,
             hoverable: mapLayerAppearance.hoverable || mapLayer.hoverable ||
