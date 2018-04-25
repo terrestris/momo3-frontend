@@ -90,6 +90,8 @@ Ext.define('MoMo.client.view.grid.PrintFormSettingsController', {
             return;
         }
         printForm.getForm().setValues(rec.data);
+        var dpiCombo = printForm.query('combo[name=dpi]')[0];
+        dpiCombo.setValue(rec.data.dpi);
         me.onLoadSuccess();
         me.getView().up('window').close();
     },
@@ -133,6 +135,18 @@ Ext.define('MoMo.client.view.grid.PrintFormSettingsController', {
      */
     updatePrintFormSettings: function(rec) {
         var me = this;
+        var printForm = Ext.ComponentQuery.query('momo-form-print')[0];
+        if (!printForm) {
+            return;
+        }
+        var values = printForm.getValues();
+        var checkboxes = printForm.query('checkbox');
+        Ext.each(checkboxes, function(box) {
+            values[box.name] = box.getValue();
+        });
+        Ext.iterate(values, function(key, val) {
+            rec.set(key, val);
+        });
         rec.save({
             failure: me.onUpdateFailure,
             success: me.onUpdateSuccess,
