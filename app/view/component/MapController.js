@@ -228,7 +228,7 @@ Ext.define('MoMo.client.view.component.MapController', {
             opacity: mapLayerAppearance.opacity,
             visible: layerTreeNode.checked,
             metadataIdentifier: mapLayer.metadataIdentifier,
-            legendUrl: mapLayer.legendUrl || me.generateLegendUrl(mapLayer),
+            legendUrl: me.generateLegendUrl(mapLayer),
             source: me.createOlLayerSource(mapLayer),
             dataType: mapLayer.dataType
         });
@@ -242,13 +242,13 @@ Ext.define('MoMo.client.view.component.MapController', {
      *
      */
     generateLegendUrl: function(mapLayer) {
+
         var layer = mapLayer.source.layerNames;
-        var url = mapLayer.source.url + Ext.urlAppend(
+        return mapLayer.source.url + Ext.urlAppend(
             '?SERVICE=WMS&VERSION=1.1.1&' +
             'REQUEST=GetLegendGraphic&FORMAT=image%2Fpng&' +
             'LAYER=' + layer
         );
-        return url;
     },
 
     /**
