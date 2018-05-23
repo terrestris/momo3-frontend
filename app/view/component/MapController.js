@@ -220,7 +220,7 @@ Ext.define('MoMo.client.view.component.MapController', {
             routingId: mapLayer.id,
             shogunId: mapLayer.id,
             hoverable: mapLayerAppearance.hoverable || mapLayer.hoverable ||
-                false,
+                mapLayerAppearance.hoverTemplate || false,
             hoverTemplate: mapLayerAppearance.hoverTemplate,
             chartable: mapLayer.chartable || false,
             minResolution: mapLayerAppearance.minResolution || undefined,
