@@ -56,12 +56,6 @@ Ext.define('MoMo.client.container.ViewportController', {
                 } else {
                     Ext.Error.raise('Could not get user by session.');
                 }
-            },
-            failure: function(response) {
-                Ext.Msg.alert(
-                    'Error',
-                    Ext.String.format(response.responseText)
-                );
             }
         });
     },
